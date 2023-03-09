@@ -5,12 +5,25 @@ import styled from 'styled-components';
 import { buttonValues, imagesS } from 'constants/index';
 import { useDrop } from 'react-dnd';
 
+const colorSets = {
+    S: "#FF7F7F",
+    A: "#FFBF7F",
+    B: "#FFDF7F",
+    C: "#FFFF7F",
+    D: "#BFFF7F",
+    F: "#7FFF7F",
+    G: "#7FFFFF"
+}
+
 const Home = () => {
     const [images, setImages] = useState([])
+    const [imagesQ, setImagesQ] = useState([])
+    const [imagesT, setImagesT] = useState([])
+    const [imagesS, setImagesS] = useState([])
 
     const [{ isOverT }, drop] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id),
+        drop: ({ id }) => addImageToSet(id, "drop"),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
@@ -18,7 +31,7 @@ const Home = () => {
 
     const [{ }, dropQ] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id),
+        drop: ({ id }) => addImageToSet(id, "dropQ"),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
@@ -26,36 +39,35 @@ const Home = () => {
 
     const [{ }, dropT] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id),
+        drop: ({ id }) => addImageToSet(id, "dropT"),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
     }), [])
-
 
     const [{ }, dropS] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id),
+        drop: ({ id }) => addImageToSet(id, "dropS"),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
     }), [])
 
-    const addImageToSet = (id) => {
+    const addImageToSet = (id, place) => {
         const addedImage = imagesS?.find((image) => image?.id === id)
-        setImages((prev) => [...prev, addedImage])
     }
 
     return (
         <Container>
             <Header />
             <RowsContainer>
-                <TierColumn {...{ images }} ref={drop} />
-                <TierColumn ref={dropQ} />
-                <TierColumn ref={dropT} />
-                <TierColumn ref={dropS} />
-                <TierColumn />
-                <TierColumn />
+                <TierColumn {...{ images }} bgColor={colorSets.S} ref={drop} />
+                <TierColumn images={imagesQ} bgColor={colorSets.A} ref={dropQ} />
+                <TierColumn images={imagesT} bgColor={colorSets.B} ref={dropT} />
+                <TierColumn images={imagesS} bgColor={colorSets.C} ref={dropS} />
+                <TierColumn bgColor={colorSets.D} />
+                <TierColumn bgColor={colorSets.F} />
+                <TierColumn bgColor={colorSets.G} />
             </RowsContainer>
             <DragPlace />
             <ButtonsContainer>

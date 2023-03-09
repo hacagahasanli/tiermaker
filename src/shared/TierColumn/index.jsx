@@ -5,15 +5,11 @@ import { Image } from ".."
 export const TierColumn = forwardRef(({ bgColor, images }, ref) => {
     return (
         <ColumnContainer ref={ref}>
-            <InputWrapper tabIndex={1}>
+            <InputWrapper tabIndex={1} {...{ bgColor }}>
                 <Input type="text" />
             </InputWrapper>
             <ImageWrapper>
-                {
-                    images?.map(({ uri, id }) => {
-                        return <Image {...{ uri, id }} key={id} />
-                    })
-                }
+                {images?.map(({ uri, id }) => <Image {...{ uri, id }} key={id} />)}
             </ImageWrapper>
         </ColumnContainer>
     )
@@ -34,7 +30,7 @@ const InputWrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
-    background-color: #FF7F7F;
+    background-color: ${({ bgColor }) => bgColor };
     border-right: solid 1px #000000;
     margin: 0;
     padding: 0;

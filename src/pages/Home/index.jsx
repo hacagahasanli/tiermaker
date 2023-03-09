@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header, MainButton, Button } from 'components/index';
-import { TierColumn } from 'shared/index';
+import { DragPlace, TierColumn } from 'shared/index';
 import styled from 'styled-components';
 import { buttonValues } from 'constants/index';
 
@@ -16,6 +16,7 @@ const Home = () => {
                 <TierColumn />
                 <TierColumn />
             </RowsContainer>
+            <DragPlace />
             <ButtonsContainer>
                 <MainButton value={buttonValues.SOD} />
                 <div>
@@ -48,7 +49,6 @@ const ButtonsContainer = styled.div`
         margin-top: 2rem;
     }
 `
-
 const Container = styled.div`
     max-width: 1180px;
     display: flex;

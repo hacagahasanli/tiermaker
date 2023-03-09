@@ -1,21 +1,12 @@
 import styled from "styled-components"
 
-export const TierColumn = () => {
+export const TierColumn = ({ bgColor }) => {
     return <ColumnContainer>
         <InputWrapper tabIndex={1}>
             <Input type="text" />
-            {/* <span>S</span> */}
         </InputWrapper>
         <ImageWrapper>
             {/* <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
             <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div> */}
         </ImageWrapper>
     </ColumnContainer>

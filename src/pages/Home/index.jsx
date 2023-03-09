@@ -22,11 +22,7 @@ const Home = () => {
     const [imagesSS, setImagesSS] = useState([])
     const [picturesS, setPicturesS] = useState([])
 
-    console.log(picturesS, "ASDDSDSs")
-
-    useEffect(() => {
-        setPicturesS(imagesS)
-    }, [])
+    useEffect(() => setPicturesS(imagesS), [])
 
     const [{ }, drop] = useDrop(() => ({
         accept: "image",
@@ -69,9 +65,8 @@ const Home = () => {
         }
 
         const addedImage = picturesS?.find((image) => image?.id === id);
-        setPicturesS((prev) => prev.filter((item) => item?.id !== id)}
-
-    setPictures((prev) => [...prev, addedImage])
+        setPicturesS((prev) => prev.filter((item) => item?.id !== id))
+        setPictures((prev) => [...prev, addedImage])
 
     }
 

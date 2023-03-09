@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { Image } from ".."
 
 export const TierColumn = forwardRef(({ bgColor, images }, ref) => {
+    console.log(images, "IMAGES")
     return (
         <ColumnContainer ref={ref}>
             <InputWrapper tabIndex={1} {...{ bgColor }}>
@@ -30,7 +31,7 @@ const InputWrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
-    background-color: ${({ bgColor }) => bgColor };
+    background-color: ${({ bgColor }) => bgColor};
     border-right: solid 1px #000000;
     margin: 0;
     padding: 0;

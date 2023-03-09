@@ -4,11 +4,11 @@ const initialState = {
     images: [],
 }
 
-const imagesReducer = createSlice({
+const ImagesSlice = createSlice({
     name: "ImagesReducer",
     initialState,
     reducers: {}
 })
 
 
-export default imagesReducer
+export const imagesReducer = ImagesSlice.reducer

@@ -1,7 +1,15 @@
+import { Provider } from "react-redux"
+import { RouterProvider } from "react-router-dom"
+import router from "./routes"
+import store from "./store"
+
+console.log(router, "ROUTER")
 
 const App = () => {
   return (
-    <div className="App"></div>
+    <Provider {...{ store }}>
+      <RouterProvider {...{ router }} />
+    </Provider>
   )
 }
 

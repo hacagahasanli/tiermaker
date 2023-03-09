@@ -1,31 +1,45 @@
-import { useDrag, useDragLayer } from "react-dnd"
+import { useDrag } from "react-dnd"
 import styled from "styled-components"
 
 export const Image = ({ uri, id }) => {
     const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
         type: "image",
-        item: { id: id, uri: uri },
+        item: { id, uri },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging()
         })
     }))
 
     return (
-        <>
-            <div ref={drag} style={{ width: "124px", minHeight: "80px", display: "inline-block", opacity: 1 }}>
-                <StyledImage src={uri} alt={id} isDragging={isDragging} />
-            </div>
-            {/* <CustomDragPreview /> */}
-        </>
+        <div ref={drag} style={{ width: "124px", height: "80px", display: "inline-block", opacity: 1 }}>
+            <StyledImage src={uri} alt={id} isDragging={isDragging} />
+        </div>
     )
 }
 
 const StyledImage = styled.img`
     width: 100%;// add your desired width here
-    height: 100px;
+    height: 80px;
     object-fit: cover;
     margin: 0;
     padding: 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /* opacity: ${({ isDragging }) => isDragging ? 1 : 1};
     border: ${({ isDragging }) => isDragging ? "3px solid #c1c1c1" : "3px solid transparent"};
     display:  ${({ isDragging }) => isDragging ? "none" : "block"}; */

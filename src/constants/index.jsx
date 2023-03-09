@@ -5,7 +5,7 @@ export const buttonValues = {
     C_B_COLOR: "Change Background Color"
 }
 
-export const images = [
+export const imagesS = [
     {
         id: 1,
         uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"

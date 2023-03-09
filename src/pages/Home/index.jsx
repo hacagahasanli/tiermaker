@@ -1,18 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Header, MainButton, Button } from 'components/index';
 import { DragPlace, TierColumn } from 'shared/index';
 import styled from 'styled-components';
-import { buttonValues } from 'constants/index';
+import { buttonValues, imagesS } from 'constants/index';
+import { useDrop } from 'react-dnd';
 
 const Home = () => {
+    const [images, setImages] = useState([])
+
+    const [{ isOverT }, drop] = useDrop(() => ({
+        accept: "image",
+        drop: ({ id }) => addImageToSet(id),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    }), [])
+
+    const [{ }, dropQ] = useDrop(() => ({
+        accept: "image",
+        drop: ({ id }) => addImageToSet(id),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    }), [])
+
+    const [{ }, dropT] = useDrop(() => ({
+        accept: "image",
+        drop: ({ id }) => addImageToSet(id),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    }), [])
+
+
+    const [{ }, dropS] = useDrop(() => ({
+        accept: "image",
+        drop: ({ id }) => addImageToSet(id),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver()
+        })
+    }), [])
+
+    const addImageToSet = (id) => {
+        const addedImage = imagesS?.find((image) => image?.id === id)
+        setImages((prev) => [...prev, addedImage])
+    }
+
     return (
         <Container>
             <Header />
             <RowsContainer>
-                <TierColumn />
-                <TierColumn />
-                <TierColumn />
-                <TierColumn />
+                <TierColumn {...{ images }} ref={drop} />
+                <TierColumn ref={dropQ} />
+                <TierColumn ref={dropT} />
+                <TierColumn ref={dropS} />
                 <TierColumn />
                 <TierColumn />
             </RowsContainer>
@@ -37,7 +78,7 @@ const ButtonsContainer = styled.div`
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    margin-top: 3rem;
+    margin: 3rem 0;
 
     div {
         width: 100%;

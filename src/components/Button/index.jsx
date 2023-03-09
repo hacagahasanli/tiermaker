@@ -14,6 +14,9 @@ const sameStyles = css`
     padding:10px 0;
     cursor: pointer;
     transition: opacity 0.5s;
+    &:hover{
+        opacity: 0.8;
+    }
 `
 
 const SButton = styled.button`
@@ -23,9 +26,7 @@ const SButton = styled.button`
     border: none;
     outline: none;
     background-color: #ffffff;
-    &:hover{
-        opacity: 0.8;
-    }
+   
 `
 
 const MButton = styled.button`
@@ -35,4 +36,5 @@ const MButton = styled.button`
     max-width: 280px;
     width: 100%;
     ${sameStyles}
+    font-size: 1rem;
 `

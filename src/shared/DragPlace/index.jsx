@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import { images } from "constants/index"
+import { imagesS } from "constants/index"
 import { Image } from ".."
 
 export const DragPlace = () => {
     return (
         <DraggableImagesContainer>
             <DragImage>
-                {images?.map(({ uri, id }) => <Image key={id} {...{ uri, id }} />)}
+                {imagesS?.map(({ uri, id }) => <Image key={id} {...{ uri, id }} />)}
             </DragImage>
         </DraggableImagesContainer>
     )

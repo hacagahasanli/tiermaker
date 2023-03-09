@@ -1,16 +1,23 @@
+import { forwardRef } from "react"
 import styled from "styled-components"
+import { Image } from ".."
 
-export const TierColumn = ({ bgColor }) => {
-    return <ColumnContainer>
-        <InputWrapper tabIndex={1}>
-            <Input type="text" />
-        </InputWrapper>
-        <ImageWrapper>
-            {/* <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div>
-            <div style={{ border: "1px solid red", width: "100px", minHeight: "80px" }}></div> */}
-        </ImageWrapper>
-    </ColumnContainer>
-}
+export const TierColumn = forwardRef(({ bgColor, images }, ref) => {
+    return (
+        <ColumnContainer ref={ref}>
+            <InputWrapper tabIndex={1}>
+                <Input type="text" />
+            </InputWrapper>
+            <ImageWrapper>
+                {
+                    images?.map(({ uri, id }) => {
+                        return <Image {...{ uri, id }} key={id} />
+                    })
+                }
+            </ImageWrapper>
+        </ColumnContainer>
+    )
+})
 
 const ColumnContainer = styled.div`
     display: grid;

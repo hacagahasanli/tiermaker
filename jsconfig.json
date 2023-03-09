@@ -1,0 +1,55 @@
+{
+    "compilerOptions": {
+        "target": "es2021",
+        "baseUrl": "./src",
+        "paths": {
+            "components/*": [
+                "components/*"
+            ],
+            "assets/*": [
+                "assets/*"
+            ],
+            "pages/*": [
+                "pages/*"
+            ],
+            "constants/*": [
+                "constants/*"
+            ],
+            "utils/*": [
+                "utils/*"
+            ],
+            "store/*": [
+                "store/*"
+            ],
+            "shared/*": [
+                "shared/*"
+            ],
+            "routes/*": [
+                "routes/*"
+            ],
+            "client/*": [
+                "client/*"
+            ],
+        },
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "declaration": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true
+    },
+    "exclude": [
+        "node_modules",
+        "build",
+        "dist",
+        ".vscode",
+        ".git"
+    ]
+}

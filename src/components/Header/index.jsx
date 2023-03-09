@@ -19,12 +19,13 @@ const LogoHeader = styled.header`
 `
 
 const LogoContainer = styled.div`
-    width: 1170px;
+    width: 100%;
     display: flex;
     align-items: center;
 
     img{
         width: 250px;
     }
+
 `
 

@@ -1,3 +1,2 @@
-import { Header } from "./Header";
-
-export { Header }
+export { Header } from "./Header";
+export { Button, MainButton } from "./Button";

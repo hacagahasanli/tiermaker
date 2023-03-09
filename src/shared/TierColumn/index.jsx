@@ -49,7 +49,6 @@ const InputWrapper = styled.div`
         border-radius: 2px;
     }
 `
-
 const Input = styled.input`
     width: 100%;
     margin:5px;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Header, MainButton, Button } from 'components/index';
 import { DragPlace, TierColumn } from 'shared/index';
 import styled from 'styled-components';
@@ -19,42 +19,60 @@ const Home = () => {
     const [images, setImages] = useState([])
     const [imagesQ, setImagesQ] = useState([])
     const [imagesT, setImagesT] = useState([])
-    const [imagesS, setImagesS] = useState([])
+    const [imagesSS, setImagesSS] = useState([])
+    const [picturesS, setPicturesS] = useState([])
 
-    const [{ isOverT }, drop] = useDrop(() => ({
+    console.log(picturesS, "ASDDSDSs")
+
+    useEffect(() => {
+        setPicturesS(imagesS)
+    }, [])
+
+    const [{ }, drop] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id, "drop"),
+        drop: ({ id }) => addImageToSet(id, "drop", setImages),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
-    }), [])
+    }), [picturesS])
 
     const [{ }, dropQ] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id, "dropQ"),
+        drop: ({ id }) => addImageToSet(id, "dropQ", setImagesQ),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
-    }), [])
+    }), [picturesS])
 
     const [{ }, dropT] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id, "dropT"),
+        drop: ({ id }) => addImageToSet(id, "dropT", setImagesT),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
-    }), [])
+    }), [picturesS])
 
     const [{ }, dropS] = useDrop(() => ({
         accept: "image",
-        drop: ({ id }) => addImageToSet(id, "dropS"),
+        drop: ({ id }) => addImageToSet(id, "dropS", setImagesSS),
         collect: (monitor) => ({
             isOver: !!monitor.isOver()
         })
-    }), [])
+    }), [picturesS])
 
-    const addImageToSet = (id, place) => {
-        const addedImage = imagesS?.find((image) => image?.id === id)
+    const addImageToSet = (id, place, setPictures) => {
+        const data = {
+            drop: images,
+            dropQ: imagesQ,
+            dropT: imagesT,
+            dropS: imagesSS
+        }
+
+        const addedImage = picturesS?.find((image) => image?.id === id);
+        setPicturesS((prev) => prev.filter((item) => item?.id !== id)}
+
+    setPictures((prev) => [...prev, addedImage])
+
     }
 
     return (
@@ -64,12 +82,12 @@ const Home = () => {
                 <TierColumn {...{ images }} bgColor={colorSets.S} ref={drop} />
                 <TierColumn images={imagesQ} bgColor={colorSets.A} ref={dropQ} />
                 <TierColumn images={imagesT} bgColor={colorSets.B} ref={dropT} />
-                <TierColumn images={imagesS} bgColor={colorSets.C} ref={dropS} />
+                <TierColumn images={imagesSS} bgColor={colorSets.C} ref={dropS} />
                 <TierColumn bgColor={colorSets.D} />
                 <TierColumn bgColor={colorSets.F} />
                 <TierColumn bgColor={colorSets.G} />
             </RowsContainer>
-            <DragPlace />
+            <DragPlace images={picturesS} />
             <ButtonsContainer>
                 <MainButton value={buttonValues.SOD} />
                 <div>

@@ -49,6 +49,7 @@ const Home = () => {
         },
         {
             id: 8,
+            diff: true,
             items: [
                 {
                     id: 1,
@@ -64,27 +65,27 @@ const Home = () => {
                 },
                 {
                     id: 4,
-                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    uri: "https://images.pexels.com/photos/15641525/pexels-photo-15641525.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 },
                 {
                     id: 5,
-                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    uri: "https://images.pexels.com/photos/13010778/pexels-photo-13010778.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 },
                 {
                     id: 6,
-                    uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
+                    uri: "https://images.pexels.com/photos/15694781/pexels-photo-15694781.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 },
                 {
                     id: 7,
-                    uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    uri: "https://images.pexels.com/photos/9374423/pexels-photo-9374423.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 },
                 {
                     id: 8,
-                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    uri: "https://images.pexels.com/photos/9821392/pexels-photo-9821392.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 },
                 {
                     id: 9,
-                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    uri: "https://images.pexels.com/photos/6341527/pexels-photo-6341527.jpeg?auto=compress&cs=tinysrgb&w=1600"
                 },
             ]
         }
@@ -96,45 +97,45 @@ const Home = () => {
     const dragOverHandler = (e, item, board) => {
         e.preventDefault();
         if (e.target.classList.value.includes('item')) {
-
+            // e.target.style.marginLeft = "130px"
         }
     };
     const dragLeaveHandler = (e) => {
-        e.target.style.boxShadow = "none";
+        // e.target.style.marginLeft = "130px"
+
     };
     const dragStartHandler = (e, board, item) => {
         setCurrentBoard(board);
         setCurrentItem(item);
     };
     const dragEndHandler = (e) => {
-        e.target.style.boxShadow = "none";
     };
-    const dropHandler = (e, board, item) => {
-        e.preventDefault();
-        console.log("CARD")
+    // const dropHandler = (e, board, item) => {
+    //     e.preventDefault();
+    //     console.log("CARD")
 
-        const currentIndex = currentBoard.items.indexOf(currentItem);
-        currentBoard.items.splice(currentIndex, 1);
-        const dropIndex = board.items.indexOf(item);
-        board.items.splice(dropIndex, 0, currentItem);
-        setBoards(
-            boards.map((b) => {
-                if (b.id === board.id) {
-                    return board;
-                }
-                if (b.id === currentBoard.id) {
-                    return currentBoard;
-                }
-                return b;
-            })
-        );
-        e.target.style.boxShadow = "none";
-    };
+    //     const currentIndex = currentBoard.items.indexOf(currentItem);
+    //     currentBoard.items.splice(currentIndex, 1);
+    //     const dropIndex = board.items.indexOf(item);
+    //     board.items.splice(dropIndex, 0, currentItem);
+    //     setBoards(
+    //         boards.map((b) => {
+    //             if (b.id === board.id) {
+    //                 return board;
+    //             }
+    //             if (b.id === currentBoard.id) {
+    //                 return currentBoard;
+    //             }
+    //             return b;
+    //         })
+    //     );
+    // };
 
     const dropCardHandler = (e, board) => {
         board.items.push(currentItem);
         const currentIndex = currentBoard.items.indexOf(currentItem);
         currentBoard.items.splice(currentIndex, 1);
+        console.log(e.target, "E TaRGET")
         setBoards(
             boards.map((b) => {
                 if (b.id === board.id) {
@@ -146,7 +147,7 @@ const Home = () => {
                 return b;
             })
         );
-        e.target.style.boxShadow = "none";
+        // e.target.style.marginRight = "130px"
     };
 
     return (
@@ -155,15 +156,17 @@ const Home = () => {
             <RowsContainer>
                 {boards.map((board) => (
                     <ColumnContainer
+                        diff={board.diff}
                         key={board.id}
                         onDragOver={e => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, board)}
                     >
-                        <InputWrapper tabIndex={1} bgColor={board.bgColor}>
-                            <Title contentEditable={true}>
+                        {board.id !== 8 && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
+                            <Title contentEditable={true} suppressContentEditableWarning>
                                 <span>{board.value}</span>
                             </Title>
                         </InputWrapper>
+                        }
                         <ImageWrapper>
                             {board.items?.map((item) => (
                                 <StyledImage
@@ -218,7 +221,8 @@ const DraggableImagesContainer = styled.div`
 `
 const ColumnContainer = styled.div`
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: ${({ diff }) => diff ? "1fr" : "100px 1fr"};
+    background: ${({ diff }) => diff ? "#000000" : "#1a1a17"};
     width: 100%;
     min-height: 80px;
     place-items: center;
@@ -257,7 +261,6 @@ const Title = styled.div`
 const ImageWrapper = styled.div`
     width: 100%;
     min-height: 80px;
-    background: #1a1a17;
     display: flex;
     flex-wrap: wrap;
     flex-shrink: 1;
@@ -312,6 +315,7 @@ const RowsContainer = styled.div`
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
+    gap: 0.12rem;
 `
 
 export default Home;

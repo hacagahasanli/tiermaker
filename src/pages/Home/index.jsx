@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Header } from 'components/index';
 import { TiersBoard, Buttons } from 'shared/index';
-
+import { useSelector } from 'react-redux';
 
 const Home = () => {
     const [boards, setBoards] = useState([]);
+    const { theme } = useSelector(state => state.images)
 
     return (
-        <Container>
-            <Header />
-            <TiersBoard {...{ setBoards, boards }} />
-            <Buttons {...{ setBoards }} />
-        </Container>
+        <ThemeProvider theme={theme}>
+            <Container>
+                <Header />
+                <TiersBoard {...{ setBoards, boards }} />
+                <Buttons {...{ setBoards }} />
+            </Container>
+        </ThemeProvider>
     )
 }
 

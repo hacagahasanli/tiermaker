@@ -145,3 +145,22 @@ export const defaultBoards = [
         ]
     }
 ]
+
+export const colourPalattes = {
+    A1: "#000000",
+    A2: '#F7F7F7',
+    A3: '#CFCFCF',
+    A4: '#858585',
+    A5: '#3B3B3B',
+    A6: '#BF7FBF',
+    A7: '#FF7FFF',
+    A8: '#7F7FFF',
+    A9: '#7FBFFF',
+    A10: '#7FFFFF',
+    A11: '#7FFF7F',
+    A12: '#BFFF7F',
+    A13: '#FFFF7F',
+    A14: '#FFDF7F',
+    A15: '#FFBF7F',
+    A16: '#FF7F7F'
+}

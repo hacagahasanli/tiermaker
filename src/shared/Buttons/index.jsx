@@ -1,10 +1,11 @@
-import { Button, MainButton } from "components/index";
+import { Button, MainButton, Palattes } from "components/index";
 import { buttonValues, defaultBoards } from "constants/index";
 import { memo, useState } from "react";
 import styled from "styled-components"
 
 export const Buttons = memo(({ setBoards }) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
+    const screenText = isFullScreen ? buttonValues.NORMAL_VIEW : buttonValues.FULL_SCREEN
 
     const saveScreenshot = () => {
         html2canvas(document.body).then(canvas => {
@@ -32,14 +33,17 @@ export const Buttons = memo(({ setBoards }) => {
     const resetBoardsHandler = () => setBoards(defaultBoards)
 
     return (
-        <ButtonsContainer>
-            <MainButton value={buttonValues.SOD} func={saveScreenshot} />
-            <div>
-                <Button func={handleFullScreenClick} value={isFullScreen ? buttonValues.NORMAL_VIEW : buttonValues.FULL_SCREEN} />
-                <Button func={resetBoardsHandler} value={buttonValues.RESET} />
-                <Button value={buttonValues.C_B_COLOR} />
-            </div>
-        </ButtonsContainer>
+        <>
+            <ButtonsContainer>
+                <MainButton value={buttonValues.SOD} func={saveScreenshot} />
+                <div>
+                    <Button func={handleFullScreenClick} value={screenText} />
+                    <Button func={resetBoardsHandler} value={buttonValues.RESET} />
+                    <Button value={buttonValues.C_B_COLOR} />
+                </div>
+            </ButtonsContainer>
+            <Palattes />
+        </>
     )
 
 })
@@ -52,7 +56,8 @@ const ButtonsContainer = styled.div`
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 3rem 0;
+    margin-top:3rem;
+    margin-bottom:1.5rem;
 
     div {
         width: 100%;

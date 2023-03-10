@@ -3,6 +3,7 @@ import { defaultBoards } from "constants/index";
 
 const initialState = {
     boards: [...defaultBoards],
+    theme: {}
 }
 
 const ImagesSlice = createSlice({

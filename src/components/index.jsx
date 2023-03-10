@@ -1,2 +1,2 @@
-export { Header } from "./Header";
-export { Button, MainButton } from "./Button";
+export { Header } from "./UI/Header";
+export { Button, MainButton } from "./UI/Button";

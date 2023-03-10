@@ -1,43 +1,50 @@
 import React, { useState } from 'react'
-import { Header, MainButton, Button } from 'components/index';
 import styled from 'styled-components';
 import { buttonValues, colorSets } from 'constants/index';
+import { Header, MainButton, Button } from 'components/index';
 
 const Home = () => {
     const [boards, setBoards] = useState([
         {
             id: 1,
             bgColor: colorSets.S,
+            value: 'S',
             items: []
         },
         {
             id: 2,
             bgColor: colorSets.A,
+            value: "A",
             items: []
         },
         {
             id: 3,
             bgColor: colorSets.B,
+            value: "B",
             items: []
         },
         {
             id: 4,
             bgColor: colorSets.C,
+            value: "C",
             items: []
         },
         {
             id: 5,
             bgColor: colorSets.D,
+            value: "D",
             items: []
         },
         {
             id: 6,
             bgColor: colorSets.F,
+            value: "F",
             items: []
         },
         {
             id: 7,
             bgColor: colorSets.G,
+            value: "G",
             items: []
         },
         {
@@ -86,10 +93,10 @@ const Home = () => {
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
-    const dragOverHandler = (e) => {
+    const dragOverHandler = (e, item, board) => {
         e.preventDefault();
-        if (e.target.className === "item") {
-            e.target.style.boxShadow = "0 4px 3px gray";
+        if (e.target.classList.value.includes('item')) {
+
         }
     };
     const dragLeaveHandler = (e) => {
@@ -104,21 +111,23 @@ const Home = () => {
     };
     const dropHandler = (e, board, item) => {
         e.preventDefault();
-        // const currentIndex = currentBoard.items.indexOf(currentItem);
-        // currentBoard.items.splice(currentIndex, 1);
-        // const dropIndex = board.items.indexOf(item);
-        // board.items.splice(dropIndex + 1, 0, currentItem);
-        // setBoards(
-        //   boards.map((b) => {
-        //     if (b.id === board.id) {
-        //       return board;
-        //     }
-        //     if (b.id === currentBoard.id) {
-        //       return currentBoard;
-        //     }
-        //     return b;
-        //   })
-        // );
+        console.log("CARD")
+
+        const currentIndex = currentBoard.items.indexOf(currentItem);
+        currentBoard.items.splice(currentIndex, 1);
+        const dropIndex = board.items.indexOf(item);
+        board.items.splice(dropIndex, 0, currentItem);
+        setBoards(
+            boards.map((b) => {
+                if (b.id === board.id) {
+                    return board;
+                }
+                if (b.id === currentBoard.id) {
+                    return currentBoard;
+                }
+                return b;
+            })
+        );
         e.target.style.boxShadow = "none";
     };
 
@@ -151,19 +160,23 @@ const Home = () => {
                         onDrop={(e) => dropCardHandler(e, board)}
                     >
                         <InputWrapper tabIndex={1} bgColor={board.bgColor}>
-                            <Input type="text" />
+                            <Title contentEditable={true}>
+                                <span>{board.value}</span>
+                            </Title>
                         </InputWrapper>
                         <ImageWrapper>
                             {board.items?.map((item) => (
                                 <StyledImage
+                                    id={item.id}
+                                    className='item'
                                     src={item.uri}
                                     alt={item.id}
                                     key={item.id}
-                                    onDragOver={(e) => dragOverHandler(e)}
+                                    onDragOver={(e) => dragOverHandler(e, item, board)}
                                     onDragLeave={(e) => dragLeaveHandler(e)}
                                     onDragStart={(e) => dragStartHandler(e, board, item)}
                                     onDragEnd={(e) => dragEndHandler(e)}
-                                    onDrop={(e) => dropHandler(e, board, item)}
+                                    // onDrop={(e) => dropHandler(e, board, item)}
                                     draggable={true}
                                 />
                             ))}
@@ -231,7 +244,7 @@ const InputWrapper = styled.div`
         border-radius: 2px;
     }
 `
-const Input = styled.input`
+const Title = styled.div`
     width: 100%;
     margin:5px;
     color: #000000;
@@ -298,7 +311,6 @@ const RowsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap:0.2rem;
     margin-top: 1rem;
 `
 

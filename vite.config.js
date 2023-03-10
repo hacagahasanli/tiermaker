@@ -16,5 +16,14 @@ export default defineConfig({
       store: "/src/store",
       utils: "/src/utils",
     }
-  }
+  },
+  //  server: {
+  //   port: 3000,
+  //   strictPort: true,
+  //   hmr: {
+  //     clientPort: 3000,
+  //     port: 3001,
+  //   },
+  // },
+
 })

@@ -5,7 +5,9 @@ import styled from "styled-components"
 
 export const Buttons = memo(({ setBoards }) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
-    const screenText = isFullScreen ? buttonValues.NORMAL_VIEW : buttonValues.FULL_SCREEN
+    const [showPalatte, setShowPalatte] = useState(false)
+    const SCREEN_TEXT = isFullScreen ? buttonValues.NORMAL_VIEW : buttonValues.FULL_SCREEN;
+    const BACKROUND_COLOR_TEXT = showPalatte ? buttonValues.C_B_COLOR_PICKER : buttonValues.C_B_COLOR;
 
     const saveScreenshot = () => {
         html2canvas(document.body).then(canvas => {
@@ -37,12 +39,12 @@ export const Buttons = memo(({ setBoards }) => {
             <ButtonsContainer>
                 <MainButton value={buttonValues.SOD} func={saveScreenshot} />
                 <div>
-                    <Button func={handleFullScreenClick} value={screenText} />
+                    <Button func={handleFullScreenClick} value={SCREEN_TEXT} />
                     <Button func={resetBoardsHandler} value={buttonValues.RESET} />
-                    <Button value={buttonValues.C_B_COLOR} />
+                    <Button func={setShowPalatte(!showPalatte)} value={BACKROUND_COLOR_TEXT} />
                 </div>
             </ButtonsContainer>
-            <Palattes />
+            <Palattes {...{ showPalatte }} />
         </>
     )
 

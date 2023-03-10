@@ -20,6 +20,40 @@ const Home = () => {
         {
             id: 1,
             bgColor: colorSets.S,
+            items: []
+        },
+        {
+            id: 2,
+            bgColor: colorSets.A,
+            items: []
+        },
+        {
+            id: 3,
+            bgColor: colorSets.B,
+            items: []
+        },
+        {
+            id: 4,
+            bgColor: colorSets.C,
+            items: []
+        },
+        {
+            id: 5,
+            bgColor: colorSets.D,
+            items: []
+        },
+        {
+            id: 6,
+            bgColor: colorSets.F,
+            items: []
+        },
+        {
+            id: 7,
+            bgColor: colorSets.G,
+            items: []
+        },
+        {
+            id: 8,
             items: [
                 {
                     id: 1,
@@ -33,12 +67,6 @@ const Home = () => {
                     id: 3,
                     uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
                 },
-            ]
-        },
-        {
-            id: 2,
-            bgColor: colorSets.A,
-            items: [
                 {
                     id: 4,
                     uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -51,12 +79,6 @@ const Home = () => {
                     id: 6,
                     uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
                 },
-            ]
-        },
-        {
-            id: 3,
-            bgColor: colorSets.B,
-            items: [
                 {
                     id: 7,
                     uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
@@ -93,7 +115,6 @@ const Home = () => {
         e.target.style.boxShadow = "none";
     };
     const dropHandler = (e, board, item) => {
-        console.log("DROP HANDLER");
         e.preventDefault();
         // const currentIndex = currentBoard.items.indexOf(currentItem);
         // currentBoard.items.splice(currentIndex, 1);
@@ -160,11 +181,13 @@ const Home = () => {
                             ))}
                         </ImageWrapper>
                     </ColumnContainer>
-
                 ))}
-
             </RowsContainer>
-            <DragPlace images={boards[0].items} />
+            <DraggableImagesContainer>
+                <DragImage>
+
+                </DragImage>
+            </DraggableImagesContainer>
             <ButtonsContainer>
                 <MainButton value={buttonValues.SOD} />
                 <div>

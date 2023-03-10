@@ -1,9 +1,4 @@
-import { forwardRef } from "react"
-import styled from "styled-components"
-import { Image } from ".."
-
-export const TierColumn = forwardRef(({ bgColor, images }, ref) => {
-    console.log(images, "IMAGES")
+export const TierColumn = () => {
     return (
         <ColumnContainer ref={ref}>
             <InputWrapper tabIndex={1} {...{ bgColor }}>
@@ -14,7 +9,7 @@ export const TierColumn = forwardRef(({ bgColor, images }, ref) => {
             </ImageWrapper>
         </ColumnContainer>
     )
-})
+}
 
 const ColumnContainer = styled.div`
     display: grid;

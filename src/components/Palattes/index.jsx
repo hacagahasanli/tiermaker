@@ -1,13 +1,11 @@
 import { colourPalattes } from "constants/index"
 import styled from "styled-components"
 
-export const Palattes = () => {
+export const Palattes = ({ showPalatte }) => {
     return <Container>
-        {
-            Object.entries(colourPalattes).map(([key, value]) => {
-                return <Colour color={value} key={key}></Colour>
-            })
-        }
+        {Object.entries(colourPalattes).map(([key, value]) => (
+            <Colour color={value} key={key}></Colour>
+        ))}
     </Container>
 }
 

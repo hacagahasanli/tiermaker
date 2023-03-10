@@ -3,6 +3,7 @@ export const buttonValues = {
     NORMAL_VIEW: "Normal View",
     RESET: "Reset",
     C_B_COLOR: "Change Background Color",
+    C_B_COLOR_PICKER: "Close Background Color Picker",
     FULL_SCREEN: "Full Screen View"
 }
 

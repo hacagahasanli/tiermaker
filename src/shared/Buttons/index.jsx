@@ -6,6 +6,7 @@ import styled from "styled-components"
 export const Buttons = memo(({ setBoards }) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [showPalatte, setShowPalatte] = useState(false)
+
     const SCREEN_TEXT = isFullScreen ? buttonValues.NORMAL_VIEW : buttonValues.FULL_SCREEN;
     const BACKROUND_COLOR_TEXT = showPalatte ? buttonValues.C_B_COLOR_PICKER : buttonValues.C_B_COLOR;
 

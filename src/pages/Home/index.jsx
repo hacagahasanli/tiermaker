@@ -16,73 +16,155 @@ const colorSets = {
 }
 
 const Home = () => {
-    const [images, setImages] = useState([])
-    const [imagesQ, setImagesQ] = useState([])
-    const [imagesT, setImagesT] = useState([])
-    const [imagesSS, setImagesSS] = useState([])
-    const [picturesS, setPicturesS] = useState([])
-
-    useEffect(() => setPicturesS(imagesS), [])
-
-    const [{ }, drop] = useDrop(() => ({
-        accept: "image",
-        drop: ({ id }) => addImageToSet(id, "drop", setImages),
-        collect: (monitor) => ({
-            isOver: !!monitor.isOver()
-        })
-    }), [picturesS])
-
-    const [{ }, dropQ] = useDrop(() => ({
-        accept: "image",
-        drop: ({ id }) => addImageToSet(id, "dropQ", setImagesQ),
-        collect: (monitor) => ({
-            isOver: !!monitor.isOver()
-        })
-    }), [picturesS])
-
-    const [{ }, dropT] = useDrop(() => ({
-        accept: "image",
-        drop: ({ id }) => addImageToSet(id, "dropT", setImagesT),
-        collect: (monitor) => ({
-            isOver: !!monitor.isOver()
-        })
-    }), [picturesS])
-
-    const [{ }, dropS] = useDrop(() => ({
-        accept: "image",
-        drop: ({ id }) => addImageToSet(id, "dropS", setImagesSS),
-        collect: (monitor) => ({
-            isOver: !!monitor.isOver()
-        })
-    }), [picturesS])
-
-    const addImageToSet = (id, place, setPictures) => {
-        const data = {
-            drop: images,
-            dropQ: imagesQ,
-            dropT: imagesT,
-            dropS: imagesSS
+    const [boards, setBoards] = useState([
+        {
+            id: 1,
+            bgColor: colorSets.S,
+            items: [
+                {
+                    id: 1,
+                    uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
+                },
+                {
+                    id: 2,
+                    uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
+                },
+                {
+                    id: 3,
+                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                },
+            ]
+        },
+        {
+            id: 2,
+            bgColor: colorSets.A,
+            items: [
+                {
+                    id: 4,
+                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                },
+                {
+                    id: 5,
+                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                },
+                {
+                    id: 6,
+                    uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
+                },
+            ]
+        },
+        {
+            id: 3,
+            bgColor: colorSets.B,
+            items: [
+                {
+                    id: 7,
+                    uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
+                },
+                {
+                    id: 8,
+                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                },
+                {
+                    id: 9,
+                    uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                },
+            ]
         }
+    ]);
 
-        const addedImage = picturesS?.find((image) => image?.id === id);
-        setPicturesS((prev) => prev.filter((item) => item?.id !== id))
-        setPictures((prev) => [...prev, addedImage])
+    const [currentBoard, setCurrentBoard] = useState(null);
+    const [currentItem, setCurrentItem] = useState(null);
 
-    }
+    const dragOverHandler = (e) => {
+        e.preventDefault();
+        if (e.target.className === "item") {
+            e.target.style.boxShadow = "0 4px 3px gray";
+        }
+    };
+    const dragLeaveHandler = (e) => {
+        e.target.style.boxShadow = "none";
+    };
+    const dragStartHandler = (e, board, item) => {
+        setCurrentBoard(board);
+        setCurrentItem(item);
+    };
+    const dragEndHandler = (e) => {
+        e.target.style.boxShadow = "none";
+    };
+    const dropHandler = (e, board, item) => {
+        console.log("DROP HANDLER");
+        e.preventDefault();
+        // const currentIndex = currentBoard.items.indexOf(currentItem);
+        // currentBoard.items.splice(currentIndex, 1);
+        // const dropIndex = board.items.indexOf(item);
+        // board.items.splice(dropIndex + 1, 0, currentItem);
+        // setBoards(
+        //   boards.map((b) => {
+        //     if (b.id === board.id) {
+        //       return board;
+        //     }
+        //     if (b.id === currentBoard.id) {
+        //       return currentBoard;
+        //     }
+        //     return b;
+        //   })
+        // );
+        e.target.style.boxShadow = "none";
+    };
+
+    const dropCardHandler = (e, board) => {
+        board.items.push(currentItem);
+        const currentIndex = currentBoard.items.indexOf(currentItem);
+        currentBoard.items.splice(currentIndex, 1);
+        setBoards(
+            boards.map((b) => {
+                if (b.id === board.id) {
+                    return board;
+                }
+                if (b.id === currentBoard.id) {
+                    return currentBoard;
+                }
+                return b;
+            })
+        );
+        e.target.style.boxShadow = "none";
+    };
 
     return (
         <Container>
             <Header />
             <RowsContainer>
-                <TierColumn {...{ images }} bgColor={colorSets.S} ref={drop} />
-                <TierColumn images={imagesQ} bgColor={colorSets.A} ref={dropQ} />
-                <TierColumn images={imagesT} bgColor={colorSets.B} ref={dropT} />
-                <TierColumn images={imagesSS} bgColor={colorSets.C} ref={dropS} />
-                <TierColumn bgColor={colorSets.D} />
-                <TierColumn bgColor={colorSets.F} />
-                <TierColumn bgColor={colorSets.G} />
+                {boards.map((board) => (
+                    <ColumnContainer
+                        key={board.id}
+                        onDragOver={e => dragOverHandler(e)}
+                        onDrop={(e) => dropCardHandler(e, board)}
+                    >
+                        <InputWrapper tabIndex={1} bgColor={board.bgColor}>
+                            <Input type="text" />
+                        </InputWrapper>
+                        <ImageWrapper>
+                            {board.items?.map((item) => (
+                                <StyledImage
+                                    src={item.uri}
+                                    alt={item.id}
+                                    key={item.id}
+                                    onDragOver={(e) => dragOverHandler(e)}
+                                    onDragLeave={(e) => dragLeaveHandler(e)}
+                                    onDragStart={(e) => dragStartHandler(e, board, item)}
+                                    onDragEnd={(e) => dragEndHandler(e)}
+                                    onDrop={(e) => dropHandler(e, board, item)}
+                                    draggable={true}
+                                />
+                            ))}
+                        </ImageWrapper>
+                    </ColumnContainer>
+
+                ))}
+
             </RowsContainer>
-            <DragPlace images={picturesS} />
+            <DragPlace images={boards[0].items} />
             <ButtonsContainer>
                 <MainButton value={buttonValues.SOD} />
                 <div>
@@ -95,6 +177,81 @@ const Home = () => {
     )
 }
 
+const DragImage = styled.div`
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 0 2rem 2rem 2rem;
+`
+
+const DraggableImagesContainer = styled.div`
+    width: inherit;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+`
+const ColumnContainer = styled.div`
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    width: 100%;
+    min-height: 80px;
+    place-items: center;
+`
+const InputWrapper = styled.div`
+    width: 100px;
+    min-height:80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    background-color: ${({ bgColor }) => bgColor};
+    border-right: solid 1px #000000;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 16px;
+    z-index: 4;
+
+    &:focus,:focus-within{
+        outline: 1.5px solid #b8e0ec;
+        border-radius: 2px;
+    }
+`
+const Input = styled.input`
+    width: 100%;
+    margin:5px;
+    color: #000000;
+    text-align: center;
+    border: 1px solid transparent;
+    outline: none;
+    background: transparent;
+    text-align: center;
+`
+const ImageWrapper = styled.div`
+    width: 100%;
+    min-height: 80px;
+    background: #1a1a17;
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+    flex-grow: 1;
+    /* display: grid;
+    grid-template-columns: repeat(10, minmax(100px, 1fr));
+    grid-template-rows: repeat(auto-fill, 80px);
+    justify-content: start; */
+
+`
+
+const StyledImage = styled.img`
+    width: 124px;// add your desired width here
+    height: 80px;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+`
 const ButtonsContainer = styled.div`
     width: 980px;
     width: 100%;

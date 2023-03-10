@@ -4,8 +4,8 @@ export const MainButton = ({ value, func }) => {
     return <MButton onClick={func}>{value}</MButton>
 }
 
-export const Button = ({ value }) => {
-    return <SButton >{value}</SButton>
+export const Button = ({ value, func }) => {
+    return <SButton onClick={func} >{value}</SButton>
 }
 
 const sameStyles = css`

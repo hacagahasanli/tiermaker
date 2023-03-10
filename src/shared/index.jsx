@@ -1,3 +1,2 @@
-export { TierColumn } from "./TierColumn";
-export { DragPlace } from "./DragPlace";
+export { TiersBoard } from "./TiersBoard";
 export { Image } from "./Image";

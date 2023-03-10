@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { buttonValues, colorSets } from 'constants/index';
 import { Header, MainButton, Button } from 'components/index';
+import html2canvas from 'html2canvas';
 
 const Home = () => {
     const [boards, setBoards] = useState([
@@ -101,8 +102,7 @@ const Home = () => {
         }
     };
     const dragLeaveHandler = (e) => {
-        // e.target.style.marginLeft = "130px"
-
+        // e.target.style.marginLeft = "0px"
     };
     const dragStartHandler = (e, board, item) => {
         setCurrentBoard(board);
@@ -110,32 +110,8 @@ const Home = () => {
     };
     const dragEndHandler = (e) => {
     };
-    // const dropHandler = (e, board, item) => {
-    //     e.preventDefault();
-    //     console.log("CARD")
 
-    //     const currentIndex = currentBoard.items.indexOf(currentItem);
-    //     currentBoard.items.splice(currentIndex, 1);
-    //     const dropIndex = board.items.indexOf(item);
-    //     board.items.splice(dropIndex, 0, currentItem);
-    //     setBoards(
-    //         boards.map((b) => {
-    //             if (b.id === board.id) {
-    //                 return board;
-    //             }
-    //             if (b.id === currentBoard.id) {
-    //                 return currentBoard;
-    //             }
-    //             return b;
-    //         })
-    //     );
-    // };
-
-    const dropCardHandler = (e, board) => {
-        board.items.push(currentItem);
-        const currentIndex = currentBoard.items.indexOf(currentItem);
-        currentBoard.items.splice(currentIndex, 1);
-        console.log(e.target, "E TaRGET")
+    const setBoardsHandler = (board) => {
         setBoards(
             boards.map((b) => {
                 if (b.id === board.id) {
@@ -147,6 +123,41 @@ const Home = () => {
                 return b;
             })
         );
+    }
+
+    const removeItemFromBoard = () => {
+        const currentIndex = currentBoard.items.indexOf(currentItem);
+        currentBoard.items.splice(currentIndex, 1);
+    }
+
+    const dropHandler = (e, board, item) => {
+        e.preventDefault();
+        removeItemFromBoard()
+        const dropIndex = board.items.indexOf(item);
+        board.items.splice(dropIndex, 0, currentItem);
+        setBoardsHandler(board)
+    };
+
+    function saveScreenshot() {
+        console.log("SADSDSAD")
+        html2canvas(document.body).then(canvas => {
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'screenshot.png';
+                link.click();
+                URL.revokeObjectURL(url);
+            });
+        });
+    }
+
+    const dropCardHandler = (e, board) => {
+        if (!e.target.classList.value.includes('item')) {
+            board.items.push(currentItem);
+            removeItemFromBoard()
+            setBoardsHandler(board)
+        }
         // e.target.style.marginRight = "130px"
     };
 
@@ -179,7 +190,7 @@ const Home = () => {
                                     onDragLeave={(e) => dragLeaveHandler(e)}
                                     onDragStart={(e) => dragStartHandler(e, board, item)}
                                     onDragEnd={(e) => dragEndHandler(e)}
-                                    // onDrop={(e) => dropHandler(e, board, item)}
+                                    onDrop={(e) => dropHandler(e, board, item)}
                                     draggable={true}
                                 />
                             ))}
@@ -193,7 +204,7 @@ const Home = () => {
                 </DragImage>
             </DraggableImagesContainer>
             <ButtonsContainer>
-                <MainButton value={buttonValues.SOD} />
+                <MainButton value={buttonValues.SOD} func={saveScreenshot} />
                 <div>
                     <Button value={buttonValues.NORMAL_VIEW} />
                     <Button value={buttonValues.RESET} />
@@ -223,6 +234,7 @@ const ColumnContainer = styled.div`
     display: grid;
     grid-template-columns: ${({ diff }) => diff ? "1fr" : "100px 1fr"};
     background: ${({ diff }) => diff ? "#000000" : "#1a1a17"};
+    margin-top: ${({ diff }) => diff ? "1.2rem" : "0"};
     width: 100%;
     min-height: 80px;
     place-items: center;

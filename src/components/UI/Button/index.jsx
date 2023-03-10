@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components"
 
-export const MainButton = ({ value }) => {
-    return <MButton>{value}</MButton>
+export const MainButton = ({ value, func }) => {
+    return <MButton onClick={func}>{value}</MButton>
 }
 
 export const Button = ({ value }) => {
-    return <SButton>{value}</SButton>
+    return <SButton >{value}</SButton>
 }
 
 const sameStyles = css`

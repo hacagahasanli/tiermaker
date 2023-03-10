@@ -1,19 +1,7 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Header, MainButton, Button } from 'components/index';
-import { DragPlace, TierColumn } from 'shared/index';
 import styled from 'styled-components';
-import { buttonValues, imagesS } from 'constants/index';
-import { useDrop } from 'react-dnd';
-
-const colorSets = {
-    S: "#FF7F7F",
-    A: "#FFBF7F",
-    B: "#FFDF7F",
-    C: "#FFFF7F",
-    D: "#BFFF7F",
-    F: "#7FFF7F",
-    G: "#7FFFFF"
-}
+import { buttonValues, colorSets } from 'constants/index';
 
 const Home = () => {
     const [boards, setBoards] = useState([

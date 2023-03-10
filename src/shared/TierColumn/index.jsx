@@ -1,3 +1,5 @@
+import styled from "styled-components"
+
 export const TierColumn = () => {
     return (
         <ColumnContainer ref={ref}>

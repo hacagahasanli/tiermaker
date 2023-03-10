@@ -47,3 +47,13 @@ export const imagesS = [
         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
     }
 ]
+
+export const colorSets = {
+    S: "#FF7F7F",
+    A: "#FFBF7F",
+    B: "#FFDF7F",
+    C: "#FFFF7F",
+    D: "#BFFF7F",
+    F: "#7FFF7F",
+    G: "#7FFFFF"
+}

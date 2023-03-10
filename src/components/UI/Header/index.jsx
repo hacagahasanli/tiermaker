@@ -13,7 +13,7 @@ export const Header = () => {
 
 const LogoHeader = styled.header`
     width: 100%;
-    min-height: 70px;
+    min-height: 50px;
     display: flex;
     justify-content: center;
 `

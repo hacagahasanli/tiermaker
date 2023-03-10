@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { colorSets } from 'constants/index';
 
 const defaultBoards = [
@@ -88,11 +88,10 @@ const defaultBoards = [
         ]
     }
 ]
-export const TiersBoard = () => {
-    const [boards, setBoards] = useState();
-
+export const TiersBoard = memo(({ setBoards, boards }) => {
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
+
     useEffect(() => setBoards(defaultBoards), [])
 
     const dragOverHandler = (e, item, board) => {
@@ -184,7 +183,7 @@ export const TiersBoard = () => {
             ))}
         </RowsContainer>
     )
-}
+})
 const ColumnContainer = styled.div`
     display: grid;
     grid-template-columns: ${({ diff }) => diff ? "1fr" : "100px 1fr"};
@@ -246,12 +245,12 @@ const StyledImage = styled.img`
     padding: 0;
 `
 const RowsContainer = styled.div`
-    max-width: 1120px;
+    max-width: 1150px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
     gap: 0.12rem;
 `

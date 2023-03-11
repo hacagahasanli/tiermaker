@@ -3,7 +3,7 @@ import styled, { css } from "styled-components"
 
 export const MainButton = memo(({ value, func }) => <MButton onClick={func}>{value}</MButton>)
 
-export const Button = memo(({ value, func }) => <SButton onClick={func}>{value}</SButton>)
+export const Button = memo(({ value, func, isGray }) => <SButton {...{ isGray }} onClick={func}>{value}</SButton>)
 
 const sameStyles = css`
     text-align: center;
@@ -21,7 +21,7 @@ const SButton = styled.button`
     ${sameStyles}
     border: none;
     outline: none;
-    background-color: #ffffff;
+    background-color:${({ isGray }) => isGray ? "#F1F1F1" : "#ffffff"} ;
     font-weight: 500;
 `
 const MButton = styled.button`

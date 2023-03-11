@@ -100,7 +100,7 @@ export const TiersBoard = memo(({ setBoards, boards }) => {
 const ColumnContainer = styled.div`
     display: grid;
     grid-template-columns: ${({ diff }) => diff ? "1fr" : "100px 1fr"};
-    background: ${({ diff }) => diff ? "#000000" : "#1a1a17"};
+    background: ${({ diff, theme }) => diff ? "#000000" : theme.colour};
     margin-top: ${({ diff }) => diff ? "1.2rem" : "0"};
     width: 100%;
     min-height: 80px;

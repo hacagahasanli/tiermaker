@@ -25,11 +25,8 @@ export const Buttons = memo(({ setBoards }) => {
 
 
     const handleFullScreenClick = () => {
-        if (!isFullScreen) {
-            document.documentElement.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
+        !isFullScreen ? document.documentElement.requestFullscreen()
+            : document.exitFullscreen();
         setIsFullScreen(!isFullScreen);
     };
 

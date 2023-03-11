@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { defaultBoards } from "constants/index";
 
 const initialState = {
-    boards: [...defaultBoards],
-    theme: {}
+    theme: {
+        colour: "#1a1a17"
+    }
 }
 
 const ImagesSlice = createSlice({
     name: "ImagesReducer",
     initialState,
     reducers: {
-        setBoards: (state, action) => {
-            const boards = action.payload
-            state.boards = [...boards]
+        setTheme: (state, action) => {
+            const colour = action.payload
+            state.theme.colour = colour
         }
     }
 })
 
 
 export const imagesReducer = ImagesSlice.reducer
-export const { setBoards } = ImagesSlice.actions 
+export const { setTheme } = ImagesSlice.actions 

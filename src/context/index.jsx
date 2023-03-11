@@ -1,9 +1,9 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { colorSets } from 'constants/index';
 
 export const BoardsContext = createContext()
 
-export const BoardProvider = () => {
+export const BoardProvider = ({ children }) => {
     const [boards, setBoards] = useState([
         {
             id: 1,
@@ -91,5 +91,5 @@ export const BoardProvider = () => {
         }
     ]);
 
-    return <BoardsContext.Provider value={{ boards, setBoards }}></BoardsContext.Provider>
+    return <BoardsContext.Provider value={{ boards, setBoards }}>{children}</BoardsContext.Provider>
 }

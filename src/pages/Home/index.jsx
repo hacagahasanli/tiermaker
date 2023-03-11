@@ -5,12 +5,11 @@ import { TiersBoard, Buttons } from 'shared/index';
 import { useSelector } from 'react-redux';
 import { BoardProvider } from 'context';
 
-
 const Home = () => {
     const { theme } = useSelector(state => state.images)
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider {...{ theme }}>
             <BoardProvider>
                 <Container>
                     <Header />

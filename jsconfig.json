@@ -33,6 +33,9 @@
             "hooks/*": [
                 "hooks/*"
             ],
+            "context/*": [
+                "context/*"
+            ],
         },
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,

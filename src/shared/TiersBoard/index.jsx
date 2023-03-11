@@ -2,10 +2,12 @@ import styled from "styled-components"
 import React, { memo, useContext, useState } from 'react'
 import { BoardsContext } from "context"
 
-export const TiersBoard = memo(() => {
+export const TiersBoard = () => {
     const { boards, setBoards } = useContext(BoardsContext)
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
+
+    console.log(boards, "BOARDS")
 
     const dragOverHandler = (e, item, board) => {
         e.preventDefault();
@@ -97,7 +99,7 @@ export const TiersBoard = memo(() => {
             ))}
         </RowsContainer>
     )
-})
+}
 const ColumnContainer = styled.div`
     display: grid;
     grid-template-columns: ${({ diff }) => diff ? "1fr" : "100px 1fr"};

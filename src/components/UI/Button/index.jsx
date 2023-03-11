@@ -23,15 +23,18 @@ const SButton = styled.button`
     border: none;
     outline: none;
     background-color: #ffffff;
-   
+    font-weight: 500;
 `
 
 const MButton = styled.button`
     border: 1px solid #ffffff;
-    background:#314A7E;
+    background:#3A5795;
     color: #ffffff;
-    max-width: 280px;
+    max-width: 340px;
+    font-weight: 700;
+    font-family: 'Nunito Sans', sans-serif;
     width: 100%;
     ${sameStyles}
-    font-size: 1rem;
+    font-size: 1.05rem;
+    padding: 0.6rem 0;
 `

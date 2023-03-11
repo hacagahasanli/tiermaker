@@ -170,7 +170,8 @@ const ColumnContainer = styled.div`
     width: 100%;
     min-height: 80px;
     place-items: center;
-    `
+    font-family: 'Nunito Sans', sans-serif;
+`
 const InputWrapper = styled.div`
     width: 100px;
     min-height:80px;

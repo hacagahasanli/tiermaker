@@ -4,7 +4,7 @@ import { colorSets } from 'constants/index';
 export const BoardsContext = createContext()
 
 export const BoardProvider = ({ children }) => {
-    const [boards, setBoards] = useState([
+    const defaultValue = [
         {
             id: 1,
             bgColor: colorSets.S,
@@ -89,7 +89,12 @@ export const BoardProvider = ({ children }) => {
                 },
             ]
         }
-    ]);
+    ]
+    const [boards, setBoards] = useState(defaultValue);
 
-    return <BoardsContext.Provider value={{ boards, setBoards }}>{children}</BoardsContext.Provider>
+    const resetBoards = () => setBoards(defaultValue);
+
+    const setNewSetterBoards = (values) => setBoards(values)
+
+    return <BoardsContext.Provider value={{ boards, setBoards, resetBoards, setNewSetterBoards }}>{children}</BoardsContext.Provider>
 }

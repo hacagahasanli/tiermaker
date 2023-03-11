@@ -6,7 +6,7 @@ import { memo, useContext, useState } from "react";
 import styled from "styled-components"
 
 export const Buttons = memo(() => {
-    const { setBoards } = useContext(BoardsContext)
+    const { resetBoards } = useContext(BoardsContext)
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [showPalatte, setShowPalatte] = useState(false)
 
@@ -26,14 +26,11 @@ export const Buttons = memo(() => {
         });
     }
 
-
     const handleFullScreenClick = () => {
         !isFullScreen ? document.documentElement.requestFullscreen()
             : document.exitFullscreen();
         setIsFullScreen(!isFullScreen);
     };
-
-    const resetBoardsHandler = () => setBoards(defaultBoards)
 
     const buttons = [
         {
@@ -43,7 +40,7 @@ export const Buttons = memo(() => {
         },
         {
             id: 'reset',
-            func: () => setBoards(defaultBoards),
+            func: () => resetBoards(),
             value: buttonValues.RESET
         },
         {
@@ -52,7 +49,6 @@ export const Buttons = memo(() => {
             value: BACKROUND_COLOR_TEXT
         },
     ]
-
 
     return (
         <>

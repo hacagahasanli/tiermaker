@@ -15,11 +15,17 @@ export const Palattes = ({ showPalatte }) => {
 
     return <Container {...{ showPalatte }}>
         <div>
-            {Object.entries(colourPalattes).reverse().map(([key, value]) => (
-                <Colour color={value} active={active === value} key={key} onClick={() => setPalatteToBoard(value)}></Colour>
-            ))}
+            <Palatte func={setPalatteToBoard} />
         </div>
     </Container>
+}
+
+export const Palatte = ({ func, active }) => {
+    return <>
+        {Object.entries(colourPalattes).reverse().map(([key, value]) => (
+            <Colour color={value} active={active === value} key={key} onClick={() => func(value)}></Colour>
+        ))}
+    </>
 }
 
 const Container = styled.div`

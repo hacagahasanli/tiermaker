@@ -91,10 +91,9 @@ export const BoardProvider = ({ children }) => {
         }
     ]
     const [boards, setBoards] = useState(defaultValue);
+    const [show, setShow] = useState(false)
 
     const resetBoards = () => setBoards(defaultValue);
 
-    const setNewSetterBoards = (values) => setBoards(values)
-
-    return <BoardsContext.Provider value={{ boards, setBoards, resetBoards, setNewSetterBoards }}>{children}</BoardsContext.Provider>
+    return <BoardsContext.Provider value={{ boards, setBoards, resetBoards, setShow, show }}>{children}</BoardsContext.Provider>
 }

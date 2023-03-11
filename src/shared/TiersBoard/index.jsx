@@ -2,16 +2,20 @@ import styled from "styled-components"
 import React, { useContext, useState } from 'react'
 import { BoardsContext } from "context"
 import { arrow_svg, settings_svg } from "assets/index"
+import { useDispatch } from "react-redux"
+import { setModalVisible } from "store/slices/images-slice"
 
 export const TiersBoard = () => {
     const { boards, setBoards } = useContext(BoardsContext)
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
+    const dispatch = useDispatch()
+
     const dragOverHandler = (e, item, board) => {
         e.preventDefault();
         if (e.target.classList.value.includes('item')) {
-            e.target.style.boxShadow = " 0px 1px 21px 7px rgba(0,0,0,0.75)"
+            e.target.style.boxShadow = "0px 1px 21px 7px rgba(0,0,0,0.75)"
         }
     };
 
@@ -80,7 +84,7 @@ export const TiersBoard = () => {
                     onDragOver={e => dragOverHandler(e)}
                     onDrop={(e) => dropCardHandler(e, board)}
                 >
-                    {board.id !== 8 && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
+                    {board.id !== boards.length && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
                         <Title contentEditable={true} suppressContentEditableWarning>
                             <span>{board.value}</span>
                         </Title>
@@ -103,9 +107,9 @@ export const TiersBoard = () => {
                             />
                         ))}
                     </ImageWrapper>
-                    {board.id !== 8 && <SettingsWrapper>
+                    {board.id !== boards.length && <SettingsWrapper>
                         <Setting>
-                            <img src={settings_svg} alt="settings_svg" />
+                            <img src={settings_svg} alt="settings_svg" onClick={() => dispatch(setModalVisible(true))} />
                         </Setting>
                         <Arrows>
                             <img src={arrow_svg} alt="arrow_svg_up" onClick={() => pushUpHandler(board)} />
@@ -127,7 +131,6 @@ const SettingsWrapper = styled.div`
     width: 100%;
     cursor: pointer;
 `
-
 const Setting = styled.div`
     min-height: 100%;
     display: flex;
@@ -142,7 +145,6 @@ const Setting = styled.div`
         }
     }
 `
-
 const Arrows = styled.div`
     display: flex;
     max-height: 80%;
@@ -162,7 +164,6 @@ const Arrows = styled.div`
         }
     }
 `
-
 const ColumnContainer = styled.div`
     display: grid;
     grid-template-columns: ${({ diff }) => diff ? "1fr" : "100px 1fr 80px"};
@@ -192,7 +193,7 @@ const InputWrapper = styled.div`
         outline: 1.5px solid #b8e0ec;
         border-radius: 2px;
     }
-    `
+`
 const Title = styled.div`
     width: 100%;
     margin:5px;

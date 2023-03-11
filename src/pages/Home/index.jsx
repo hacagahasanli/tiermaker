@@ -4,17 +4,20 @@ import { Header } from 'components/index';
 import { TiersBoard, Buttons } from 'shared/index';
 import { useSelector } from 'react-redux';
 import { BoardProvider } from 'context';
+import { SettingModal } from 'components/Modal';
+
 
 const Home = () => {
-    const { theme } = useSelector(state => state.images)
+    const { theme, modalVisibility } = useSelector(state => state.images)
 
     return (
         <ThemeProvider {...{ theme }}>
             <BoardProvider>
-                <Container>
+                <Container {...{ modalVisibility }}>
                     <Header />
                     <TiersBoard />
                     <Buttons />
+                    <SettingModal />
                 </Container>
             </BoardProvider>
         </ThemeProvider>
@@ -24,10 +27,13 @@ const Home = () => {
 
 const Container = styled.div`
     max-width: 1180px;
+    min-height: 100%;
+    height: ${({ modalVisibility }) => modalVisibility && '100vh'};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    overflow: hidden;
 `
 export default Home;

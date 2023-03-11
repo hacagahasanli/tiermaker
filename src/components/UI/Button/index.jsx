@@ -15,7 +15,6 @@ const sameStyles = css`
         opacity: 0.8;
     }
 `
-
 const SButton = styled.button`
     max-width: 250px;
     width: 100%;
@@ -25,10 +24,9 @@ const SButton = styled.button`
     background-color: #ffffff;
     font-weight: 500;
 `
-
 const MButton = styled.button`
     border: 1px solid #ffffff;
-    background:#3A5795;
+    background:#314A7E;
     color: #ffffff;
     max-width: 340px;
     font-weight: 700;

@@ -1,10 +1,10 @@
 import styled from "styled-components"
-import React, { memo, useState } from 'react'
-import { useBoards } from "hooks/index"
+import React, { memo, useContext, useState } from 'react'
+import { BoardsContext } from "pages/Home"
 
 
 export const TiersBoard = memo(() => {
-    const { boards, setBoards } = useBoards()
+    const { boards, setBoards } = useContext(BoardsContext)
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
@@ -53,7 +53,7 @@ export const TiersBoard = memo(() => {
 
     const dropCardHandler = (e, board) => {
         if (!e.target.classList.value.includes('item')) {
-            board.items.push(currentItem);
+            board?.items?.push(currentItem);
             removeItemFromBoard()
             setBoardsHandler(board)
         }

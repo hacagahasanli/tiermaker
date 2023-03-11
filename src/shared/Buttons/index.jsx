@@ -1,11 +1,13 @@
 import { Button, MainButton, Palattes } from "components/index";
 import { buttonValues, defaultBoards } from "constants/index";
 import { useBoards } from "hooks/index";
-import { memo, useState } from "react";
+import html2canvas from "html2canvas";
+import { BoardsContext } from "pages/Home";
+import { memo, useContext, useState } from "react";
 import styled from "styled-components"
 
 export const Buttons = memo(() => {
-    const { setBoards } = useBoards()
+    const { setBoards } = useContext(BoardsContext)
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [showPalatte, setShowPalatte] = useState(false)
 
@@ -42,7 +44,7 @@ export const Buttons = memo(() => {
         },
         {
             id: 'reset',
-            func: resetBoardsHandler,
+            func: () => setBoards(defaultBoards),
             value: buttonValues.RESET
         },
         {

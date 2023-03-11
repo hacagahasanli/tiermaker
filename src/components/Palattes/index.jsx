@@ -1,8 +1,8 @@
 import { colourPalattes } from "constants/index"
-import { useState } from "react"
+import { memo, useState } from "react"
 import { useDispatch } from "react-redux"
 import { setTheme } from "store/slices/images-slice"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 export const Palattes = ({ showPalatte }) => {
     const [active, setActive] = useState()
@@ -15,18 +15,18 @@ export const Palattes = ({ showPalatte }) => {
 
     return <Container {...{ showPalatte }}>
         <div>
-            <Palatte func={setPalatteToBoard} />
+            <Palatte func={setPalatteToBoard} {...{ active }} palattes={colourPalattes} />
         </div>
     </Container>
 }
 
-export const Palatte = ({ func, active }) => {
+export const Palatte = memo(({ func, active, isBlack, palattes }) => {
     return <>
-        {Object.entries(colourPalattes).reverse().map(([key, value]) => (
-            <Colour color={value} active={active === value} key={key} onClick={() => func(value)}></Colour>
+        {Object?.entries(palattes ?? {})?.reverse().map(([key, value]) => (
+            <Colour color={value} borderColor={isBlack} active={active === value} key={key} onClick={() => func(value)}></Colour>
         ))}
     </>
-}
+})
 
 const Container = styled.div`
     justify-content: center;
@@ -52,10 +52,19 @@ const Container = styled.div`
 `
 
 const Colour = styled.span`
-    background-color: ${({ color }) => color};
-    width: ${({ active }) => active ? "25px" : "30px"};
-    height: ${({ active }) => active ? "25px" : "30px"};
+        ${({ borderColor }) => borderColor ?
+        css`
+            width: 30px;
+            height: 30px;
+            border: 2px solid ${({ active }) => active ? "#000000" : "#ffffff"};
+        `
+        : css`   
+            width: ${({ active }) => active ? "25px" : "30px"};
+            height: ${({ active }) => active ? "25px" : "30px"};
+            border: 2px solid #ffffff;
+        ` }
+        
     border-radius: 50%;
-    border: 2px solid #ffffff;
+    background-color: ${({ color }) => color};
     cursor: pointer;
 `

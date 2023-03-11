@@ -187,7 +187,6 @@ const InputWrapper = styled.div`
     padding: 0;
     overflow: hidden;
     font-size: 16px;
-    z-index: 4;
 
     &:focus,:focus-within{
         outline: 1.5px solid #b8e0ec;

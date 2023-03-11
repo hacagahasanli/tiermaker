@@ -27,13 +27,10 @@ const Home = () => {
 
 const Container = styled.div`
     max-width: 1180px;
-    min-height: 100%;
-    height: ${({ modalVisibility }) => modalVisibility && '100vh'};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    overflow: hidden;
 `
 export default Home;

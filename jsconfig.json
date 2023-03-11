@@ -30,6 +30,9 @@
             "client/*": [
                 "client/*"
             ],
+            "hooks/*": [
+                "hooks/*"
+            ],
         },
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,

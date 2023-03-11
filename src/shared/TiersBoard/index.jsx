@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import React, { memo, useEffect, useState } from 'react'
-import { colorSets } from 'constants/index';
+import React, { memo, useState } from 'react'
+import { useBoards } from "hooks/index"
 
 
-export const TiersBoard = memo(({ setBoards, boards }) => {
+export const TiersBoard = memo(() => {
+    const { boards, setBoards } = useBoards()
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 

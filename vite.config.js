@@ -15,6 +15,7 @@ export default defineConfig({
       shared: "/src/shared",
       store: "/src/store",
       utils: "/src/utils",
+      hooks: "/src/hooks",
     }
   },
   // server: {

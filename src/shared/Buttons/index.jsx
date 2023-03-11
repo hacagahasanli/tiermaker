@@ -1,9 +1,11 @@
 import { Button, MainButton, Palattes } from "components/index";
 import { buttonValues, defaultBoards } from "constants/index";
+import { useBoards } from "hooks/index";
 import { memo, useState } from "react";
 import styled from "styled-components"
 
-export const Buttons = memo(({ setBoards }) => {
+export const Buttons = memo(() => {
+    const { setBoards } = useBoards()
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [showPalatte, setShowPalatte] = useState(false)
 

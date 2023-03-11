@@ -1,15 +1,14 @@
 import styled from "styled-components"
 import { tier_maker } from "assets/index"
 
-export const Header = () => {
-    return (
-        <LogoHeader>
-            <LogoContainer>
-                <img src={tier_maker} alt="tier_maker" />
-            </LogoContainer>
-        </LogoHeader>
-    )
-}
+export const Header = () => (
+    <LogoHeader>
+        <LogoContainer>
+            <img src={tier_maker} alt="tier_maker" />
+        </LogoContainer>
+    </LogoHeader>
+)
+
 
 const LogoHeader = styled.header`
     width: 100%;

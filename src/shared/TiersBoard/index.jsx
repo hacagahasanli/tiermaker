@@ -11,11 +11,11 @@ export const TiersBoard = memo(() => {
     const dragOverHandler = (e, item, board) => {
         e.preventDefault();
         if (e.target.classList.value.includes('item')) {
-            // e.target.style.marginLeft = "130px"
+            e.target.style.boxShadow = " 0px 1px 21px 7px rgba(0,0,0,0.75)"
         }
     };
     const dragLeaveHandler = (e) => {
-        // e.target.style.marginLeft = "0px"
+        e.target.style.boxShadow = "none"
     };
     const dragStartHandler = (e, board, item) => {
         setCurrentBoard(board);
@@ -27,12 +27,10 @@ export const TiersBoard = memo(() => {
     const setBoardsHandler = (board) => {
         setBoards(
             boards?.map((b) => {
-                if (b.id === board.id) {
+                if (b.id === board.id)
                     return board;
-                }
-                if (b.id === currentBoard.id) {
-                    return currentBoard;
-                }
+                if (b.id === currentBoard.id)
+                    return currentBoard
                 return b;
             })
         );
@@ -49,6 +47,8 @@ export const TiersBoard = memo(() => {
         const dropIndex = board.items.indexOf(item);
         board.items.splice(dropIndex, 0, currentItem);
         setBoardsHandler(board)
+        e.target.style.boxShadow = "none"
+
     };
 
     const dropCardHandler = (e, board) => {
@@ -57,7 +57,8 @@ export const TiersBoard = memo(() => {
             removeItemFromBoard()
             setBoardsHandler(board)
         }
-        // e.target.style.marginRight = "130px"
+        e.target.style.boxShadow = "none"
+
     };
 
 

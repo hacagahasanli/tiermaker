@@ -13,20 +13,36 @@ export const Palattes = ({ showPalatte }) => {
         dispatch(setTheme(colour))
     }
 
-    return <Container>
-        {Object.entries(colourPalattes).map(([key, value]) => (
-            <Colour color={value} active={active === value} key={key} onClick={() => setPalatteToBoard(value)}></Colour>
-        ))}
+    return <Container {...{ showPalatte }}>
+        <div>
+            {Object.entries(colourPalattes).reverse().map(([key, value]) => (
+                <Colour color={value} active={active === value} key={key} onClick={() => setPalatteToBoard(value)}></Colour>
+            ))}
+        </div>
     </Container>
 }
 
 const Container = styled.div`
-    display: flex;
     justify-content: center;
     align-items:center;
-    gap:.7rem;
     width: 100%;
-    min-height: 50px;
+    position: relative;
+    height: ${({ showPalatte }) => showPalatte ? "50px" : "0px"};
+    /* height: ${({ showPalatte }) => showPalatte ? "50px" : "0px"}; */
+    transition: all .5s;
+    overflow: hidden;
+    margin-bottom: 10rem;
+
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:.7rem;
+        min-height: 100%;
+        position: absolute;
+        transform:${({ showPalatte }) => showPalatte ? "translateX(232px)" : 'translateX(-200px)'};
+        transition:all .8s;
+    }
 `
 
 const Colour = styled.span`

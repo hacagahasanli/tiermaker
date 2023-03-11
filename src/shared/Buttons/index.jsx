@@ -35,14 +35,31 @@ export const Buttons = memo(({ setBoards }) => {
 
     const resetBoardsHandler = () => setBoards(defaultBoards)
 
+    const buttons = [
+        {
+            id: 'screen_text',
+            func: handleFullScreenClick,
+            value: SCREEN_TEXT
+        },
+        {
+            id: 'reset',
+            func: resetBoardsHandler,
+            value: buttonValues.RESET
+        },
+        {
+            id: 'bg_color_text',
+            func: () => setShowPalatte(!showPalatte),
+            value: BACKROUND_COLOR_TEXT
+        },
+    ]
+
+
     return (
         <>
             <ButtonsContainer>
                 <MainButton value={buttonValues.SOD} func={saveScreenshot} />
                 <div>
-                    <Button func={handleFullScreenClick} value={SCREEN_TEXT} />
-                    <Button func={resetBoardsHandler} value={buttonValues.RESET} />
-                    <Button func={setShowPalatte(!showPalatte)} value={BACKROUND_COLOR_TEXT} />
+                    {buttons?.map(({ value, func, id }) => <Button key={id} {...{ value, func }} />)}
                 </div>
             </ButtonsContainer>
             <Palattes {...{ showPalatte }} />

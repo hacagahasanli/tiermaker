@@ -1,12 +1,13 @@
+import { memo } from "react"
 import styled, { css } from "styled-components"
 
-export const MainButton = ({ value, func }) => {
+export const MainButton = memo(({ value, func }) => {
     return <MButton onClick={func}>{value}</MButton>
-}
+})
 
-export const Button = ({ value, func }) => {
+export const Button = memo(({ value, func }) => {
     return <SButton onClick={func} >{value}</SButton>
-}
+})
 
 const sameStyles = css`
     text-align: center;

@@ -1,8 +1,7 @@
 import { Button, MainButton, Palattes } from "components/index";
 import { buttonValues, defaultBoards } from "constants/index";
-import { useBoards } from "hooks/index";
+import { BoardsContext } from "context";
 import html2canvas from "html2canvas";
-import { BoardsContext } from "pages/Home";
 import { memo, useContext, useState } from "react";
 import styled from "styled-components"
 

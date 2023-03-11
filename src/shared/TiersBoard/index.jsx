@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React, { memo, useContext, useState } from 'react'
-import { BoardsContext } from "pages/Home"
-
+import { BoardsContext } from "context"
 
 export const TiersBoard = memo(() => {
     const { boards, setBoards } = useContext(BoardsContext)

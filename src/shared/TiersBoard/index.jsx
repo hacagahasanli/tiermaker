@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { BoardsContext } from "context"
 import { arrow_svg, settings_svg } from "assets/index"
 import { useDispatch } from "react-redux"
-import { setModalVisible } from "store/slices/images-slice"
+import { setModalVisible, setColumnDetail } from "store/slices/images-slice"
 
 export const TiersBoard = () => {
     const { boards, setBoards } = useContext(BoardsContext)
@@ -73,7 +73,12 @@ export const TiersBoard = () => {
 
     const pullDownHandler = (board) => arrowHandler(boards?.length - 2, 1, board)
 
-    const pushUpHandler = (board) => arrowHandler(0, -1, board)
+    const pushUpHandler = (board) => arrowHandler(0, -1, board);
+
+    const modalHandler = async (board) => {
+        await dispatch(setColumnDetail(board))
+        await dispatch(setModalVisible(true))
+    }
 
     return (
         <RowsContainer>
@@ -109,7 +114,7 @@ export const TiersBoard = () => {
                     </ImageWrapper>
                     {board.id !== boards.length && <SettingsWrapper>
                         <Setting>
-                            <img src={settings_svg} alt="settings_svg" onClick={() => dispatch(setModalVisible(true))} />
+                            <img src={settings_svg} alt="settings_svg" onClick={() => modalHandler(board)} />
                         </Setting>
                         <Arrows>
                             <img src={arrow_svg} alt="arrow_svg_up" onClick={() => pushUpHandler(board)} />

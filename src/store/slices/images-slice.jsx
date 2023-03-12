@@ -4,7 +4,8 @@ const initialState = {
     theme: {
         colour: "#1a1a17"
     },
-    modalVisibility: false
+    modalVisibility: false,
+    columnDetail: {}
 }
 
 const ImagesSlice = createSlice({
@@ -17,12 +18,15 @@ const ImagesSlice = createSlice({
         },
         setModalVisible: (state, action) => {
             const isVisible = action.payload
-            console.log(isVisible, "IS VISIBLE")
             state.modalVisibility = isVisible
+        },
+        setColumnDetail: (state, action) => {
+            const data = action.payload;
+            state.columnDetail = data
         }
     }
 })
 
 
 export const imagesReducer = ImagesSlice.reducer
-export const { setTheme, setModalVisible } = ImagesSlice.actions 
+export const { setTheme, setModalVisible, setColumnDetail } = ImagesSlice.actions 

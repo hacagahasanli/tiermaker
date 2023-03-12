@@ -1,11 +1,12 @@
 import { Palatte } from "components/Palattes"
-import { useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setModalVisible } from "store/slices/images-slice"
 import styled from "styled-components"
 import { colourPalattes } from "constants/index"
 import { Button } from ".."
 import { close_icon_svg } from "assets/index"
+import { BoardsContext } from "context/index"
 
 const palattes = Object.fromEntries(
     Object.entries(colourPalattes).filter(([key]) => key !== "A1")
@@ -13,14 +14,36 @@ const palattes = Object.fromEntries(
 
 export const SettingModal = () => {
     const [active, setActive] = useState()
+    const { boards, setBoards } = useContext(BoardsContext)
+    const { modalVisibility, columnDetail } = useSelector(state => state.images)
 
-    const { modalVisibility } = useSelector(state => state.images)
     const dispatch = useDispatch();
+    const ref = useRef()
+
+    useEffect(() => {
+        const defaultValue = async () => {
+            ref.current.value = columnDetail.value
+        }
+        defaultValue()
+    }, [modalVisibility])
 
     const handleClose = (e) => {
         const id = e.target.id
-        if (id === "container" || id === "close_icon") dispatch(setModalVisible(false))
+        if (id === "container" || id === "close_icon") {
+            dispatch(setModalVisible(false))
+
+        }
     }
+
+    const columnColourHandler = (colour) => {
+        setActive(colour)
+        setBoards(boards.map((item) => {
+            if (item.id === columnDetail?.id)
+                return { ...columnDetail, bgColor: colour }
+            return item
+        }))
+    }
+
     return (
         <>
             <ModalContainer id="container" show={modalVisibility} onClick={(e) => handleClose(e)}>
@@ -29,10 +52,10 @@ export const SettingModal = () => {
                     <PalatteContainer>
                         <span>Choose a Label Background Color:</span>
                         <div>
-                            <Palatte func={setActive} active={active} isBlack={"#000000"} palattes={palattes ?? {}} />
+                            <Palatte func={columnColourHandler} active={active} isBlack={"#000000"} palattes={palattes ?? {}} />
                         </div>
                         <h3>Edit Label Text Below:</h3>
-                        <textarea name="board_name" id="board_name" cols="30" rows="2"></textarea>
+                        <textarea name="board_name" id="board_name" cols="30" rows="2" ref={ref}></textarea>
                         <ButtonsContainer>
                             <Button value="Delete Row" isGray />
                             <Button value="Clear Row Images" isGray />

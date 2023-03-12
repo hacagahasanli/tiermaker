@@ -1,8 +1,10 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import { colorSets } from 'constants/index';
 
 export const BoardsContext = createContext()
+// const storageBoards = localStorage.getItem('boards');
 
+// JSON.parse(storageBoards)
 export const BoardProvider = ({ children }) => {
     const defaultValue = [
         {

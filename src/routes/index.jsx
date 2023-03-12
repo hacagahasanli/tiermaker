@@ -1,10 +1,18 @@
+import { Home, TierBoard } from "pages/index";
 import { createBrowserRouter } from "react-router-dom";
-import Home from "pages/Home";
 
 const router = createBrowserRouter([
     {
+        path: "/tierboard",
+        element: <TierBoard />
+    },
+    {
         path: "/",
         element: <Home />
+    },
+    {
+        path: '*',
+        element: <h4 style={{ color: "white" }}>Page Not found</h4>
     }
 ])
 

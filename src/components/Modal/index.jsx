@@ -56,12 +56,16 @@ export const SettingModal = () => {
 
     const clearImagesHandler = () => {
         setBoards(boards.map((item) => {
-            if (item.id === columnDetail?.id) {
-                return { ...item, items: [] }
-            } else if (item.id === 8) {
-                return { ...item, items: [...item.items, ...columnDetail.items] }
+            let data = item;
+            switch (item.id) {
+                case columnDetail?.id:
+                    data = { ...item, items: [] };
+                    break;
+                case 8:
+                    data = { ...item, items: [...item.items, ...columnDetail.items] }
+                    break;
             }
-            return item
+            return data
         }))
     }
 

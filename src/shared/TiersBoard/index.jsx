@@ -80,6 +80,7 @@ export const TiersBoard = () => {
         await dispatch(setModalVisible(true))
     }
 
+    console.log(boards, 'BOARDS');
     return (
         <RowsContainer>
             {boards?.map((board) => (
@@ -89,7 +90,7 @@ export const TiersBoard = () => {
                     onDragOver={e => dragOverHandler(e)}
                     onDrop={(e) => dropCardHandler(e, board)}
                 >
-                    {board.id !== boards.length && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
+                    {board.id !== 8 && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
                         <Title contentEditable={true} suppressContentEditableWarning>
                             <span>{board.value}</span>
                         </Title>
@@ -112,7 +113,7 @@ export const TiersBoard = () => {
                             />
                         ))}
                     </ImageWrapper>
-                    {board.id !== boards.length && <SettingsWrapper>
+                    {board.id !== 8 && <SettingsWrapper>
                         <Setting>
                             <img src={settings_svg} alt="settings_svg" onClick={() => modalHandler(board)} />
                         </Setting>

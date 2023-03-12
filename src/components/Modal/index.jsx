@@ -27,22 +27,64 @@ export const SettingModal = () => {
         defaultValue()
     }, [modalVisibility])
 
+    const closeModal = () => dispatch(setModalVisible(false))
+
     const handleClose = (e) => {
         const id = e.target.id
         if (id === "container" || id === "close_icon") {
-            dispatch(setModalVisible(false))
-
+            closeModal()
+            setBoards(boards.map((item) => item.id === columnDetail?.id ?
+                { ...item, value: ref.current.value }
+                : item
+            ))
         }
     }
 
     const columnColourHandler = (colour) => {
         setActive(colour)
+        setBoards(boards.map((item) => item.id === columnDetail?.id ?
+            { ...item, bgColor: colour }
+            : item
+        ))
+    }
+
+    const deleteRowHandler = () => {
+        const filteredBoards = boards.filter((item) => item.id !== columnDetail?.id)
+        setBoards(filteredBoards)
+        closeModal()
+    }
+
+    const clearImagesHandler = () => {
         setBoards(boards.map((item) => {
-            if (item.id === columnDetail?.id)
-                return { ...columnDetail, bgColor: colour }
+            if (item.id === columnDetail?.id) {
+                return { ...item, items: [] }
+            } else if (item.id === 8) {
+                return { ...item, items: [...item.items, ...columnDetail.items] }
+            }
             return item
         }))
     }
+
+    const buttons = [
+        {
+            id: "delete_row",
+            value: "Delete Row",
+            func: () => deleteRowHandler()
+        },
+        {
+            id: "clear_row_images",
+            value: "Clear Row Images",
+            func: () => clearImagesHandler()
+        },
+        {
+            id: "add_a_row_above",
+            value: "Add a Row Above",
+        },
+        {
+            id: "add_a_row_below",
+            value: "Add a Row Below",
+        }
+    ]
 
     return (
         <>
@@ -57,10 +99,9 @@ export const SettingModal = () => {
                         <h3>Edit Label Text Below:</h3>
                         <textarea name="board_name" id="board_name" cols="30" rows="2" ref={ref}></textarea>
                         <ButtonsContainer>
-                            <Button value="Delete Row" isGray />
-                            <Button value="Clear Row Images" isGray />
-                            <Button value="Add a Row Above" isGray />
-                            <Button value="Add a Row Below" isGray />
+                            {
+                                buttons.map(({ id, value, func }) => <Button key={id} {...{ func, value }} isGray />)
+                            }
                         </ButtonsContainer>
                     </PalatteContainer>
                 </Modal>
@@ -109,10 +150,10 @@ const PalatteContainer = styled.div`
     textarea{
         margin-top: -1.5rem;
         width: 100%;
-        max-height: 45px;
+        max-height: 25px;
         border: 1px solid #f1f1f1;
         font-size: 1rem;
-        padding: .3rem;
+        padding: .7rem .7rem;
     }
 
 `

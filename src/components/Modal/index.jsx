@@ -17,8 +17,6 @@ export const SettingModal = () => {
     const { modalVisibility } = useSelector(state => state.images)
     const dispatch = useDispatch();
 
-
-
     const handleClose = (e) => {
         const id = e.target.id
         if (id === "container" || id === "close_icon") dispatch(setModalVisible(false))
@@ -62,7 +60,6 @@ const ButtonsContainer = styled.div`
     }
 
 `
-
 const PalatteContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -96,7 +93,6 @@ const PalatteContainer = styled.div`
     }
 
 `
-
 const Modal = styled.div`
     position: fixed;
     margin: 0 auto;
@@ -117,14 +113,13 @@ const Modal = styled.div`
         cursor: pointer;
     }
 `
-
 const ModalContainer = styled.div`
     width: 100%;
     min-height: 100vh;
-    z-index: 1;
+    z-index: 4;
     background-color: #000000c8;
     position: absolute;
-    transition: all .4s;
+    transition: all .35s;
     left: 0;
     top: 0;
     opacity: ${({ show }) => show ? "1" : "0"};

@@ -33,19 +33,21 @@ export const SettingModal = () => {
         const id = e.target.id
         if (id === "container" || id === "close_icon") {
             closeModal()
-            setBoards(boards.map((item) => item.id === columnDetail?.id ?
+            const newBoards = boards.map((item) => item.id === columnDetail?.id ?
                 { ...item, value: ref.current.value }
                 : item
-            ))
+            )
+            setBoards(newBoards)
         }
     }
 
     const columnColourHandler = (colour) => {
         setActive(colour)
-        setBoards(boards.map((item) => item.id === columnDetail?.id ?
+        const newBoards = boards.map((item) => item.id === columnDetail?.id ?
             { ...item, bgColor: colour }
             : item
-        ))
+        )
+        setBoards(newBoards)
     }
 
     const deleteRowHandler = () => {
@@ -55,7 +57,7 @@ export const SettingModal = () => {
     }
 
     const clearImagesHandler = () => {
-        setBoards(boards.map((item) => {
+        const newBoards = boards.map((item) => {
             let data = item;
             switch (item.id) {
                 case columnDetail?.id:
@@ -66,7 +68,8 @@ export const SettingModal = () => {
                     break;
             }
             return data
-        }))
+        })
+        setBoards(newBoards)
     }
 
     const buttons = [

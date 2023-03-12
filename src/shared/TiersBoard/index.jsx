@@ -80,7 +80,6 @@ export const TiersBoard = () => {
         await dispatch(setModalVisible(true))
     }
 
-    console.log(boards, 'BOARDS');
     return (
         <RowsContainer>
             {boards?.map((board) => (

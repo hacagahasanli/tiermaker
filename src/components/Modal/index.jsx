@@ -7,6 +7,7 @@ import { colourPalattes } from "constants/index"
 import { Button } from ".."
 import { close_icon_svg } from "assets/index"
 import { BoardsContext } from "context/index"
+import { v4 } from "uuid"
 
 const palattes = Object.fromEntries(
     Object.entries(colourPalattes).filter(([key]) => key !== "A1")
@@ -26,6 +27,7 @@ export const SettingModal = () => {
         }
         defaultValue()
     }, [modalVisibility])
+
 
     const closeModal = () => dispatch(setModalVisible(false))
 
@@ -72,6 +74,18 @@ export const SettingModal = () => {
         setBoards(newBoards)
     }
 
+    const createNewColumn = () => {
+        const newColumn = { id: v4(), bgColor: colourPalattes.A13, value: "NEW", items: [] }
+        return newColumn;
+    }
+
+    const addRowDetectionHandler = (pos,) => {
+        const item = createNewColumn()
+        const boardIndex = boards.indexOf(columnDetail)
+        boards.splice(boardIndex + pos, 0, item)
+        setBoards(boards.map(item => item))
+    }
+
     const buttons = [
         {
             id: "delete_row",
@@ -86,10 +100,13 @@ export const SettingModal = () => {
         {
             id: "add_a_row_above",
             value: "Add a Row Above",
+            func: () => addRowDetectionHandler(0)
+
         },
         {
             id: "add_a_row_below",
             value: "Add a Row Below",
+            func: () => addRowDetectionHandler(1)
         }
     ]
 

@@ -6,8 +6,6 @@ export const BoardsContext = createContext()
 export const BoardProvider = ({ children }) => {
     const storageBoards = localStorage.getItem('boards');
 
-    console.log(JSON.parse(storageBoards), "STORAGE BOARDS");
-
     const [boards, setBoards] = useState(JSON.parse(storageBoards));
     const [show, setShow] = useState(false)
 

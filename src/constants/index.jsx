@@ -10,49 +10,6 @@ export const buttonValues = {
     FULL_SCREEN: "Full Screen View"
 }
 
-// export const imagesS = [
-//     {
-//         id: 1,
-//         uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 2,
-//         uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 3,
-//         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 4,
-//         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 5,
-//         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 6,
-//         uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 7,
-//         uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 8,
-//         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 9,
-//         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     },
-//     {
-//         id: 10,
-//         uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
-//     }
-// ]
-
 export const colorSets = {
     S: "#FF7F7F",
     A: "#FFBF7F",
@@ -211,6 +168,10 @@ export const tiersCategories = {
             {
                 id: 25,
                 uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/rubypng"
+            },
+            {
+                id: 29,
+                uri: 'https://tiermaker.com/images/chart/chart/programming-languages-33471/rustprogramminglanguageblacklogosvgpng.png'
             },
             {
                 id: 27,

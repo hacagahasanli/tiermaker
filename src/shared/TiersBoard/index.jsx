@@ -213,10 +213,11 @@ const ImageWrapper = styled.div`
     width: 100%;
     min-height: 80px;
     display: flex;
-    gap:0.6rem;
+    gap:0.1rem;
     flex-wrap: wrap;
     flex-shrink: 1;
     flex-grow: 1;
+
     background: ${({ diff, theme }) => diff ? "#000000" : theme.colour};
     /* display: grid;
     grid-template-columns: repeat(10, minmax(100px, 1fr));
@@ -229,6 +230,7 @@ const StyledImage = styled.img`
     object-fit: contain;
     margin: 0;
     padding: 0;
+    background: #eeeeee;
 `
 const RowsContainer = styled.div`
     max-width: 1150px;

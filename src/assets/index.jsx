@@ -1,6 +1,7 @@
 import tier_maker from "./images/tiermaker-logo.png"
 import p_langs_thumbnail from './images/p_lang.png'
 import console_thumbnail from './images/console.png'
+import ufc_thumbnail from './images/ufc.png'
 
 import arrow_svg from "./svgs/arrow.svg"
 import settings_svg from "./svgs/settings.svg"
@@ -13,6 +14,7 @@ export {
     //thumbnails
     p_langs_thumbnail,
     console_thumbnail,
+    ufc_thumbnail,
 
     //column icons
     arrow_svg,

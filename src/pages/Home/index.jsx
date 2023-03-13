@@ -41,7 +41,7 @@ const CardContainer = styled.div`
     justify-content: center;
     align-items: center;
     border: 1px solid #6c6c6c;
-    max-width: 300px;
+    max-width: 500px;
     color: white;
     text-align: center;
     cursor: pointer;
@@ -66,7 +66,7 @@ const CardContainer = styled.div`
 
 const CardWrapper = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:repeat(2,1fr);
     place-items: center;
     width: 100%;
     gap:2rem;

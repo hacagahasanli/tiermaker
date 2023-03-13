@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import { tiersCategories, cardTiers } from 'constants/index';
 import { BoardsContext } from 'context/index';
 import { useNavigate } from 'react-router-dom';
+import { defaultBoards } from 'constants/index';
 
 const Home = () => {
-    const { setBoards, boards } = useContext(BoardsContext)
+    const { setBoards } = useContext(BoardsContext)
     const navigate = useNavigate()
 
     const tierBoardNavigator = (id) => {
         const items = [...tiersCategories[id].items];
-        setBoards(boards?.map((item) => {
+        setBoards(defaultBoards?.map((item) => {
             if (item.id === 8) return { ...item, items: [...items] }
             return item
         }))

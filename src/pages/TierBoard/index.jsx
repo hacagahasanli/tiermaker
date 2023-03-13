@@ -4,17 +4,20 @@ import { Header } from 'components/index';
 import { TiersBoard, Buttons } from 'shared/index';
 import { useSelector } from 'react-redux';
 import { SettingModal } from 'components/Modal';
+import { LocaleStorage } from 'components/index';
 
 const TierBoard = () => {
     const { modalVisibility } = useSelector(state => state.images)
 
     return (
-        <Wrapper {...{ modalVisibility }}>
-            <Header />
-            <TiersBoard />
-            <Buttons />
-            <SettingModal />
-        </Wrapper>
+        <LocaleStorage>
+            <Wrapper id="tier_board" {...{ modalVisibility }}>
+                <Header />
+                <TiersBoard />
+                <Buttons />
+                <SettingModal />
+            </Wrapper>
+        </LocaleStorage>
     )
 }
 

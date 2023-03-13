@@ -1,10 +1,20 @@
+import { BoardsContext } from "context/index";
 import { Home, TierBoard } from "pages/index";
-import { createBrowserRouter } from "react-router-dom";
+import { useContext } from "react";
+import { createBrowserRouter, Outlet } from "react-router-dom";
+
+const Auth = () => {
+    const { boards } = useContext(BoardsContext)
+    if (boards.length > 0) return <Outlet />
+}
 
 const router = createBrowserRouter([
     {
-        path: "/tierboard",
-        element: <TierBoard />
+        element: <Auth />,
+        children: [{
+            path: "/tierboard",
+            element: <TierBoard />
+        }]
     },
     {
         path: "/",

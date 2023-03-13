@@ -12,9 +12,7 @@ const App = () => {
   return (
     <ThemeProvider {...{ theme }}>
       <BoardProvider>
-        <LocaleStorage>
-          <RouterProvider {...{ router }} />
-        </LocaleStorage>
+        <RouterProvider {...{ router }} />
       </BoardProvider>
     </ThemeProvider>
 

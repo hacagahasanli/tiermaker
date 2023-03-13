@@ -38,29 +38,31 @@ const Home = () => {
 const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid #6c6c6c;
-    max-width: 500px;
+    max-width: 450px;
+    min-height: 400px;
+    max-height: 420px;
     color: white;
     text-align: center;
     cursor: pointer;
     transition:opacity 0.6s;
     border-radius: 5px;
+    padding: 2rem 0;
 
     :hover{
         opacity: 0.7;
     }
 
     img{
-        max-width: 100%;
-        padding: 1rem 0;
+        max-width: 90%;
         border-radius: 1rem;
+        object-fit: contain;
     }
     
     span{
-        padding: 1rem;
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 `
 
@@ -70,6 +72,7 @@ const CardWrapper = styled.div`
     place-items: center;
     width: 100%;
     gap:2rem;
+    margin-bottom: 2rem;
 `
 
 const Wrapper = styled.div`
@@ -80,7 +83,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    gap:4rem;
+    gap:2rem;
 
     h2{
         color: #ffffff;

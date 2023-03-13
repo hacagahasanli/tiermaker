@@ -1,4 +1,4 @@
-import { p_langs_thumbnail, console_thumbnail, ufc_thumbnail } from "assets/index"
+import { p_langs_thumbnail, console_thumbnail, ufc_thumbnail, sports_thumbnail } from "assets/index"
 
 
 export const buttonValues = {
@@ -541,6 +541,6 @@ export const cardTiers = [
     {
         id: 'all_sports',
         name: "All Well-known Sports",
-        // thumbnail:
+        thumbnail: sports_thumbnail
     }
 ] 

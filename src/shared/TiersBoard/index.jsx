@@ -217,7 +217,6 @@ const ImageWrapper = styled.div`
     flex-wrap: wrap;
     flex-shrink: 1;
     flex-grow: 1;
-
     background: ${({ diff, theme }) => diff ? "#000000" : theme.colour};
     /* display: grid;
     grid-template-columns: repeat(10, minmax(100px, 1fr));

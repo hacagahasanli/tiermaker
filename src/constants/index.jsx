@@ -1,4 +1,4 @@
-import { p_langs_thumbnail } from "assets/index"
+import { p_langs_thumbnail, console_thumbnail } from "assets/index"
 
 
 export const buttonValues = {
@@ -182,6 +182,86 @@ export const tiersCategories = {
                 uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/visualbasicjpg"
             }
         ]
+    },
+    console: {
+        items: [
+            {
+                id: 1,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/dreamcastpng.png"
+            },
+            {
+                id: 2,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/gamecubepng.png"
+            },
+            {
+                id: 3,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/n64png.png"
+            },
+            {
+                id: 4,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/nintendopng.png"
+            },
+            {
+                id: 5,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/ps1png.png"
+            },
+            {
+                id: 6,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/ps2png.png"
+            },
+            {
+                id: 7,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/ps3png.png"
+            },
+            {
+                id: 8,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/ps4-1png.png"
+            },
+            {
+                id: 9,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/ps5png.png"
+            },
+            {
+                id: 10,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/sega-genesis-1png.png"
+            },
+            {
+                id: 11,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/super-nintendopng.png"
+            },
+            {
+                id: 12,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/switchpng.png"
+            },
+            {
+                id: 13,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/wii-upng.png"
+            },
+            {
+                id: 14,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/wiipng.png"
+            },
+            {
+                id: 15,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/xbox-360png.png"
+            },
+            {
+                id: 16,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/xbox-onepng.png"
+            },
+            {
+                id: 17,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/xbox-xpng.png"
+            },
+            {
+                id: 18,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/xboxpng.png"
+            },
+            {
+                id: 19,
+                uri: "https://tiermaker.com/images/chart/chart/best-gaming-consoles--453459/zz1621004671sega-saturnpng.png"
+            },
+        ]
     }
 
 }
@@ -210,5 +290,10 @@ export const cardTiers = [
         id: "p_lang",
         name: "Programming Languages",
         thumbnail: p_langs_thumbnail
+    },
+    {
+        id: 'console',
+        name: "Gaming Consoles",
+        thumbnail: console_thumbnail
     }
 ] 

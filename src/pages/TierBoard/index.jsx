@@ -5,6 +5,7 @@ import { TiersBoard, Buttons } from 'shared/index';
 import { useSelector } from 'react-redux';
 import { SettingModal } from 'components/Modal';
 import { LocaleStorage } from 'components/index';
+import { withScrollToTop } from 'components/ScrollToTop';
 
 const TierBoard = () => {
     const { modalVisibility } = useSelector(state => state.images)
@@ -29,4 +30,4 @@ const Wrapper = styled.div`
     align-items: center;
     margin: 0 auto;
 `
-export default TierBoard;
+export const TierBoardWithScrollToTop = withScrollToTop(TierBoard);

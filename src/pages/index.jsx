@@ -1,4 +1,6 @@
-import Home from "./Home";
-import TierBoard from "./TierBoard";
+import { HomeWithScrollToTop } from "./Home"
+import { TierBoardWithScrollToTop } from "./TierBoard"
 
-export { Home, TierBoard }
+// import TierBoard from "./TierBoard";
+
+export { HomeWithScrollToTop, TierBoardWithScrollToTop }

@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components';
 import { tiersCategories, cardTiers } from 'constants/index';
 import { BoardsContext } from 'context/index';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { defaultBoards } from 'constants/index';
 import { ErrorBoundary } from 'components/ErrorBoundary';
+import { withScrollToTop } from 'components/ScrollToTop';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
@@ -92,4 +93,4 @@ const Wrapper = styled.div`
         margin-top: 1rem;
     }
 `
-export default Home;
+export const HomeWithScrollToTop = withScrollToTop(Home);

@@ -1,3 +1,6 @@
+import { p_langs_thumbnail } from "assets/index"
+
+
 export const buttonValues = {
     SOD: "Save or Download",
     NORMAL_VIEW: "Normal View",
@@ -106,46 +109,121 @@ export const defaultBoards = [
     {
         id: 8,
         diff: true,
+        items: []
+    }
+]
+
+export const tiersCategories = {
+    p_lang: {
         items: [
             {
                 id: 1,
-                uri: "https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/assemblypng"
             },
             {
                 id: 2,
-                uri: "https://images.pexels.com/photos/1853542/pexels-photo-1853542.jpeg?auto=compress&cs=tinysrgb&w=600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/bashpng"
             },
             {
                 id: 3,
-                uri: "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/cpppng"
             },
             {
                 id: 4,
-                uri: "https://images.pexels.com/photos/15641525/pexels-photo-15641525.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/cpng"
             },
             {
                 id: 5,
-                uri: "https://images.pexels.com/photos/13010778/pexels-photo-13010778.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/csharppng"
             },
             {
                 id: 6,
-                uri: "https://images.pexels.com/photos/15694781/pexels-photo-15694781.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/csspng"
             },
             {
                 id: 7,
-                uri: "https://images.pexels.com/photos/9374423/pexels-photo-9374423.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/fortranpng"
             },
             {
                 id: 8,
-                uri: "https://images.pexels.com/photos/9821392/pexels-photo-9821392.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/go-oldpng"
             },
             {
-                id: 9,
-                uri: "https://images.pexels.com/photos/6341527/pexels-photo-6341527.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                id: 10,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/haskellpng"
             },
+            {
+                id: 11,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/htmlpng"
+            },
+            {
+                id: 12,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/javapng"
+            },
+            {
+                id: 13,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/javascriptpng"
+            },
+            {
+                id: 14,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/kotlinpng"
+            },
+            {
+                id: 15,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/latexpng"
+            },
+            {
+                id: 16,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/lisppng"
+            },
+            {
+                id: 17,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/luapng"
+            },
+            {
+                id: 18,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/matlabjpg"
+            },
+            {
+                id: 19,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/mysqlpng"
+            },
+            {
+                id: 20,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/perljpg"
+            },
+            {
+                id: 21,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/phppng"
+            },
+            {
+                id: 22,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/powershellpng"
+            },
+            {
+                id: 23,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/pythonpng"
+            },
+            {
+                id: 24,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/rpng"
+            },
+            {
+                id: 25,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/rubypng"
+            },
+            {
+                id: 27,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/swiftpng"
+            },
+            {
+                id: 28,
+                uri: "https://tiermaker.com/images/chart/chart/programming-languages--32215/visualbasicjpg"
+            }
         ]
     }
-]
+
+}
 
 export const colourPalattes = {
     A1: "#000000",
@@ -165,3 +243,11 @@ export const colourPalattes = {
     A15: '#FFBF7F',
     A16: '#FF7F7F'
 }
+
+export const cardTiers = [
+    {
+        id: "p_lang",
+        name: "Programming Languages",
+        thumbnail: p_langs_thumbnail
+    }
+] 

@@ -80,6 +80,8 @@ export const TiersBoard = () => {
         await dispatch(setModalVisible(true))
     }
 
+    console.log(boards, "BOARDS")
+
     return (
         <RowsContainer>
             {boards?.map((board) => (
@@ -213,6 +215,7 @@ const ImageWrapper = styled.div`
     width: 100%;
     min-height: 80px;
     display: flex;
+    gap:0.6rem;
     flex-wrap: wrap;
     flex-shrink: 1;
     flex-grow: 1;
@@ -224,9 +227,8 @@ const ImageWrapper = styled.div`
 
 `
 const StyledImage = styled.img`
-    width: 124px;// add your desired width here
     height: 80px;
-    object-fit: cover;
+    object-fit: contain;
     margin: 0;
     padding: 0;
 `

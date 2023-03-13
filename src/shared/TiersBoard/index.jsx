@@ -4,6 +4,7 @@ import { BoardsContext } from "context"
 import { arrow_svg, settings_svg } from "assets/index"
 import { useDispatch } from "react-redux"
 import { setModalVisible, setColumnDetail } from "store/slices/images-slice"
+import { ErrorBoundary } from "components/ErrorBoundary"
 
 export const TiersBoard = () => {
     const { boards, setBoards } = useContext(BoardsContext)
@@ -82,47 +83,49 @@ export const TiersBoard = () => {
 
     return (
         <RowsContainer>
-            {boards?.map((board) => (
-                <ColumnContainer
-                    diff={board?.diff}
-                    key={board?.id}
-                    onDragOver={e => dragOverHandler(e)}
-                    onDrop={(e) => dropCardHandler(e, board)}
-                >
-                    {board.id !== 8 && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
-                        <Title contentEditable={true} suppressContentEditableWarning>
-                            <span>{board.value}</span>
-                        </Title>
-                    </InputWrapper>
-                    }
-                    <ImageWrapper diff={board.diff}>
-                        {board.items?.map((item) => (
-                            <StyledImage
-                                id={item.id}
-                                className='item'
-                                src={item.uri}
-                                alt={item.id}
-                                key={item.id}
-                                onDragOver={(e) => dragOverHandler(e, item, board)}
-                                onDragLeave={(e) => dragLeaveHandler(e)}
-                                onDragStart={(e) => dragStartHandler(e, board, item)}
-                                onDragEnd={(e) => dragEndHandler(e)}
-                                onDrop={(e) => dropHandler(e, board, item)}
-                                draggable={true}
-                            />
-                        ))}
-                    </ImageWrapper>
-                    {board.id !== 8 && <SettingsWrapper>
-                        <Setting>
-                            <img src={settings_svg} alt="settings_svg" onClick={() => modalHandler(board)} />
-                        </Setting>
-                        <Arrows>
-                            <img src={arrow_svg} alt="arrow_svg_up" onClick={() => pushUpHandler(board)} />
-                            <img src={arrow_svg} alt="arrow_svg_down" onClick={() => pullDownHandler(board)} />
-                        </Arrows>
-                    </SettingsWrapper>}
-                </ColumnContainer>
-            ))}
+            <ErrorBoundary>
+                {boards?.map((board) => (
+                    <ColumnContainer
+                        diff={board?.diff}
+                        key={board?.id}
+                        onDragOver={e => dragOverHandler(e)}
+                        onDrop={(e) => dropCardHandler(e, board)}
+                    >
+                        {board.id !== 8 && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
+                            <Title contentEditable={true} suppressContentEditableWarning>
+                                <span>{board.value}</span>
+                            </Title>
+                        </InputWrapper>
+                        }
+                        <ImageWrapper diff={board.diff}>
+                            {board.items?.map((item) => (
+                                <StyledImage
+                                    id={item.id}
+                                    className='item'
+                                    src={item.uri}
+                                    alt={item.id}
+                                    key={item.id}
+                                    onDragOver={(e) => dragOverHandler(e, item, board)}
+                                    onDragLeave={(e) => dragLeaveHandler(e)}
+                                    onDragStart={(e) => dragStartHandler(e, board, item)}
+                                    onDragEnd={(e) => dragEndHandler(e)}
+                                    onDrop={(e) => dropHandler(e, board, item)}
+                                    draggable={true}
+                                />
+                            ))}
+                        </ImageWrapper>
+                        {board.id !== 8 && <SettingsWrapper>
+                            <Setting>
+                                <img src={settings_svg} alt="settings_svg" onClick={() => modalHandler(board)} />
+                            </Setting>
+                            <Arrows>
+                                <img src={arrow_svg} alt="arrow_svg_up" onClick={() => pushUpHandler(board)} />
+                                <img src={arrow_svg} alt="arrow_svg_down" onClick={() => pullDownHandler(board)} />
+                            </Arrows>
+                        </SettingsWrapper>}
+                    </ColumnContainer>
+                ))}
+            </ErrorBoundary>
         </RowsContainer>
     )
 }

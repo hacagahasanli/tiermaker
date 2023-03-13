@@ -4,6 +4,7 @@ import { tiersCategories, cardTiers } from 'constants/index';
 import { BoardsContext } from 'context/index';
 import { useNavigate } from 'react-router-dom';
 import { defaultBoards } from 'constants/index';
+import { ErrorBoundary } from 'components/ErrorBoundary';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
@@ -21,16 +22,18 @@ const Home = () => {
     return (
         <Wrapper>
             <h2>Select the board</h2>
-            <CardWrapper>
-                {
-                    cardTiers?.map(({ id, thumbnail, name }) => {
-                        return <CardContainer key={id} onClick={() => tierBoardNavigator(id)}>
-                            <img src={thumbnail} alt="tiers_image" />
-                            <span>{name}</span>
-                        </CardContainer>
-                    })
-                }
-            </CardWrapper>
+            <ErrorBoundary>
+                <CardWrapper>
+                    {
+                        cardTiers?.map(({ id, thumbnail, name }) => {
+                            return <CardContainer key={id} onClick={() => tierBoardNavigator(id)}>
+                                <img src={thumbnail} alt="tiers_image" />
+                                <span>{name}</span>
+                            </CardContainer>
+                        })
+                    }
+                </CardWrapper>
+            </ErrorBoundary>
         </Wrapper>
     )
 }
@@ -65,7 +68,6 @@ const CardContainer = styled.div`
         font-size: 1.2rem;
     }
 `
-
 const CardWrapper = styled.div`
     display: grid;
     grid-template-columns:repeat(2,1fr);
@@ -74,7 +76,6 @@ const CardWrapper = styled.div`
     gap:2rem;
     margin-bottom: 2rem;
 `
-
 const Wrapper = styled.div`
     position: relative;
     max-width: 1180px;

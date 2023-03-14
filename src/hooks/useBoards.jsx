@@ -1,4 +1,4 @@
-const useBoards = () => {
+const useBoxShadow = () => {
     const dragOverHandler = (e) => {
         e.preventDefault();
         if (e.target.classList.value.includes('item')) {
@@ -9,4 +9,4 @@ const useBoards = () => {
     return { dragOverHandler }
 }
 
-export default useBoards
+export default useBoxShadow

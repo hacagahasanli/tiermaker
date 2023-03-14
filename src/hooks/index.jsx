@@ -1,3 +1,3 @@
-import useBoards from "./useBoards";
+import useBoxShadow from "./useBoards";
 
-export { useBoards }
+export { useBoxShadow }

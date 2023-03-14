@@ -2,11 +2,11 @@ import styled from "styled-components"
 import React, { useContext } from 'react'
 import { BoardsContext } from "context"
 import { TierTitle, ErrorBoundary, Settings, ColumnBoard } from "components/index"
-import { useBoards } from "hooks/index"
+import { useBoxShadow } from "hooks/index"
 
 export const TiersBoard = () => {
     const { boards, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
-    const { dragOverHandler } = useBoards()
+    const { dragOverHandler } = useBoxShadow()
 
     const dropCardHandler = (e, board) => {
         if (!e.target.classList.value.includes('item')) {

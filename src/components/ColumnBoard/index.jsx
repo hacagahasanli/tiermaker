@@ -1,11 +1,11 @@
 import { BoardsContext } from "context/index";
-import { useBoards } from "hooks/index";
+import { useBoxShadow } from "hooks/index";
 import { memo, useContext } from "react";
 import styled from "styled-components";
 
 export const ColumnBoard = memo(({ diff, items, board }) => {
     const { setCurrentBoard, setCurrentItem, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
-    const { dragOverHandler } = useBoards()
+    const { dragOverHandler } = useBoxShadow()
 
     const dragLeaveHandler = (target) => target.style.boxShadow = "none"
 

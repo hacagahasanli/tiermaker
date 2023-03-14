@@ -84,14 +84,15 @@ export const TiersBoard = () => {
     return (
         <RowsContainer>
             <ErrorBoundary>
-                {boards?.map((board) => (
-                    <ColumnContainer
+                {boards?.map((board) => {
+                    const defultImageBoard = board.id !== 8;
+                    return <ColumnContainer
                         diff={board?.diff}
                         key={board?.id}
                         onDragOver={e => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, board)}
                     >
-                        {board.id !== 8 && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
+                        {defultImageBoard && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
                             <Title contentEditable={true} suppressContentEditableWarning>
                                 <span>{board.value}</span>
                             </Title>
@@ -114,7 +115,7 @@ export const TiersBoard = () => {
                                 />
                             ))}
                         </ImageWrapper>
-                        {board.id !== 8 && <SettingsWrapper>
+                        {defultImageBoard && <SettingsWrapper>
                             <Setting>
                                 <img src={settings_svg} alt="settings_svg" onClick={() => modalHandler(board)} />
                             </Setting>
@@ -124,7 +125,7 @@ export const TiersBoard = () => {
                             </Arrows>
                         </SettingsWrapper>}
                     </ColumnContainer>
-                ))}
+                })}
             </ErrorBoundary>
         </RowsContainer>
     )

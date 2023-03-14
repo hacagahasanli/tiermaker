@@ -1,5 +1,5 @@
 import { Button, MainButton, Palattes } from "components/index";
-import { buttonValues, defaultBoards } from "constants/index";
+import { buttonValues } from "constants/index";
 import { BoardsContext } from "context";
 import html2canvas from "html2canvas";
 import { memo, useContext, useState } from "react";
@@ -65,7 +65,7 @@ export const Buttons = memo(() => {
 })
 
 const ButtonsContainer = styled.div`
-    width: 980px;
+    max-width: 980px;
     width: 100%;
     display: flex;
     justify-content: center;

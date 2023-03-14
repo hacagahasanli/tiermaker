@@ -1,16 +1,11 @@
 import { BoardsContext } from "context/index";
+import { useBoards } from "hooks/index";
 import { memo, useContext } from "react";
 import styled from "styled-components";
 
 export const ColumnBoard = memo(({ diff, items, board }) => {
     const { setCurrentBoard, setCurrentItem, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
-
-    const dragOverHandler = (e) => {
-        e.preventDefault();
-        if (e.target.classList.value.includes('item')) {
-            e.target.style.boxShadow = "0px 1px 21px 7px rgba(0,0,0,0.75)"
-        }
-    };
+    const { dragOverHandler } = useBoards()
 
     const dragLeaveHandler = (target) => target.style.boxShadow = "none"
 
@@ -40,7 +35,7 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
                 key={id}
                 className='item'
                 draggable={true}
-                onDragOver={(e) => dragOverHandler(e, item, board)}
+                onDragOver={(e) => dragOverHandler(e)}
                 onDragLeave={(e) => dragLeaveHandler(e.target)}
                 onDragStart={() => dragStartHandler({ board, item })}
                 onDragEnd={(e) => dragEndHandler(e)}

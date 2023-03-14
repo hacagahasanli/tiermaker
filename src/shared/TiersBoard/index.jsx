@@ -2,16 +2,11 @@ import styled from "styled-components"
 import React, { useContext } from 'react'
 import { BoardsContext } from "context"
 import { TierTitle, ErrorBoundary, Settings, ColumnBoard } from "components/index"
+import { useBoards } from "hooks/index"
 
 export const TiersBoard = () => {
     const { boards, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
-
-    const dragOverHandler = (e) => {
-        e.preventDefault();
-        if (e.target.classList.value.includes('item')) {
-            e.target.style.boxShadow = "0px 1px 21px 7px rgba(0,0,0,0.75)"
-        }
-    };
+    const { dragOverHandler } = useBoards()
 
     const dropCardHandler = (e, board) => {
         if (!e.target.classList.value.includes('item')) {
@@ -36,7 +31,7 @@ export const TiersBoard = () => {
                     >
                         <TierTitle {...{ bgColor, value, defultImageBoard }} />
                         <ColumnBoard {...{ diff, items, board }} />
-                        <Settings {...{ board, defultImageBoard }} />
+                        {defultImageBoard && <Settings {...{ board, defultImageBoard }} />}
                     </ColumnContainer>
                 })}
             </ErrorBoundary>

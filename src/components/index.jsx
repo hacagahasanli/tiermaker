@@ -1,3 +1,4 @@
+export { Settings } from "./Settings";
 export { TierTitle } from "./TierTitle";
 export { Header } from "./UI/Header";
 export { Button, MainButton } from "./UI/Button";

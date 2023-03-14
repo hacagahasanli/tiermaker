@@ -1,3 +1,4 @@
+export { ColumnBoard } from "./ColumnBoard";
 export { Settings } from "./Settings";
 export { TierTitle } from "./TierTitle";
 export { Header } from "./UI/Header";

@@ -5,16 +5,16 @@ import styled from "styled-components";
 export const ColumnBoard = ({ diff, items, board }) => {
     const { setCurrentBoard, setCurrentItem, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
 
-    const dragOverHandler = (e, item, board) => {
+    const dragOverHandler = (e) => {
         e.preventDefault();
         if (e.target.classList.value.includes('item')) {
             e.target.style.boxShadow = "0px 1px 21px 7px rgba(0,0,0,0.75)"
         }
     };
 
-    const dragLeaveHandler = (e) => e.target.style.boxShadow = "none"
+    const dragLeaveHandler = (target) => target.style.boxShadow = "none"
 
-    const dragStartHandler = (e, board, item) => {
+    const dragStartHandler = ({ board, item }) => {
         setCurrentBoard(board);
         setCurrentItem(item);
     };
@@ -35,16 +35,16 @@ export const ColumnBoard = ({ diff, items, board }) => {
             const { id, uri } = item
             return <StyledImage
                 id={id}
-                className='item'
                 src={uri}
                 alt={id}
                 key={id}
+                className='item'
+                draggable={true}
                 onDragOver={(e) => dragOverHandler(e, item, board)}
-                onDragLeave={(e) => dragLeaveHandler(e)}
-                onDragStart={(e) => dragStartHandler(e, board, item)}
+                onDragLeave={(e) => dragLeaveHandler(e.target)}
+                onDragStart={() => dragStartHandler({ board, item })}
                 onDragEnd={(e) => dragEndHandler(e)}
                 onDrop={(e) => dropHandler(e, board, item)}
-                draggable={true}
             />
         })}
     </ImageWrapper>

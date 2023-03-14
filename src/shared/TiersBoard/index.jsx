@@ -76,9 +76,9 @@ export const TiersBoard = () => {
 
     const pushUpHandler = (board) => arrowHandler(0, -1, board);
 
-    const modalHandler = async (board) => {
-        await dispatch(setColumnDetail(board))
-        await dispatch(setModalVisible(true))
+    const modalHandler = (board) => {
+        dispatch(setColumnDetail(board))
+        dispatch(setModalVisible(true))
     }
 
     return (

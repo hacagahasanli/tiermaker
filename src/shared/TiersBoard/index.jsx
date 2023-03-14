@@ -86,20 +86,21 @@ export const TiersBoard = () => {
             <ErrorBoundary>
                 {boards?.map((board) => {
                     const defultImageBoard = board.id !== 8;
+                    const { diff, id, value, items, bgColor } = board;
                     return <ColumnContainer
-                        diff={board?.diff}
-                        key={board?.id}
+                        diff={diff}
+                        key={id}
                         onDragOver={e => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, board)}
                     >
-                        {defultImageBoard && <InputWrapper tabIndex={1} bgColor={board.bgColor}>
+                        {defultImageBoard && <InputWrapper bgColor={bgColor}>
                             <Title contentEditable={true} suppressContentEditableWarning>
-                                <span>{board.value}</span>
+                                <span>{value}</span>
                             </Title>
                         </InputWrapper>
                         }
-                        <ImageWrapper diff={board.diff}>
-                            {board.items?.map((item) => (
+                        <ImageWrapper diff={diff}>
+                            {items?.map((item) => (
                                 <StyledImage
                                     id={item.id}
                                     className='item'

@@ -1,12 +1,14 @@
 import styled from "styled-components"
 
 
-export const TierTitle = ({ bgColor, value }) => {
-    return <TitleWrapper bgColor={bgColor}>
-        <Title contentEditable={true} suppressContentEditableWarning>
-            <span>{value}</span>
-        </Title>
-    </TitleWrapper>
+export const TierTitle = ({ bgColor, value, defultImageBoard }) => {
+    return <>
+        {defultImageBoard && <TitleWrapper bgColor={bgColor}>
+            <Title contentEditable={true} suppressContentEditableWarning>
+                <span>{value}</span>
+            </Title>
+        </TitleWrapper>}
+    </>
 }
 
 const TitleWrapper = styled.div`

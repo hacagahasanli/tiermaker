@@ -1,8 +1,8 @@
 import { BoardsContext } from "context/index";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import styled from "styled-components";
 
-export const ColumnBoard = ({ diff, items, board }) => {
+export const ColumnBoard = memo(({ diff, items, board }) => {
     const { setCurrentBoard, setCurrentItem, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
 
     const dragOverHandler = (e) => {
@@ -48,7 +48,7 @@ export const ColumnBoard = ({ diff, items, board }) => {
             />
         })}
     </ImageWrapper>
-}
+})
 
 const ImageWrapper = styled.div`
     width: 100%;

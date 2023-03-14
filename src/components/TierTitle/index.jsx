@@ -1,7 +1,8 @@
+import { memo } from "react"
 import styled from "styled-components"
 
 
-export const TierTitle = ({ bgColor, value, defultImageBoard }) => {
+export const TierTitle = memo(({ bgColor, value, defultImageBoard }) => {
     return <>
         {defultImageBoard && <TitleWrapper bgColor={bgColor}>
             <Title contentEditable={true} suppressContentEditableWarning>
@@ -9,7 +10,7 @@ export const TierTitle = ({ bgColor, value, defultImageBoard }) => {
             </Title>
         </TitleWrapper>}
     </>
-}
+})
 
 const TitleWrapper = styled.div`
     width: 100px;

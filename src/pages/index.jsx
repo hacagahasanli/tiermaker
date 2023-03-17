@@ -1,4 +1,4 @@
 import { HomeWithScrollToTop } from "./Home"
 import { TierBoardWithScrollToTop } from "./TierBoard"
-
-export { HomeWithScrollToTop, TierBoardWithScrollToTop }
+import Template from "./Template"
+export { HomeWithScrollToTop, TierBoardWithScrollToTop, Template }

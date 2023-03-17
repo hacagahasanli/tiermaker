@@ -76,7 +76,7 @@ const CardWrapper = styled.div`
     gap:2rem;
     margin-bottom: 2rem;
 `
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     position: relative;
     max-width: 1180px;
     min-height: 100vh;

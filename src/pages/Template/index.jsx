@@ -11,7 +11,8 @@ const Template = () => {
             templateDescription: '',
             email: '',
             coverPhoto: "",
-            tierlistImages: ""
+            tierlistImages: "",
+            imageCreditsUrl: ""
         },
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
@@ -41,15 +42,16 @@ const Template = () => {
                         value={formik.values.selectOption}
                     >
                         <option value="">Select a Category</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                        <option value="option1">Actors && Actresses</option>
+                        <option value="option2">Albums</option>
+                        <option value="option3">AMC Shows</option>
+                        <option value="option3">Among Us</option>
                     </select>
                 </InputWrapper>
                 <InputWrapper>
                     <Label htmlFor="templateDescription">Description of Template:</Label>
                     <Textarea
-                        rows="4"
+                        rows="3"
                         id="templateDescription"
                         name="templateDescription"
                         placeholder="A great description helps users find your template in search results"
@@ -81,7 +83,17 @@ const Template = () => {
                         }}
                     />
                 </InputWrapper>
-                <button type="submit">Submit</button>
+                <InputWrapper>
+                    <Label htmlFor="imageCreditsUrl">Add a URL for Image Credits:</Label>
+                    <Input
+                        id="imageCreditsUrl"
+                        name="imageCreditsUrl"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.imageCreditsUrl}
+                        placeholder="URL of site"
+                    />
+                </InputWrapper>
             </Form>
         </Container>
     </Wrapper>
@@ -107,8 +119,10 @@ const InputWrapper = styled.div`
     }
 
     select{
-        font-size: 1rem;
+        font-size: 1.25rem;
         padding: 0.3rem;
+        color: white;
+        background: #000000;
     }
 `
 const Input = styled.input`
@@ -138,7 +152,7 @@ const Form = styled.form`
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
-    gap:2rem;
+    gap:3rem;
 `
 const Container = styled.div`
     width: 100%;

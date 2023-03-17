@@ -4,9 +4,6 @@ import { Wrapper } from "pages/Home"
 import styled from "styled-components"
 
 const Template = () => {
-    // const videoUrl = "https://www.youtube.com/watch?v=<your-video-id>";
-    // const embedUrl = `https://www.youtube.com/embed/${videoUrl.split("=")[1]}`;
-
     const formik = useFormik({
         initialValues: {
             templateName: '',

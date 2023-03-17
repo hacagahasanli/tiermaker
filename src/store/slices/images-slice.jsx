@@ -5,7 +5,7 @@ const initialState = {
         colour: "#1a1a17"
     },
     modalVisibility: false,
-    columnDetail: {}
+    columnDetail: {},
 }
 
 const ImagesSlice = createSlice({

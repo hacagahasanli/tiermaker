@@ -4,6 +4,9 @@ import { Wrapper } from "pages/Home"
 import styled from "styled-components"
 
 const Template = () => {
+    // const videoUrl = "https://www.youtube.com/watch?v=<your-video-id>";
+    // const embedUrl = `https://www.youtube.com/embed/${videoUrl.split("=")[1]}`;
+
     const formik = useFormik({
         initialValues: {
             templateName: '',
@@ -26,7 +29,16 @@ const Template = () => {
                     <h2>Create a Template</h2>
                     <span>TierMaker lets you easily create a tier list template for anything. By using TierMaker, you agree to follow our Guidelines and our Terms of Use. If you are having troubles, refer to our template creation guide and FAQ.</span>
                 </div>
-                <div></div>
+                <div>
+                    <iframe
+                        width="460"
+                        height="250"
+                        src="https://www.youtube.com/embed/e8hXPUh-iCU?autoplay=1&rel=0&modestbranding=1&showinfo=0"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
             </Title>
             <Form onSubmit={formik.handleSubmit}>
                 <InputWrapper>
@@ -139,7 +151,6 @@ const Title = styled.div`
         letter-spacing: 2px;
     }
 `
-
 const Textarea = styled.textarea`
     background: #000000;
     border: 1px solid #474747;

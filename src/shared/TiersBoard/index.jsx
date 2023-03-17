@@ -31,7 +31,7 @@ export const TiersBoard = () => {
                     >
                         <TierTitle {...{ bgColor, value, defultImageBoard }} />
                         <ColumnBoard {...{ diff, items, board }} />
-                        {defultImageBoard && <Settings {...{ board, defultImageBoard }} />}
+                        {defultImageBoard && <Settings {...{ board }} />}
                     </ColumnContainer>
                 })}
             </ErrorBoundary>

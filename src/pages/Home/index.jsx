@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
-import { tiersCategories, cardTiers } from 'constants/index';
+import { tiersCategories, cardTiers, defaultBoards } from 'constants/index';
 import { BoardsContext } from 'context/index';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { defaultBoards } from 'constants/index';
-import { ErrorBoundary } from 'components/ErrorBoundary';
+import { useNavigate } from 'react-router-dom';
 import { withScrollToTop } from 'components/ScrollToTop';
+import { Header, ErrorBoundary } from 'components/index';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
@@ -22,7 +21,7 @@ const Home = () => {
 
     return (
         <Wrapper>
-            <h2>Select the board</h2>
+            <Header></Header>
             <ErrorBoundary>
                 <CardWrapper>
                     {
@@ -71,7 +70,7 @@ const CardContainer = styled.div`
 `
 const CardWrapper = styled.div`
     display: grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(3,1fr);
     place-items: center;
     width: 100%;
     gap:2rem;

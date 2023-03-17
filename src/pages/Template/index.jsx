@@ -21,6 +21,13 @@ const Template = () => {
     return <Wrapper>
         <Header />
         <Container>
+            <Title>
+                <div>
+                    <h2>Create a Template</h2>
+                    <span>TierMaker lets you easily create a tier list template for anything. By using TierMaker, you agree to follow our Guidelines and our Terms of Use. If you are having troubles, refer to our template creation guide and FAQ.</span>
+                </div>
+                <div></div>
+            </Title>
             <Form onSubmit={formik.handleSubmit}>
                 <InputWrapper>
                     <Label htmlFor="templateName">Name of Template</Label>
@@ -94,10 +101,44 @@ const Template = () => {
                         placeholder="URL of site"
                     />
                 </InputWrapper>
+                <InputWrapper>
+                    <Label htmlFor="selectOption">Image Orientation</Label>
+                    <select
+                        id="selectOption"
+                        name="selectOption"
+                        onChange={formik.handleChange}
+                        value={formik.values.selectOption}
+                    >
+                        <option value="square">Square</option>
+                        <option value="landscape">Landscape</option>
+                        <option value="portrait">Portrait</option>
+                        <option value="circle">Circle</option>
+                    </select>
+                </InputWrapper>
             </Form>
         </Container>
     </Wrapper>
 }
+
+const Title = styled.div`
+    display: grid;
+    grid-template-columns: 1.35fr 2fr;
+    place-items: center;
+    color:white;
+    margin-bottom: 2rem;
+    padding: .5rem .5rem .5rem 0;
+
+    span{
+        line-height: 2rem;
+        font-size: 1.2rem;
+        color: #cccccc;
+    }
+
+    h2{
+        max-width:80%;
+        letter-spacing: 2px;
+    }
+`
 
 const Textarea = styled.textarea`
     background: #000000;
@@ -123,6 +164,7 @@ const InputWrapper = styled.div`
         padding: 0.3rem;
         color: white;
         background: #000000;
+        border: 1px solid #474747;
     }
 `
 const Input = styled.input`
@@ -155,7 +197,9 @@ const Form = styled.form`
     gap:3rem;
 `
 const Container = styled.div`
+    max-width: 840px;
     width: 100%;
+    margin-bottom: 6rem;
 `
 
 export default Template

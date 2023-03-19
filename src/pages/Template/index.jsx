@@ -1,8 +1,8 @@
-import { Header, TemplateTitle } from "components/index"
 import { useFormik } from "formik"
 import { Wrapper } from "pages/Home"
 import React from "react"
 import styled from "styled-components"
+import { Header, TemplateTitle } from "components/index"
 
 const Template = () => {
     const formik = useFormik({

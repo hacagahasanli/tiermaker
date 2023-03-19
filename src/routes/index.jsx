@@ -13,12 +13,10 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <HomeWithScrollToTop />
-
     },
     {
         path: "/make-a-template",
         element: <Template />
-
     },
     {
         path: '*',

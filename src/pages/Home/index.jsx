@@ -24,14 +24,12 @@ const Home = () => {
             <Header></Header>
             <ErrorBoundary>
                 <CardWrapper>
-                    {
-                        cardTiers?.map(({ id, thumbnail, name }) => {
-                            return <CardContainer key={id} onClick={() => tierBoardNavigator(id)}>
-                                <img src={thumbnail} alt="tiers_image" />
-                                <span>{name}</span>
-                            </CardContainer>
-                        })
-                    }
+                    {cardTiers?.map(({ id, thumbnail, name }) => {
+                        return <CardContainer key={id} onClick={() => tierBoardNavigator(id)}>
+                            <img src={thumbnail} alt="tiers_image" />
+                            <span>{name}</span>
+                        </CardContainer>
+                    })}
                 </CardWrapper>
             </ErrorBoundary>
         </Wrapper>

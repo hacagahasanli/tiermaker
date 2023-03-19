@@ -147,99 +147,13 @@ const Template = () => {
             <TemplateTitle />
             <Form onSubmit={formik.handleSubmit}>
                 {
-                    inputs?.map(({ id, title, ...rest }) => {
-                        return <InputWrapper key={id}>
+                    inputs?.map(({ id, title, ...rest }) =>
+                        <InputWrapper key={id}>
                             <Label htmlFor={id}>{title}</Label>
                             {sendInputByType({ id, title, ...rest })}
                         </InputWrapper>
-                    })
+                    )
                 }
-                {/* <InputWrapper>
-                    <Label htmlFor="templateName">Name of Template</Label>
-                    <Input
-                        id="templateName"
-                        name="templateName"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.templateName}
-                        placeholder="Describe the image set, ex. 'Game of Thrones characters'"
-                    />
-                </InputWrapper>
-                <InputWrapper>
-                    <Label htmlFor="selectOption">Select a Category:</Label>
-                    <select
-                        id="selectOption"
-                        name="selectOption"
-                        onChange={formik.handleChange}
-                        value={formik.values.selectOption}
-                    >
-                        <option value="">Select a Category</option>
-                        <option value="Actors && Actresses">Actors && Actresses</option>
-                        <option value="Albums">Albums</option>
-                        <option value="AMC Shows">AMC Shows</option>
-                        <option value="Among Us">Among Us</option>
-                    </select>
-                </InputWrapper>
-                <InputWrapper>
-                    <Label htmlFor="templateDescription">Description of Template:</Label>
-                    <Textarea
-                        rows="3"
-                        id="templateDescription"
-                        name="templateDescription"
-                        placeholder="A great description helps users find your template in search results"
-                        onChange={formik.handleChange}
-                        value={formik.values.templateDescription}
-                    />
-                </InputWrapper>
-                <InputWrapper>
-                    <Label htmlFor="coverPhoto">Select Template Cover Photo:</Label>
-                    <Input
-                        id="coverPhoto"
-                        name="coverPhoto"
-                        type="file"
-                        onChange={(event) => {
-                            formik.setFieldValue("coverPhoto", event.target.files[0]);
-                        }}
-                    />
-                </InputWrapper>
-                <InputWrapper>
-                    <Label htmlFor="tierlistImages">Upload a Set of Images for the Tier List Template:</Label>
-                    <span>Consistent image size and orientation (square, portrait or landscape) work best. You can use our Text to Image Generator to quickly add text labels on your images. Large file sizes may cause the upload to fail. A minimum of 2 images are needed to make a template.</span>
-                    <Input
-                        id="tierlistImages"
-                        name="tierlistImages"
-                        type="file"
-                        multiple={true}
-                        onChange={(event) => {
-                            formik.setFieldValue("tierlistImages", event.target.files);
-                        }}
-                    />
-                </InputWrapper>
-                <InputWrapper>
-                    <Label htmlFor="imageCreditsUrl">Add a URL for Image Credits:</Label>
-                    <Input
-                        id="imageCreditsUrl"
-                        name="imageCreditsUrl"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.imageCreditsUrl}
-                        placeholder="URL of site"
-                    />
-                </InputWrapper>
-                <InputWrapper>
-                    <Label htmlFor="selectOption">Image Orientation</Label>
-                    <select
-                        id="selectOption"
-                        name="selectOption"
-                        onChange={formik.handleChange}
-                        value={formik.values.selectOption}
-                    >
-                        <option value="Square">Square</option>
-                        <option value="landscape">Landscape</option>
-                        <option value="portrait">Portrait</option>
-                        <option value="circle">Circle</option>
-                    </select>
-                </InputWrapper> */}
                 <button type="submit">SUBMIT</button>
             </Form>
         </Container>

@@ -20,14 +20,12 @@ const Template = () => {
         },
     });
 
-    const sendInputByType = ({ id, type, placeholder, value, onChange, inputType, options, multiple, rows }) => {
-        if (id === "coverPhoto") {
-            return <Input
-                id="coverPhoto"
-                name="coverPhoto"
-                type="file"
-                onChange={(event) => formik.setFieldValue("coverPhoto", event.target.files[0])}
-            />
+    const sendInputByType = ({ id, type, placeholder, value, onChange, inputType, options, multiple, rows, text }) => {
+        if (id === "coverPhoto" || id === "tierlistImages") {
+            return <>
+                {text && <span>{text}</span>}
+                <Input {...{ id, type, onChange, multiple }} name={id} />
+            </>
         }
         switch (inputType) {
             case "input":
@@ -105,7 +103,7 @@ const Template = () => {
             type: "file",
             multiple: true,
             value: formik.values.tierlistImages,
-            onChange: (e) => formik.setFieldValue("coverPhoto", e.target.files[0]),
+            onChange: (e) => formik.setFieldValue("tierlistImages", e.target.files),
             inputType: "input"
         },
         {
@@ -149,11 +147,10 @@ const Template = () => {
             <TemplateTitle />
             <Form onSubmit={formik.handleSubmit}>
                 {
-                    inputs?.map(({ id, title, text, type, ...rest }) => {
+                    inputs?.map(({ id, title, ...rest }) => {
                         return <InputWrapper key={id}>
                             <Label htmlFor={id}>{title}</Label>
-                            {!text && <span>{text}</span>}
-                            {sendInputByType({ id, title, type, ...rest })}
+                            {sendInputByType({ id, title, ...rest })}
                         </InputWrapper>
                     })
                 }

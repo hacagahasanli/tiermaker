@@ -146,14 +146,12 @@ const Template = () => {
         <Container>
             <TemplateTitle />
             <Form onSubmit={formik.handleSubmit}>
-                {
-                    inputs?.map(({ id, title, ...rest }) =>
-                        <InputWrapper key={id}>
-                            <Label htmlFor={id}>{title}</Label>
-                            {sendInputByType({ id, title, ...rest })}
-                        </InputWrapper>
-                    )
-                }
+                {inputs?.map(({ id, title, ...rest }) =>
+                    <InputWrapper key={id}>
+                        <Label htmlFor={id}>{title}</Label>
+                        {sendInputByType({ id, title, ...rest })}
+                    </InputWrapper>
+                )}
                 <button type="submit">SUBMIT</button>
             </Form>
         </Container>

@@ -16,7 +16,7 @@ const Template = () => {
             imageCreditsUrl: ""
         },
         onSubmit: values => {
-            console.log(values, "VALUES");
+            console.log(values, "VALUESS");
         },
     });
 

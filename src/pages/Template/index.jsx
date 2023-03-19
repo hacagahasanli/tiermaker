@@ -9,15 +9,71 @@ const Template = () => {
             templateName: '',
             selectOption: "",
             templateDescription: '',
-            email: '',
             coverPhoto: "",
             tierlistImages: "",
             imageCreditsUrl: ""
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
+            console.log(values, "VALUES");
         },
     });
+
+    const inputs = [
+        {
+            id: "templateName",
+            title: "Name of Template",
+            type: "text",
+            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
+            value: formik.values.templateName,
+            onChange: formik.handleChange,
+            input: true
+        },
+        {
+            id: "templateName",
+            title: "Name of Template",
+            type: "text",
+            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
+            value: formik.values.templateName,
+            onChange: formik.handleChange,
+            input: true
+        },
+        {
+            id: "templateName",
+            title: "Name of Template",
+            type: "text",
+            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
+            value: formik.values.templateName,
+            onChange: formik.handleChange,
+            input: true
+        },
+        {
+            id: "templateName",
+            title: "Name of Template",
+            type: "text",
+            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
+            value: formik.values.templateName,
+            onChange: formik.handleChange,
+            input: true
+        },
+        {
+            id: "templateName",
+            title: "Name of Template",
+            type: "text",
+            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
+            value: formik.values.templateName,
+            onChange: formik.handleChange,
+            input: true
+        },
+        {
+            id: "templateName",
+            title: "Name of Template",
+            type: "text",
+            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
+            value: formik.values.templateName,
+            onChange: formik.handleChange,
+            input: true
+        },
+    ]
     return <Wrapper>
         <Header />
         <Container>
@@ -43,10 +99,10 @@ const Template = () => {
                         value={formik.values.selectOption}
                     >
                         <option value="">Select a Category</option>
-                        <option value="option1">Actors && Actresses</option>
-                        <option value="option2">Albums</option>
-                        <option value="option3">AMC Shows</option>
-                        <option value="option3">Among Us</option>
+                        <option value="Actors && Actresses">Actors && Actresses</option>
+                        <option value="Albums">Albums</option>
+                        <option value="AMC Shows">AMC Shows</option>
+                        <option value="Among Us">Among Us</option>
                     </select>
                 </InputWrapper>
                 <InputWrapper>
@@ -78,9 +134,9 @@ const Template = () => {
                         id="tierlistImages"
                         name="tierlistImages"
                         type="file"
-                        multiple
+                        multiple={true}
                         onChange={(event) => {
-                            formik.setFieldValue("tierlistImages", event.target.files[0]);
+                            formik.setFieldValue("tierlistImages", event.target.files);
                         }}
                     />
                 </InputWrapper>
@@ -109,6 +165,7 @@ const Template = () => {
                         <option value="circle">Circle</option>
                     </select>
                 </InputWrapper>
+                <button type="submit">SUBMIT</button>
             </Form>
         </Container>
     </Wrapper>

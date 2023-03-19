@@ -6,3 +6,4 @@ export { Button, MainButton, TButton } from "./UI/Button";
 export { Palattes } from "./Palattes";
 export { LocaleStorage } from "./LocaleStorage";
 export { ErrorBoundary } from "./ErrorBoundary";
+export { TemplateTitle } from "./UI/TemplateTitle";

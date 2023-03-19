@@ -1,13 +1,15 @@
 import { Header, TemplateTitle } from "components/index"
 import { useFormik } from "formik"
 import { Wrapper } from "pages/Home"
+import React from "react"
 import styled from "styled-components"
 
 const Template = () => {
     const formik = useFormik({
         initialValues: {
             templateName: '',
-            selectOption: "",
+            selectCategory: "",
+            selectImageOrientation: "",
             templateDescription: '',
             coverPhoto: "",
             tierlistImages: "",
@@ -18,6 +20,28 @@ const Template = () => {
         },
     });
 
+    const sendInputByType = ({ id, type, placeholder, value, onChange, inputType, options, multiple, rows }) => {
+        if (id === "coverPhoto") {
+            return <Input
+                id="coverPhoto"
+                name="coverPhoto"
+                type="file"
+                onChange={(event) => formik.setFieldValue("coverPhoto", event.target.files[0])}
+            />
+        }
+        switch (inputType) {
+            case "input":
+                return <Input {...{ id, type, value, placeholder, onChange, multiple }} name={id} />
+            case "select":
+                return <select {...{ id, onChange, value }} name={id}>
+                    {options.map(({ value, id }) => <option key={id} {...{ value }}>{value}</option>)}
+                </select>
+            case "textarea":
+                return <Textarea {...{ rows, id, placeholder, onChange, value }} name={id} />
+            default: <span>Something went wrong!</span>
+        }
+    }
+
     const inputs = [
         {
             id: "templateName",
@@ -26,52 +50,97 @@ const Template = () => {
             placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
             value: formik.values.templateName,
             onChange: formik.handleChange,
-            input: true
+            inputType: "input"
         },
         {
-            id: "templateName",
-            title: "Name of Template",
-            type: "text",
-            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
-            value: formik.values.templateName,
+            id: "selectCategory",
+            title: "Select a Category:",
+            value: formik.values.selectCategory,
             onChange: formik.handleChange,
-            input: true
+            inputType: "select",
+            options: [
+                {
+                    id: "Select a Category",
+                    value: "Select a Category"
+                },
+                {
+                    id: "Actors && Actresses",
+                    value: "Actors && Actresses"
+                },
+                {
+                    id: "Albums",
+                    value: "Albums"
+                },
+                {
+                    id: "AMC Shows",
+                    value: "AMC Shows"
+                },
+                {
+                    id: "Among Us",
+                    value: "Among Us"
+                },
+            ]
         },
         {
-            id: "templateName",
-            title: "Name of Template",
-            type: "text",
-            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
-            value: formik.values.templateName,
+            id: "templateDescription",
+            title: "Description of Template:",
+            rows: "3",
+            placeholder: "A great description helps users find your template in search results",
+            value: formik.values.templateDescription,
             onChange: formik.handleChange,
-            input: true
+            inputType: "textarea"
         },
         {
-            id: "templateName",
-            title: "Name of Template",
-            type: "text",
-            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
-            value: formik.values.templateName,
-            onChange: formik.handleChange,
-            input: true
+            id: "coverPhoto",
+            title: "Select Template Cover Photo:",
+            type: "file",
+            value: formik.values.coverPhoto,
+            onChange: (e) => formik.setFieldValue("coverPhoto", e?.target?.files[0]),
+            inputType: "input"
         },
         {
-            id: "templateName",
-            title: "Name of Template",
-            type: "text",
-            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
-            value: formik.values.templateName,
-            onChange: formik.handleChange,
-            input: true
+            id: "tierlistImages",
+            title: "Upload a Set of Images for the Tier List Template:",
+            text: "Consistent image size and orientation (square, portrait or landscape) work best. You can use our Text to Image Generator to quickly add text labels on your images. Large file sizes may cause the upload to fail. A minimum of 2 images are needed to make a template.",
+            type: "file",
+            multiple: true,
+            value: formik.values.tierlistImages,
+            onChange: (e) => formik.setFieldValue("coverPhoto", e.target.files[0]),
+            inputType: "input"
         },
         {
-            id: "templateName",
-            title: "Name of Template",
+            id: "imageCreditsUrl",
+            title: "Add a URL for Image Credits:",
             type: "text",
-            placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
-            value: formik.values.templateName,
+            placeholder: "URL of site",
+            value: formik.values.imageCreditsUrl,
             onChange: formik.handleChange,
-            input: true
+            inputType: "input"
+        },
+        {
+            id: "selectImageOrientation",
+            title: "Image Orientation",
+            value: formik.values.selectImageOrientation,
+            onChange: formik.handleChange,
+            inputType: "select",
+            options: [
+                {
+                    id: "Square",
+                    value: "Square"
+                },
+                {
+                    id: "Landscape",
+                    value: "Landscape"
+                },
+                {
+                    id: "Portrait",
+                    value: "Portrait"
+                },
+                {
+                    id: "Circle",
+                    value: "Circle"
+                },
+            ]
         },
     ]
     return <Wrapper>
@@ -79,7 +148,16 @@ const Template = () => {
         <Container>
             <TemplateTitle />
             <Form onSubmit={formik.handleSubmit}>
-                <InputWrapper>
+                {
+                    inputs?.map(({ id, title, text, type, ...rest }) => {
+                        return <InputWrapper key={id}>
+                            <Label htmlFor={id}>{title}</Label>
+                            {!text && <span>{text}</span>}
+                            {sendInputByType({ id, title, type, ...rest })}
+                        </InputWrapper>
+                    })
+                }
+                {/* <InputWrapper>
                     <Label htmlFor="templateName">Name of Template</Label>
                     <Input
                         id="templateName"
@@ -159,12 +237,12 @@ const Template = () => {
                         onChange={formik.handleChange}
                         value={formik.values.selectOption}
                     >
-                        <option value="square">Square</option>
+                        <option value="Square">Square</option>
                         <option value="landscape">Landscape</option>
                         <option value="portrait">Portrait</option>
                         <option value="circle">Circle</option>
                     </select>
-                </InputWrapper>
+                </InputWrapper> */}
                 <button type="submit">SUBMIT</button>
             </Form>
         </Container>

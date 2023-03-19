@@ -12,9 +12,9 @@ export const TemplateTitle = () => {
                 height="250"
                 src="https://www.youtube.com/embed/e8hXPUh-iCU?autoplay=1&rel=0&modestbranding=1&showinfo=0"
                 title="YouTube video player"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+                allowFullScreen></iframe>
         </div>
     </Title>
 }

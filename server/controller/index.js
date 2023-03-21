@@ -1,2 +1,2 @@
-export { AuthController } from "./auth";
-export { FileController } from "./file";
+export { AuthController } from "./Auth";
+export { FileController } from "./File";

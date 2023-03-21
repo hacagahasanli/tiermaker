@@ -1,9 +1,9 @@
+import { FileController } from "controller";
 import { Router } from "express";
+const t = 10;
 
 const router = new Router()
 
-router.post('', (req, res) => {
-    console.log(req);
-})
+router.post('', FileController)
 
 export { router }

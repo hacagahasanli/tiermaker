@@ -25,6 +25,6 @@ const tierImagesUpload = upload.fields([
 ])
 
 router.post('/add-tier-list', tierImagesUpload, authMiddleware, FileController.create)
-router.get('/get-files', authMiddleware, FileController.getFiles)
+router.get('/get-all-tierlists', authMiddleware, FileController.getFiles)
 
 export { router }

@@ -34,13 +34,25 @@ class File {
         }
     }
     async getFiles(req, res) {
-        try {
-            const files = await FileSchema.findOne({ owner: req.userId?.id })
-            res.json(files)
-        } catch (err) {
-            res.status(500).json({ message: err.message })
-            console.log(err)
-        }
+        const pageSize = 2;
+        const currentPage = req.query.page || 1;
+        FileSchema.countDocuments({ owner: req.userId?.id })
+            .then(totalCount => {
+                FileSchema.find({ owner: req.userId?.id })
+                    .skip((pageSize * currentPage) - pageSize)
+                    .limit(pageSize)
+                    .then(allFiles => {
+                        const files = !allFiles.length ?
+                            { allFiles: [], message: 'No more tierlists' }
+                            : { allFiles, message: 'TierLists fetched successfully' }
+                        res.status(200).json({ ...files, totalCount })
+                    })
+                    .catch(err => {
+                        res.status(500).json({ message: err.message })
+                    })
+            }).catch(err => {
+                res.status(500).json({ message: err.message })
+            })
     }
 }
 

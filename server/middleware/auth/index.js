@@ -12,14 +12,14 @@ export const authMiddleware = (req, res, next) => {
             return res.status(401).json({ message: "Empty token value!" })
 
         const decodedValue = jwt.verify(token, process.env.SECRET_KEY)
-        if (decodedValue.iss === process.env.JWT_AUTH_ISSUER) {
-            if (decodedValue.aud === process.env.JWT_AUDIENCE) {
-                req.userId = decodedValue;
-                return next()
-            } else
-                return res.status(403).json({ message: "Unauthorized user" })
+        const { iss, aud } = decodedValue
+
+        if (iss === process.env.JWT_AUTH_ISSUER &&
+            aud === process.env.JWT_AUDIENCE) {
+            req.userId = decodedValue;
+            return next()
         }
-        throw new Error("")
+        return res.status(403).json({ message: "Unauthorized user" })
 
     } catch (err) {
         res.status(403).json({ message: "Unauthorized user" })

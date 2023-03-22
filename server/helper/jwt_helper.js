@@ -3,7 +3,7 @@ import { config } from "dotenv"
 config()
 
 class JwtHelpers {
-    loginAccessToken({ id }) {
+    signAccessToken({ id }) {
         return new Promise((resolve, reject) => {
             const secretKey = process.env.ACCESS_TOKEN_SECRET_KEY
             const options = {
@@ -20,6 +20,9 @@ class JwtHelpers {
                 resolve(token)
             })
         })
+
+    }
+    verifyAccessToken() {
 
     }
 }

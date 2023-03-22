@@ -34,7 +34,7 @@ class Auth {
         if (!isPasswordValid)
             return res.status(400).json({ message: "Invalid password" })
 
-        const token = await JwtHelper.loginAccessToken({ id: user._id })
+        const token = await JwtHelper.signAccessToken({ id: user._id })
         return res.json({
             token,
             user: {

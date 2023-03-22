@@ -1,7 +1,7 @@
 import UserSchema from "../../models/User.js";
 import createError from "http-errors"
 import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken";
+import { JwtHelper } from "../../helper/jwt_helper.js";
 import { config } from "dotenv"
 config()
 
@@ -34,13 +34,7 @@ class Auth {
         if (!isPasswordValid)
             return res.status(400).json({ message: "Invalid password" })
 
-        const options = {
-            expiresIn: '24h',
-            issuer: process.env.JWT_AUTH_ISSUER,
-            audience: process.env.JWT_AUDIENCE,
-        }
-        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, options)
-
+        const token = await JwtHelper.loginAccessToken({ id: user._id })
         return res.json({
             token,
             user: {

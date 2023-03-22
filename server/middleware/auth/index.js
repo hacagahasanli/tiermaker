@@ -11,7 +11,7 @@ export const authMiddleware = (req, res, next) => {
         if (!token)
             return res.status(401).json({ message: "Empty token value!" })
 
-        const decodedValue = jwt.verify(token, process.env.SECRET_KEY)
+        const decodedValue = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY)
         const { iss, aud } = decodedValue
 
         if (iss === process.env.JWT_AUTH_ISSUER &&

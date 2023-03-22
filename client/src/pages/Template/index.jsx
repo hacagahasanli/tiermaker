@@ -145,7 +145,7 @@ const Template = () => {
         <Header />
         <Container>
             <TemplateTitle />
-            <Form onSubmit={formik.handleSubmit}>
+            <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
                 {inputs?.map(({ id, title, ...rest }) =>
                     <InputWrapper key={id}>
                         <Label htmlFor={id}>{title}</Label>

@@ -2,7 +2,7 @@ import { FileController } from "../../controller/index.js";
 import multer from "multer";
 import { Router } from "express";
 import path from "path";
-import fs from "fs"
+import { authMiddleware } from "../../middleware/auth/index.js";
 
 const router = new Router()
 
@@ -24,7 +24,7 @@ const tierImagesUpload = upload.fields([
     { name: 'tierlistImages', maxCount: 30 },
 ])
 
-router.post('', tierImagesUpload, FileController.create)
-router.get('/get-files', FileController.getFiles)
+router.post('/add-tier-list', tierImagesUpload, authMiddleware, FileController.create)
+router.get('/get-files', authMiddleware, FileController.getFiles)
 
 export { router }

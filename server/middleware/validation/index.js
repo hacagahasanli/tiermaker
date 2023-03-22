@@ -16,5 +16,6 @@ export const userValidation = [
             console.log(errors)
             return res.status(422).json({ errors: errors.array() })
         }
+        next()
     }
 ]

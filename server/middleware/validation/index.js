@@ -1,4 +1,5 @@
 import { check, validationResult } from "express-validator"
+import createError from "http-errors"
 
 const fieldLengthRange = { min: 4, max: 17 }
 export const userValidation = [
@@ -12,7 +13,7 @@ export const userValidation = [
     (req, res, next) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            console.log(errors)
+            // return createError(422, errors.errors)
             return res.status(422).json({ errors: errors.array() })
         }
         next()

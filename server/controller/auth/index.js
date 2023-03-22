@@ -1,9 +1,9 @@
 import UserSchema from "../../models/User.js";
+import createError from "http-errors"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken";
 import { config } from "dotenv"
 config()
-
 
 class Auth {
     async registration(req, res) {
@@ -33,7 +33,14 @@ class Auth {
         const isPasswordValid = bcrypt.compareSync(password, user.password)
         if (!isPasswordValid)
             return res.status(400).json({ message: "Invalid password" })
-        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '24h' })
+
+        const options = {
+            expiresIn: '24h',
+            issuer: process.env.JWT_AUTH_ISSUER,
+            audience: process.env.JWT_AUDIENCE,
+        }
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, options)
+
         return res.json({
             token,
             user: {

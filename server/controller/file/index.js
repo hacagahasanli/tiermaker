@@ -6,7 +6,7 @@ class File {
     async create(req, res) {
         try {
             const { templateName, templateDescription, selectImageOrientation, selectCategory } = req.body
-            const { coverPhoto, tierlistImages } = await req.files
+            const { coverPhoto, tierlistImages } = req.files
 
             const coverPhotoPath = process.env.IMAGE_SUB_URL + coverPhoto[0]?.path.split('\\')[1]
 

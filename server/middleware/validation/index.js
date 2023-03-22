@@ -1,14 +1,13 @@
-import { check } from "express-validator"
+import { check, validationResult } from "express-validator"
 
 const fieldLengthRange = { min: 4, max: 17 }
 export const userValidation = [
     check('username')
         .not()
         .isEmpty()
-        .withMessage('Username is empty')
-        .isLength(fieldLengthRange),
+        .withMessage('Username is empty'),
     check('password')
-        .isLength(fieldLengthRange)
+        .isLength({ min: 4, max: 17 })
         .withMessage('Password must be more than 4 and less than 17'),
     (req, res, next) => {
         const errors = validationResult(req)

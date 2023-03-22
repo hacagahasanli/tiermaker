@@ -4,14 +4,13 @@ import { Router } from "express";
 import path from "path";
 import fs from "fs"
 
-// const filePath = `C:\\Users\\user\\Desktop\\tiermaker-clone\\server\\uploads`
 const router = new Router()
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function (_, _, cb) {
         cb(null, `uploads/`)
     },
-    filename: function (req, file, cb) {
+    filename: function (_, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });

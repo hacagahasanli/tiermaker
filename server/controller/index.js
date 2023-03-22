@@ -1,2 +1,4 @@
-export { AuthController } from "./Auth";
-export { FileController } from "./File";
+import { AuthController } from "./Auth/index.js";
+import { FileController } from "./File/index.js";
+
+export { AuthController, FileController }

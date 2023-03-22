@@ -8,9 +8,9 @@ config()
 const DB_URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.u0jafxl.mongodb.net/?retryWrites=true&w=majority`
 const app = express();
 
+app.use(express.static('uploads'))
 app.use(cors)
 app.use(express.json())
-app.use(express.static('static'))
 app.use('/files', fileRouter)
 app.use('/auth', authRouter)
 

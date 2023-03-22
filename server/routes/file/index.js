@@ -7,10 +7,10 @@ import fs from "fs"
 const router = new Router()
 
 const storage = multer.diskStorage({
-    destination: function (_, _, cb) {
+    destination: function (req, file, cb) {
         cb(null, `uploads/`)
     },
-    filename: function (_, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
@@ -19,7 +19,6 @@ const upload = multer({
     storage: storage
 })
 
-// const upload = multer({ dest: '' })
 const tierImagesUpload = upload.fields([
     { name: 'coverPhoto', maxCount: 1 },
     { name: 'tierlistImages', maxCount: 30 },

@@ -1,6 +1,7 @@
 import { Auth } from "components/Auth";
 import { HomeWithScrollToTop, TierBoardWithScrollToTop, Template } from "pages/index";
 import { createBrowserRouter } from "react-router-dom";
+import Login from "pages/Login";
 
 const router = createBrowserRouter([
     {
@@ -11,8 +12,12 @@ const router = createBrowserRouter([
         }]
     },
     {
-        path: "/",
+        path: "/home",
         element: <HomeWithScrollToTop />
+    },
+    {
+        path: '/',
+        element: <Login />
     },
     {
         path: "/make-a-template",

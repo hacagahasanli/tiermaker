@@ -28,10 +28,12 @@ class Auth {
     async login(req, res) {
         try {
             const { username, password } = req.body
+            if (!username || !password)
+                return response(res, 400, { message: 'Username and password are required.' })
 
-            const user = await UserSchema.findOne({ username })
+            const user = await UserSchema.findOne({ username }).exec()
             if (!user)
-                return response(res, 404)
+                return response(res, 401)
 
             const isPasswordValid = bcrypt.compareSync(password, user.password)
             if (!isPasswordValid)

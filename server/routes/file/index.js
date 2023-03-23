@@ -21,7 +21,7 @@ const upload = multer({
 
 const tierImagesUpload = upload.fields([
     { name: 'coverPhoto', maxCount: 1 },
-    { name: 'tierlistImages', maxCount: 30 },
+    { name: 'tierlistImages', maxCount: 22 },
 ])
 
 router.post('/add-tier-list', tierImagesUpload, authMiddleware, FileController.create)

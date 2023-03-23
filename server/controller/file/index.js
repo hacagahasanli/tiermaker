@@ -1,5 +1,7 @@
 import FileSchema from "../../models/File.js"
 import { config } from "dotenv"
+import { response } from "../../helper/response.js"
+
 config()
 
 class File {
@@ -27,31 +29,34 @@ class File {
                 owner: req.userId?.id
             })
             await file.save()
-            res.json(file)
+            res.status(200).json(file)
         } catch (err) {
-            res.status(500).json({ message: err.message })
+            response(res, 500, { message: err.message })
             console.log(err)
         }
     }
     async getFiles(req, res) {
+
         const pageSize = 2;
         const currentPage = req.query.page || 1;
-        FileSchema.countDocuments({ owner: req.userId?.id })
+
+        FileSchema.countDocuments()
             .then(totalCount => {
-                FileSchema.find({ owner: req.userId?.id })
+                FileSchema.find()
                     .skip((pageSize * currentPage) - pageSize)
                     .limit(pageSize)
                     .then(allFiles => {
                         const files = !allFiles.length ?
                             { allFiles: [], message: 'No more tierlists' }
                             : { allFiles, message: 'TierLists fetched successfully' }
+
                         res.status(200).json({ ...files, totalCount })
                     })
                     .catch(err => {
-                        res.status(500).json({ message: err.message })
+                        response(res, 500, { message: err.message })
                     })
             }).catch(err => {
-                res.status(500).json({ message: err.message })
+                response(res, 500, { message: err.message })
             })
     }
 }

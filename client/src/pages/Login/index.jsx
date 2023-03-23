@@ -1,5 +1,5 @@
+import { axiosInstance } from 'api/index'
 import React, { useEffect, useState } from 'react'
-import axios from "../../api"
 
 const Login = () => {
     const [files, setFiles] = useState()
@@ -9,7 +9,7 @@ const Login = () => {
         const controller = new AbortController()
         const getFiles = async () => {
             try {
-                const response = await axios.get('/get-all-tierlists', {
+                const response = await axiosInstance.get('/get-all-tierlists', {
                     signal: controller.signal
                 })
                 console.log(response.data);

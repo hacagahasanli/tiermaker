@@ -27,8 +27,8 @@
             "routes/*": [
                 "routes/*"
             ],
-            "client/*": [
-                "client/*"
+            "api/*": [
+                "api/*"
             ],
             "hooks/*": [
                 "hooks/*"
@@ -49,7 +49,10 @@
         "sourceMap": true,
         "inlineSources": true,
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "types": [
+            "vite/client"
+        ]
     },
     "exclude": [
         "node_modules",

@@ -1,7 +1,8 @@
 import express from "express"
 import mongoose from "mongoose";
 import { config } from "dotenv";
-import { authMiddleware, cors } from "./middleware/index.js";
+import cors from "cors"
+import { authMiddleware, corsOptions } from "./middleware/index.js";
 import { fileRouter, authRouter, refreshRouter, logoutRouter } from "./routes/index.js";
 import cookieParser from "cookie-parser";
 config()
@@ -10,7 +11,7 @@ const DB_URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWO
 const app = express();
 
 app.use(express.static('uploads'))
-app.use(cors)
+app.use(cors(corsOptions))
 // app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())

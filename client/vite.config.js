@@ -13,7 +13,7 @@ export default defineConfig({
       components: "/src/components",
       assets: "/src/assets",
       constants: "/src/constants",
-      client: "/src/client",
+      api: "/src/api",
       pages: "/src/pages",
       routes: "/src/routes",
       shared: "/src/shared",

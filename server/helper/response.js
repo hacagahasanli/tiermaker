@@ -10,10 +10,10 @@ const Message = (statusCode, type, infos) => {
                 pass: "Password is invalid"
             },
             401: {
-                serv: "Empty token value!"
+                serv: "Unauthorized user"
             },
             403: {
-                user: `Unauthorized user`
+                user: `Forbidden!`
             },
             404: {
                 user: `User not found`,

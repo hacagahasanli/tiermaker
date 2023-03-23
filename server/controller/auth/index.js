@@ -3,6 +3,7 @@ import createError from "http-errors"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { response } from "../../helper/response.js";
+import { JwtHelper } from "../../helper/jwt_helper.js";
 import { config } from "dotenv"
 config()
 
@@ -42,17 +43,18 @@ class Auth {
                 return response(res, 400, 'pass')
 
             if (isPasswordValid) {
-                const accessToken = jwt.sign(
-                    { "userId": user._id },
-                    process.env.ACCESS_TOKEN_SECRET_KEY,
-                    { expiresIn: '30s' }
-                )
-
-                const refreshToken = jwt.sign(
-                    { "userId": user._id },
-                    process.env.REFRESH_TOKEN_SECRET_KEY,
-                    { expiresIn: '1d' }
-                )
+                console.log(1);
+                const accessToken = await JwtHelper.signAuthToken({
+                    userId: user._id,
+                    secretKey: process.env.ACCESS_TOKEN_SECRET_KEY,
+                    ei: '30s'
+                })
+                console.log(2);
+                const refreshToken = await JwtHelper.signAuthToken({
+                    userId: user._id,
+                    secretKey: process.env.REFRESH_TOKEN_SECRET_KEY,
+                    ei: '1d'
+                })
 
                 const updatedUser = await UserSchema.findOneAndUpdate(
                     { username: user.username },
@@ -66,6 +68,7 @@ class Auth {
                 //         password
                 //     }
                 // })
+
                 return res.json(updatedUser)
             }
         } catch (err) {

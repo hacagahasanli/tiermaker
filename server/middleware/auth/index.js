@@ -13,12 +13,12 @@ export const authMiddleware = (req, res, next) => {
             return response(res, 401, 'serv')
 
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY, (err, decodedValue) => {
-            const { iss, aud } = decodedValue;
+            // const { iss, aud } = decodedValue;
 
-            if (iss !== process.env.JWT_AUTH_ISSUER ||
-                aud !== process.env.JWT_AUDIENCE) {
-                return response(res, 403)
-            }
+            // if (iss !== process.env.JWT_AUTH_ISSUER ||
+            //     aud !== process.env.JWT_AUDIENCE) {
+            //     return response(res, 403)
+            // }
 
             if (err) {
                 const message = err.name !== "JsonWebTokenError" ? message : err.message

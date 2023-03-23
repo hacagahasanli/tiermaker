@@ -9,7 +9,7 @@ class RefreshTokenController {
     async refreshTokenHandler(req, res) {
         try {
             const cookies = req.cookies
-            if (!cookies?.jwt) return response(res, 401)
+            if (!cookies?.jwt) return response(res, 401, "serv")
 
             const refreshToken = cookies.jwt
 

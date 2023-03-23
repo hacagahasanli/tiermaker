@@ -2,7 +2,7 @@ import express from "express"
 import mongoose from "mongoose";
 import { config } from "dotenv";
 import { authMiddleware, cors } from "./middleware/index.js";
-import { fileRouter, authRouter, refreshRouter } from "./routes/index.js";
+import { fileRouter, authRouter, refreshRouter, logoutRouter } from "./routes/index.js";
 import cookieParser from "cookie-parser";
 config()
 
@@ -16,6 +16,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use('/auth', authRouter)
 app.use('/refresh', refreshRouter)
+app.use('/logout', logoutRouter)
 app.use(authMiddleware)
 app.use('/files', fileRouter)
 

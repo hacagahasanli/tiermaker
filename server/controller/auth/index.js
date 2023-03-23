@@ -1,7 +1,7 @@
 import UserSchema from "../../models/User.js";
 import createError from "http-errors"
 import bcrypt from "bcryptjs"
-import { JwtHelper } from "../../helper/jwt_helper.js";
+import jwt from "jsonwebtoken"
 import { response } from "../../helper/response.js";
 import { config } from "dotenv"
 config()
@@ -18,6 +18,7 @@ class Auth {
 
             const hashPassword = await bcrypt.hash(password, 7)
             const user = await UserSchema.create({ username, password: hashPassword })
+
             await user.save()
             response(res, 200)
         } catch (err) {
@@ -28,6 +29,7 @@ class Auth {
     async login(req, res) {
         try {
             const { username, password } = req.body
+
             if (!username || !password)
                 return response(res, 400, { message: 'Username and password are required.' })
 
@@ -39,16 +41,36 @@ class Auth {
             if (!isPasswordValid)
                 return response(res, 400, 'pass')
 
-            const token = await JwtHelper.signAccessToken({ id: user._id })
-            return res.json({
-                token,
-                user: {
-                    username,
-                    password
-                }
-            })
+            if (isPasswordValid) {
+                const accessToken = jwt.sign(
+                    { "userId": user._id },
+                    process.env.ACCESS_TOKEN_SECRET_KEY,
+                    { expiresIn: '30s' }
+                )
+
+                const refreshToken = jwt.sign(
+                    { "userId": user._id },
+                    process.env.REFRESH_TOKEN_SECRET_KEY,
+                    { expiresIn: '1d' }
+                )
+
+                const updatedUser = await UserSchema.findOneAndUpdate(
+                    { username: user.username },
+                    { refreshToken },
+                    { new: true }
+                )
+                // return res.json({
+                //     token,
+                //     user: {
+                //         username,
+                //         password
+                //     }
+                // })
+                return res.json(updatedUser)
+            }
         } catch (err) {
             response(res, 404)
+            console.log(err);
         }
 
     }

@@ -2,8 +2,10 @@ import UserSchema from "../../models/User.js";
 import createError from "http-errors"
 import bcrypt from "bcryptjs"
 import { JwtHelper } from "../../helper/jwt_helper.js";
+import { errorMessage } from "../../helper/errorMessage.js";
 import { config } from "dotenv"
 config()
+
 
 class Auth {
     async registration(req, res) {
@@ -12,7 +14,7 @@ class Auth {
 
             const candidate = await UserSchema.findOne({ username })
             if (candidate)
-                return res.status(400).json({ message: `User with username ${username} already exist` })
+                return errorMessage(res, 400, "user", { username })
 
             const hashPassword = await bcrypt.hash(password, 7)
             const user = await UserSchema.create({ username, password: hashPassword })
@@ -24,24 +26,29 @@ class Auth {
         }
     }
     async login(req, res) {
-        const { username, password } = req.body
+        try {
+            const { username, password } = req.body
 
-        const user = await UserSchema.findOne({ username })
-        if (!user)
-            return res.status(404).json({ message: `User  not found` })
+            const user = await UserSchema.findOne({ username })
+            if (!user)
+                return errorMessage(res, 404, 'user')
 
-        const isPasswordValid = bcrypt.compareSync(password, user.password)
-        if (!isPasswordValid)
-            return res.status(400).json({ message: "Invalid password" })
+            const isPasswordValid = bcrypt.compareSync(password, user.password)
+            if (!isPasswordValid)
+                return errorMessage(res, 400, 'pass')
 
-        const token = await JwtHelper.signAccessToken({ id: user._id })
-        return res.json({
-            token,
-            user: {
-                username,
-                password
-            }
-        })
+            const token = await JwtHelper.signAccessToken({ id: user._id })
+            return res.json({
+                token,
+                user: {
+                    username,
+                    password
+                }
+            })
+        } catch (err) {
+
+        }
+
     }
 }
 

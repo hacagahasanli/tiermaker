@@ -22,7 +22,7 @@ class JwtHelpers {
         })
 
     }
-    verifyAccessToken() {
+    signRefreshToken() {
 
     }
 }

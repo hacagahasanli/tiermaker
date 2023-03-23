@@ -1,4 +1,5 @@
 import { router as fileRouter } from "./file/index.js";
 import { router as authRouter } from "./auth/index.js";
+import { router as refreshRouter } from "./refresh.js";
 
-export { fileRouter, authRouter }
+export { fileRouter, authRouter, refreshRouter }

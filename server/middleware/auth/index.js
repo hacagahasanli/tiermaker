@@ -10,7 +10,6 @@ export const authMiddleware = (req, res, next) => {
     try {
         const authHeader = req.headers.authorization
         if (!authHeader) return response(res, 401, 'serv')
-        console.log(authHeader);
 
         const token = authHeader.split(' ')[1]
 
@@ -23,8 +22,8 @@ export const authMiddleware = (req, res, next) => {
             // }
 
             if (err) {
-                const message = err.name !== "JsonWebTokenError" ? message : err.message
-                return response(res, 403)
+                const message = err.name !== "JsonWebTokenError" && err.message
+                return response(res, 403, "user", { message })
             }
 
             req.userId = decodedValue;

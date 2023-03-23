@@ -1,7 +1,6 @@
 import UserSchema from "../../models/User.js";
 import createError from "http-errors"
 import bcrypt from "bcryptjs"
-import jwt from "jsonwebtoken"
 import { response } from "../../helper/response.js";
 import { JwtHelper } from "../../helper/jwt_helper.js";
 import { config } from "dotenv"
@@ -46,7 +45,7 @@ class Auth {
                 const accessToken = await JwtHelper.signAuthToken({
                     userId: user._id,
                     secretKey: process.env.ACCESS_TOKEN_SECRET_KEY,
-                    ei: '30s'
+                    ei: '130s'
                 })
 
                 const refreshToken = await JwtHelper.signAuthToken({
@@ -60,6 +59,7 @@ class Auth {
                     { refreshToken },
                     { new: true }
                 )
+
                 res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
                 return res.json({ accessToken })
             }

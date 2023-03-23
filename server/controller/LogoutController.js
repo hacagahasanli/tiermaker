@@ -1,20 +1,21 @@
-import { config } from "dotenv"
-import jwt from "jsonwebtoken"
 import { JwtHelper } from "../helper/jwt_helper.js";
 import { response } from "../helper/response.js";
 import UserSchema from "../models/User.js";
 
-config()
-class RefreshTokenController {
-    async refreshTokenHandler(req, res) {
+class LogoutController {
+    async logoutHandler(req, res) {
+        // on client, also delete the accessToken
         try {
             const cookies = req.cookies
-            if (!cookies?.jwt) return response(res, 401)
+            if (!cookies?.jwt) return response(res, 204, "serv")
 
             const refreshToken = cookies.jwt
 
             const matchedUser = await UserSchema.findOne({ refreshToken })
-            if (!matchedUser) return response(res, 403)
+            if (!matchedUser) {
+                res.clearCookie('jwt', { httpOnly: true })
+                return response(res, 204, "serv")
+            }
 
             jwt.verify(
                 refreshToken,
@@ -40,4 +41,4 @@ class RefreshTokenController {
 }
 
 
-export default new RefreshTokenController()
+export default new LogoutController()

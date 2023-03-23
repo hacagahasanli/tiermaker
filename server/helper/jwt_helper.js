@@ -5,7 +5,6 @@ config()
 class JwtHelpers {
     signAuthToken({ userId, secretKey, ei, ...rest }) {
         return new Promise((resolve, reject) => {
-            const secretKey = process.env.ACCESS_TOKEN_SECRET_KEY
             const options = {
                 expiresIn: ei,
                 ...rest

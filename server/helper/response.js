@@ -5,6 +5,9 @@ const Message = (statusCode, type, infos) => {
             200: {
                 user: "User was created succesfully"
             },
+            204: {
+                serv: "No content"
+            },
             400: {
                 user: `User with username ${infos?.username} already exist`,
                 pass: "Password is invalid"

@@ -43,13 +43,12 @@ class Auth {
                 return response(res, 400, 'pass')
 
             if (isPasswordValid) {
-                console.log(1);
                 const accessToken = await JwtHelper.signAuthToken({
                     userId: user._id,
                     secretKey: process.env.ACCESS_TOKEN_SECRET_KEY,
                     ei: '30s'
                 })
-                console.log(2);
+
                 const refreshToken = await JwtHelper.signAuthToken({
                     userId: user._id,
                     secretKey: process.env.REFRESH_TOKEN_SECRET_KEY,
@@ -61,15 +60,8 @@ class Auth {
                     { refreshToken },
                     { new: true }
                 )
-                // return res.json({
-                //     token,
-                //     user: {
-                //         username,
-                //         password
-                //     }
-                // })
-
-                return res.json(updatedUser)
+                res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+                return res.json({ accessToken })
             }
         } catch (err) {
             response(res, 404)

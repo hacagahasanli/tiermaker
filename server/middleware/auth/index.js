@@ -8,9 +8,11 @@ export const authMiddleware = (req, res, next) => {
         return response(res, 405, 'serv')
 
     try {
-        const token = req.headers.authorization.split(' ')[1]
-        if (!token)
-            return response(res, 401, 'serv')
+        const authHeader = req.headers.authorization
+        if (!authHeader) return response(res, 401, 'serv')
+        console.log(authHeader);
+
+        const token = authHeader.split(' ')[1]
 
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET_KEY, (err, decodedValue) => {
             // const { iss, aud } = decodedValue;

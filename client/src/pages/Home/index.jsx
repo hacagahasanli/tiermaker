@@ -5,6 +5,7 @@ import { BoardsContext } from 'context/index';
 import { useNavigate } from 'react-router-dom';
 import { withScrollToTop } from 'components/ScrollToTop';
 import { Header, ErrorBoundary } from 'components/index';
+import { Wrapper } from 'components/UI/styled-component';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
@@ -73,21 +74,5 @@ const CardWrapper = styled.div`
     width: 100%;
     gap:2rem;
     margin-bottom: 2rem;
-`
-export const Wrapper = styled.div`
-    position: relative;
-    max-width: 1180px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto;
-    gap:2rem;
-
-    h2{
-        color: #ffffff;
-        font-size: 2rem;
-        margin-top: 1rem;
-    }
 `
 export const HomeWithScrollToTop = withScrollToTop(Home);

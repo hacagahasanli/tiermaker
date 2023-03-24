@@ -12,7 +12,7 @@ const TierBoard = () => {
 
     return (
         <LocaleStorage>
-            <Wrapper id="tier_board" {...{ modalVisibility }}>
+            <Wrapper id="tier_board">
                 <Header />
                 <TiersBoard />
                 <Buttons />

@@ -32,7 +32,7 @@ export const Form = styled.form`
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
-    gap:3rem;
+    gap:${({ midGap }) => midGap ? "1rem" : "3rem"};
 `
 
 export const Input = styled.input`
@@ -50,4 +50,21 @@ export const Input = styled.input`
      :focus,:focus-visible,:focus-within{
         outline: none;
      }
+`
+
+export const Wrapper = styled.div`
+    position: relative;
+    max-width: 1180px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    gap:2rem;
+
+    h2{
+        color: #ffffff;
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
 `

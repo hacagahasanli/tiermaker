@@ -11,7 +11,7 @@ class Auth {
     async registration(req, res) {
         try {
             const { username, password } = req.body
-
+            console.log(username, password);
             const candidate = await UserSchema.findOne({ username })
             if (candidate)
                 return response(res, 400, "user", { username })

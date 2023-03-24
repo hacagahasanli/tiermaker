@@ -9,10 +9,10 @@ const SignSlice = createSlice({
     name: "SignSlice",
     initialState,
     reducers: {
-        getRegisterValues: (payload) => payload,
+        registerUser: (payload) => payload,
         getLoginValues: (payload) => payload
     }
 })
 
 export const signReducer = SignSlice.reducer
-export const { getRegisterValues, getLoginValues } = SignSlice.actions
+export const { registerUser, loginUser } = SignSlice.actions

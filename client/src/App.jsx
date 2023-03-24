@@ -16,7 +16,6 @@ const App = () => {
       <BoardProvider>
         <RouterProvider {...{ router }} />
       </BoardProvider>
-      <Footer />
     </ThemeProvider>
   )
 }

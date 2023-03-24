@@ -1,6 +1,6 @@
 import { userRegistration } from "api/index";
 import { put, call, fork, takeLatest } from "redux-saga/effects";
-import { getRegisterValues, getLoginValues } from "store/slices/sign-slice";
+import { registerUser, loginUser } from "store/slices/sign-slice";
 
 
 function* RegisterUser({ payload }) {
@@ -14,7 +14,7 @@ function* RegisterUser({ payload }) {
 }
 
 function* CallRegisterUser() {
-    yield takeLatest(getRegisterValues, RegisterUser)
+    yield takeLatest(registerUser, RegisterUser)
 }
 
 export const signSaga = [

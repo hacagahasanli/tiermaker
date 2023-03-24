@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik'
-import { axiosInstance } from 'api/index'
-import { Form, InputWrapper, Label, Input, Wrapper } from "components/UI/styled-component"
+import { Form, InputWrapper, Input, Wrapper } from "components/UI/styled-component"
 import { Header } from 'components/index'
 import styled from 'styled-components'
-import { Footer } from 'components/index'
+import { useDispatch } from 'react-redux'
+import { registerUser } from 'store/slices'
 
 const Login = () => {
     // const [files, setFiles] = useState()
+    const [validPassword, setValidPasswords] = useState()
+    const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -15,7 +17,9 @@ const Login = () => {
             repeatedPassword: ''
         },
         onSubmit: values => {
-            console.log(values, "VALUESS");
+            const { username, password, repeatedPassword } = values
+            if (password !== repeatedPassword) return setValidPasswords(false)
+            dispatch(registerUser({ username, password }))
         },
     });
 

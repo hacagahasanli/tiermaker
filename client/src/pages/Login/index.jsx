@@ -4,6 +4,7 @@ import { axiosInstance } from 'api/index'
 import { Form, InputWrapper, Label, Input, Wrapper } from "components/UI/styled-component"
 import { Header } from 'components/index'
 import styled from 'styled-components'
+import { Footer } from 'components/index'
 
 const Login = () => {
     // const [files, setFiles] = useState()

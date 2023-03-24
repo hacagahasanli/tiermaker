@@ -1,4 +1,12 @@
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
+
+export const GlobalStyle = createGlobalStyle`
+ *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+ }
+`
 
 export const Label = styled.label`
     font-size: 1.3rem;
@@ -61,7 +69,7 @@ export const Wrapper = styled.div`
     align-items: center;
     margin: 0 auto;
     gap:2rem;
-
+    overflow: ${({ isHide }) => isHide ? "hidden" : "visible"};
     h2{
         color: #ffffff;
         font-size: 2rem;

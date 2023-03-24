@@ -67,7 +67,7 @@ const CardContainer = styled.div`
         font-size: 1.2rem;
     }
 `
-const CardWrapper = styled.div`
+const CardWrapper = styled.article`
     display: grid;
     grid-template-columns:repeat(3,1fr);
     place-items: center;

@@ -31,6 +31,7 @@ const LogoContainer = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+    padding: .8rem 0;
 
     img{
         width: 250px;

@@ -21,7 +21,7 @@ const Home = () => {
 
     return (
         <Wrapper>
-            <Header></Header>
+            <Header />
             <ErrorBoundary>
                 <CardWrapper>
                     {cardTiers?.map(({ id, thumbnail, name }) => {

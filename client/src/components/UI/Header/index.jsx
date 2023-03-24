@@ -15,7 +15,7 @@ export const Header = memo(() => {
         <LogoContainer>
             <img src={tier_maker} alt="tier_maker" />
         </LogoContainer>
-        {pathname === "/" && <TButton func={navigateToMakeTemplate} />}
+        {pathname === "/home" && <TButton func={navigateToMakeTemplate} />}
     </LogoHeader>
 })
 

@@ -8,7 +8,6 @@ class LogoutController {
             if (!cookies?.jwt) return response(res, 204, "serv")
 
             const refreshToken = cookies.jwt
-            console.log(refreshToken, "REGFRESH TOKEN");
 
             const matchedUser = await UserSchema.findOne({ refreshToken })
             if (!matchedUser) {
@@ -16,13 +15,10 @@ class LogoutController {
                 return response(res, 204, "serv")
             }
 
-            // await UserSchema.findByIdAndUpdate(
-            //     matchedUser._id,
-            //     { $set: { refreshToken: '' } },
-            //     { new: true }
-            // )
-            matchedUser.refreshToken = ''
-            await matchedUser.save()
+            await UserSchema.findByIdAndUpdate(
+                matchedUser._id,
+                { $set: { refreshToken: '' } },
+            )
 
             res.clearCookie('jwt', { httpOnly: true, secure: true, sameSite: "None" })
             response(res, 204, "serv")

@@ -8,6 +8,7 @@ client/lerna-debug.log*
 
 # Ignore .env file
 client/.env
+client/secrets.js
 server/.env
 client/node_modules
 server/node_modules

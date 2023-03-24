@@ -59,8 +59,7 @@ class Auth {
                     { refreshToken },
                     { new: true }
                 )
-
-                res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+                res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, sameSite: "None" })
                 return res.json({ accessToken })
             }
         } catch (err) {

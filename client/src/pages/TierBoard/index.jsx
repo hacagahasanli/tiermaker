@@ -8,8 +8,6 @@ import { LocaleStorage } from 'components/index';
 import { withScrollToTop } from 'components/ScrollToTop';
 
 const TierBoard = () => {
-    const { modalVisibility } = useSelector(state => state.images)
-
     return (
         <LocaleStorage>
             <Wrapper id="tier_board">

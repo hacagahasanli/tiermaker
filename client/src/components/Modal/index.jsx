@@ -32,6 +32,7 @@ export const SettingModal = () => {
     const closeModal = () => dispatch(setModalVisible(false))
 
     const handleClose = (e) => {
+        e.stopPropagation()
         const id = e.target.id
         if (id === "container" || id === "close_icon") {
             closeModal()

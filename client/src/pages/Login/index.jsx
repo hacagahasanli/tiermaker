@@ -51,13 +51,13 @@ const Login = () => {
             <Header />
             <FormWrapper>
                 <Title>Registration</Title>
-                <Form onSubmit={formik.handleSubmit}>
-                    {inputs?.map(({ id, title, ...rest }) =>
+                <Form midGap="true" onSubmit={formik.handleSubmit}>
+                    {inputs?.map(({ id, ...rest }) =>
                         <InputWrapper key={id}>
                             <Input {...rest} autoComplete="off" />
                         </InputWrapper>
                     )}
-                    <Button type="submit">Register</Button>
+                    <Button type="submit">Sign up</Button>
                 </Form>
             </FormWrapper>
         </Wrapper>
@@ -65,8 +65,20 @@ const Login = () => {
 }
 
 const Button = styled.button`
-    color: #7fff7f;
+    color: #ff7f7f;
     font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.6rem 0;
+    width: 100%;
+    background: transparent;
+    border: 1px solid gray;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    :hover{
+        background: white;
+        color: black;
+    }
 `
 
 const FormWrapper = styled.div`

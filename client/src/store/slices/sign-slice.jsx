@@ -11,9 +11,10 @@ const SignSlice = createSlice({
     initialState,
     reducers: {
         registerUser: (payload) => payload,
-        getLoginValues: (payload) => payload,
+        loginUser: (payload) => payload,
         setAuth: (state, action) => {
-            state.auth = { ...state.auth, accessToken: action.payload }
+            const { accessToken } = action?.payload
+            state.auth = { ...state.auth, accessToken }
         }
     }
 })

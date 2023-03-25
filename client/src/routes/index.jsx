@@ -1,7 +1,11 @@
-import { Auth } from "components/Auth";
-import { HomeWithScrollToTop, TierBoardWithScrollToTop, Template } from "pages/index";
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Login from "pages/Login";
+
+const Auth = lazy(() => import("components/Auth"));
+const HomeWithScrollToTop = lazy(() => import("pages/index"))
+const TierBoardWithScrollToTop = lazy(() => import("pages/index"))
+const Template = lazy(() => import("pages/index"))
+const Login = lazy(() => import("pages/Login"))
 
 const router = createBrowserRouter([
     {

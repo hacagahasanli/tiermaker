@@ -12,13 +12,24 @@ export const axiosPrivate = axios.create({
 })
 
 export const userRegistration = async (values) => {
-    await authAxios.post('/registration', { ...values }, {
+    await authAxios.post('/auth/registration', { ...values }, {
         model: "registration"
     })
 }
 
+export const userLogin = async (values) => {
+    const response = await authAxios.post('/auth/login', { ...values }, {
+        model: "login"
+    })
+    return response
+}
 
-const responseInterceptor = axiosPrivate.interceptors.response.use(
+const resInterceptor = authAxios.interceptors.response.use(
+    (response) => response?.data,
+    (error) => Promise.reject(error)
+)
+
+const responseInterceptorPrivate = axiosPrivate.interceptors.response.use(
     (response) => response,
     async (error) => {
         const prevRequest = error?.config
@@ -35,7 +46,7 @@ const responseInterceptor = axiosPrivate.interceptors.response.use(
     }
 )
 
-const requestIntercept = axiosPrivate.interceptors.request.use(
+const requestInterceptorPrivate = axiosPrivate.interceptors.request.use(
     config => {
         const { auth } = useSelector(state => state.sign)
         console.log(auth, "AUTH");
@@ -47,6 +58,8 @@ const requestIntercept = axiosPrivate.interceptors.request.use(
     }, (error) => Promise.reject(error)
 );
 
-axiosPrivate.interceptors.request.eject(requestIntercept)
+// axiosPrivate.interceptors.request.eject(requestInterceptorPrivate)
 
-axiosPrivate.interceptors.response.eject(responseInterceptor)
+// axiosPrivate.interceptors.response.eject(responseInterceptorPrivate)
+
+// authAxios.interceptors.response.eject(resInterceptor)

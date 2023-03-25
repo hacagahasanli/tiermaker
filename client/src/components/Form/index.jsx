@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import { Form, InputWrapper, Input } from "components/UI/styled-component"
-import { registerUser } from 'store/slices'
+import { registerUser, loginUser } from 'store/slices'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
@@ -20,8 +20,13 @@ export const FormValidater = ({ initialValues, type, neededInputs }) => {
     const formik = useFormik({
         initialValues,
         validate,
-        onSubmit: values => { },
+        onSubmit: values => { submitHandler(values) },
     });
+
+    const submitHandler = ({ password, repeatedPassword, username }) => {
+        type === "login" && dispatch(loginUser({ password, username }))
+        type === "register" && dispatch(registerUser({ password, repeatedPassword, username }))
+    }
 
     const error = (message) => <Error>{message}</Error>
 

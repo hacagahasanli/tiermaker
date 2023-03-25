@@ -6,8 +6,7 @@ import { registerUser, loginUser } from "store/slices/sign-slice";
 function* RegisterUser({ payload }) {
     try {
         const userValues = payload;
-        const response = yield call(userRegistration, userValues)
-        console.log(response, "RESPONSE");
+        yield call(userRegistration, userValues)
     } catch (err) {
         console.log(err);
     }

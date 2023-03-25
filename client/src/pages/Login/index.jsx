@@ -1,90 +1,51 @@
-import React, { useState } from 'react'
-import { useFormik } from 'formik'
-import { Form, InputWrapper, Input, Wrapper } from "components/UI/styled-component"
+import React from 'react'
+import { Wrapper } from "components/UI/styled-component"
 import { Header } from 'components/index'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import { registerUser } from 'store/slices'
+import { FormValidater } from 'components/Form'
+import { useLocation } from 'react-router-dom'
+
 
 const Login = () => {
     // const [files, setFiles] = useState()
-    const [validPassword, setValidPasswords] = useState()
-    const dispatch = useDispatch()
-    const formik = useFormik({
-        initialValues: {
-            username: "",
-            password: "",
-            repeatedPassword: ''
-        },
-        onSubmit: values => {
-            const { username, password, repeatedPassword } = values
-            if (password !== repeatedPassword) return setValidPasswords(false)
-            dispatch(registerUser({ username, password }))
-        },
-    });
+    const location = useLocation()
+    const pathname = location.pathname
+    let userForm = null
 
-    const inputs = [
-        {
-            id: "username",
-            title: "Username",
-            type: "text",
-            name: "username",
-            placeholder: "username",
-            value: formik.values.username,
-            onChange: formik.handleChange,
+    const form = {
+        "/login": {
+            title: "Waitin you!",
+            initialValues: { username: "", password: "" },
+            type: "login",
+            neededInputs: ["username", "password"]
         },
-        {
-            id: "password",
-            type: "password",
-            name: "password",
-            placeholder: "password",
-            value: formik.values.password,
-            onChange: formik.handleChange,
-        },
-        {
-            id: "repeatedPassword",
-            type: "password",
-            name: "repeatedPassword",
-            placeholder: "repeat password",
-            value: formik.values.repeatedPassword,
-            onChange: formik.handleChange,
-        },
-    ]
+        "/register": {
+            title: "Register",
+            initialValues: { username: "", password: "", repeatedPassword: "" },
+            type: "register",
+            neededInputs: ["username", "password", "repeatedPassword"]
+        }
+    }
+
+    if (pathname === "/login" || pathname === "/register") {
+        const { title, initialValues, type, neededInputs } = form[pathname]
+        userForm = <>
+            <Title>{title}</Title>
+            <FormValidater {...{ initialValues, type, neededInputs }} />
+        </>
+    }
 
     return (
         <Wrapper>
             <Header />
             <FormWrapper>
-                <Title>Registration</Title>
-                <Form midGap="true" onSubmit={formik.handleSubmit}>
-                    {inputs?.map(({ id, ...rest }) =>
-                        <InputWrapper key={id}>
-                            <Input {...rest} autoComplete="off" />
-                        </InputWrapper>
-                    )}
-                    <Button type="submit">Sign up</Button>
-                </Form>
+                {userForm}
             </FormWrapper>
         </Wrapper>
     )
 }
 
-const Button = styled.button`
-    color: #ff7f7f;
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 0.6rem 0;
-    width: 100%;
-    background: transparent;
-    border: 1px solid gray;
-    cursor: pointer;
-    transition: all 0.3s;
-
-    :hover{
-        background: white;
-        color: black;
-    }
-`
 
 const FormWrapper = styled.div`
     margin-top: 2rem;
@@ -104,6 +65,7 @@ const Title = styled.span`
     text-align: center;
     margin-bottom: 2rem;
 `
+
 
 export default Login
 

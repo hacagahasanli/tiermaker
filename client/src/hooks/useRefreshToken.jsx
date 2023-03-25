@@ -1,20 +1,10 @@
 import { authAxios } from "api/index";
-import { useDispatch } from "react-redux";
-import { setAuth } from "store/slices/sign-slice";
+import { BoardsContext } from "context/index";
+import { useContext } from "react";
+
 
 const useRefreshToken = () => {
-    const dispatch = useDispatch()
 
-    const refresh = async () => {
-        const response = await axios.get('/refresh', {
-            withCredentials: true
-        })
-        const accessToken = response.data
-        dispatch(setAuth(accessToken))
-
-        return accessToken;
-    }
-    return refresh
 }
 
 export { useRefreshToken }

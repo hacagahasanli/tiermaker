@@ -42,7 +42,7 @@ export const BoardProvider = ({ children }) => {
             currentItem,
             setCurrentItem,
             removeItemFromBoard,
-            setBoardsHandler
+            setBoardsHandler,
         }}>
         {children}
     </BoardsContext.Provider>

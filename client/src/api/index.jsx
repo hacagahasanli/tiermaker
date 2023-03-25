@@ -5,7 +5,7 @@ import { useRefreshToken } from "hooks/index"
 
 export const authAxios = axios.create({ baseURL })
 
-export const axiosPrivate = axios.create({
+export const privateAxios = axios.create({
     baseURL,
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true
@@ -29,37 +29,11 @@ const resInterceptor = authAxios.interceptors.response.use(
     (error) => Promise.reject(error)
 )
 
-const responseInterceptorPrivate = axiosPrivate.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-        const prevRequest = error?.config
-        const refresh = useRefreshToken()
-        console.log(error, "ERROR INSIDE RESPONSE INTERCEPTOR");
-        console.log(prevRequest, "PREVREQUEST INSIDE RESPONSE INTERCEPTOR");
-        if (error?.response?.status === 403 && !prevRequest.sent) {
-            prevRequest.sent = true;
-            const newAccessToken = await refresh()
-            prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-            return axiosPrivate(prevRequest) // calling function again 
-        }
-        return Promise.reject(error)
-    }
-)
+export const refresh = async () => {
+    const response = await axios.get('/refresh', {
+        withCredentials: true
+    })
+    const accessToken = response.data
+    return accessToken;
+}
 
-const requestInterceptorPrivate = axiosPrivate.interceptors.request.use(
-    config => {
-        const { auth } = useSelector(state => state.sign)
-        console.log(auth, "AUTH");
-        if (!config.headers['Authorization']) {
-            config.headers['Authorization'] = `Bearer ${auth?.accessToken}`;
-        }
-        console.log(config, "CONFIG AFTER IF REQUEST INTERCEPTOR");
-        return config;
-    }, (error) => Promise.reject(error)
-);
-
-// axiosPrivate.interceptors.request.eject(requestInterceptorPrivate)
-
-// axiosPrivate.interceptors.response.eject(responseInterceptorPrivate)
-
-// authAxios.interceptors.response.eject(resInterceptor)

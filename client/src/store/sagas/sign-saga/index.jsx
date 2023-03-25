@@ -3,7 +3,7 @@ import { put, call, fork, takeLatest } from "redux-saga/effects";
 import { registerUser, loginUser, setAuth } from "store/slices/sign-slice";
 
 
-function* RegisterUser({ payload }) {
+function* RegisterUserAsync({ payload }) {
     try {
         const userValues = payload;
         yield call(userRegistration, userValues)
@@ -12,7 +12,7 @@ function* RegisterUser({ payload }) {
     }
 }
 
-function* LoginUser({ payload }) {
+function* LoginUserAsync({ payload }) {
     try {
         const userValues = payload
         const token = yield call(userLogin, userValues)
@@ -23,14 +23,14 @@ function* LoginUser({ payload }) {
 }
 
 function* CallRegisterUser() {
-    yield takeLatest(registerUser, RegisterUser)
+    yield takeLatest(registerUser, RegisterUserAsync)
 }
 
 function* CallLoginUser() {
-    yield takeLatest(loginUser, LoginUser)
+    yield takeLatest(loginUser, LoginUserAsync)
 }
 
 export const signSaga = [
     fork(CallRegisterUser),
-    fork(CallLoginUser)
+    fork(CallLoginUser),
 ]

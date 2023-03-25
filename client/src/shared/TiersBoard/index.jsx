@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { BoardsContext } from "context"
 import { TierTitle, ErrorBoundary, Settings, ColumnBoard } from "components/index"
 import { useBoxShadow } from "hooks/index"

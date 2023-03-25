@@ -23,10 +23,14 @@ const ImagesSlice = createSlice({
         setColumnDetail: (state, action) => {
             const data = action.payload;
             state.columnDetail = data
+        },
+        getTierLists: () => { },
+        setTierLists: (state, action) => {
+            console.log(action.payload, "TIER LISTS");
         }
     }
 })
 
 
 export const imagesReducer = ImagesSlice.reducer
-export const { setTheme, setModalVisible, setColumnDetail } = ImagesSlice.actions 
+export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists } = ImagesSlice.actions 

@@ -36,7 +36,7 @@ class File {
         }
     }
     async getFiles(req, res) {
-
+        console.log("BURDAYAM");
         const pageSize = 2;
         const currentPage = req.query.page || 1;
 

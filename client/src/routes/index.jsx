@@ -1,10 +1,14 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-const Auth = lazy(() => import("components/Auth"));
-const HomeWithScrollToTop = lazy(() => import("pages/index"))
-const TierBoardWithScrollToTop = lazy(() => import("pages/index"))
-const Template = lazy(() => import("pages/index"))
+
+const Home = lazy(() => import("pages/Home"))
+// const TierBoard = lazy(() => import("pages/TierBoard"))
+// const Template = lazy(() => import("pages/Template"))
+// const Auth = lazy(() => import("components/Auth"));
+import TierBoard from "pages/TierBoard";
+import Template from "pages/Template";
+import { Auth } from "components/Auth";
 const Login = lazy(() => import("pages/Login"))
 
 const router = createBrowserRouter([
@@ -12,12 +16,12 @@ const router = createBrowserRouter([
         element: <Auth />,
         children: [{
             path: "/tierboard",
-            element: <TierBoardWithScrollToTop />
+            element: <TierBoard />
         }]
     },
     {
-        path: "/home",
-        element: <HomeWithScrollToTop />
+        path: "/",
+        element: <Home />
     },
     {
         path: '/login',

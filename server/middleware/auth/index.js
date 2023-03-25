@@ -5,7 +5,7 @@ config()
 
 export const authMiddleware = (req, res, next) => {
     if (req.method === "OPTIONS")
-        return response(res, 405, 'serv')
+        return next()
 
     try {
         const authHeader = req.headers.authorization
@@ -25,7 +25,6 @@ export const authMiddleware = (req, res, next) => {
                 const message = err.name !== "JsonWebTokenError" && err.message
                 return response(res, 403, "user", { message })
             }
-
             req.userId = decodedValue;
             return next()
         })

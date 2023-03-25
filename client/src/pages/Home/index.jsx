@@ -1,15 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components';
 import { tiersCategories, cardTiers, defaultBoards } from 'constants/index';
 import { BoardsContext } from 'context/index';
 import { useNavigate } from 'react-router-dom';
-import { withScrollToTop } from 'components/ScrollToTop';
 import { Header, ErrorBoundary } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
+import { useDispatch } from 'react-redux';
+import useAxiosPrivate from 'hooks/useAxiosPrivate';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const privateAxios = useAxiosPrivate()
 
     const tierBoardNavigator = (id) => {
         const items = [...tiersCategories[id].items];
@@ -19,6 +22,32 @@ const Home = () => {
         }))
         navigate('/tierboard')
     }
+
+
+    useEffect(() => {
+        let isMounted = true;
+        const controller = new AbortController()
+
+        const getTierLists = async () => {
+            try {
+                const tierLists = await privateAxios.get('/files/get-all-tierlists', {
+                    signal: controller.signal
+                })
+                console.log(tierLists?.data)
+                isMounted && dispatch()
+            } catch (err) {
+                // console.log(err);
+            }
+        }
+        getTierLists()
+
+        return () => {
+            isMounted = false;
+            controller.abort()
+        }
+    }, [])
+
+
 
     return (
         <Wrapper>
@@ -75,4 +104,4 @@ const CardWrapper = styled.article`
     gap:2rem;
     margin-bottom: 2rem;
 `
-export const HomeWithScrollToTop = withScrollToTop(Home);
+export default Home;

@@ -1,21 +1,29 @@
+const errorMessage = {
+    emptyPass: 'Are u okay ? Set your password!',
+    emptyUsername: 'Okay , Set your username!',
+    notMatchFields: "Speechless , Passwords did not match !",
+    incorrect_short: 'Password must be at least 4 characters long !',
+    iccorrect_long: 'Password must be less than 17 !'
+}
+
+
 export const validate = (values) => {
     const errors = {};
     const { password, repeatedPassword, username } = values
     if (!password)
-        errors.password = ' Are u okay ? Set your password!';
+        errors.password = errorMessage.emptyPass;
 
     if (!username)
-        errors.username = 'Okay , Set your username!';
+        errors.username = errorMessage.username;
 
-    if (repeatedPassword !== password)
-        errors.repeatedPassword = "Speechless , Passwords did not match !"
+    if (repeatedPassword !== undefined && repeatedPassword !== password)
+        errors.repeatedPassword = errorMessage.notMatchFields
 
-    if (password.length && password.length < 4)
-        errors.password = 'Password must be at least 4 characters long !';
+    if (password?.length && password.length < 4)
+        errors.password = errorMessage.incorrect_short;
 
-    if (password.length > 17)
-        errors.password = 'Password must be less than 17 !'
-
+    if (password?.length > 17)
+        errors.password = errorMessage.iccorrect_long
 
     return errors;
 };

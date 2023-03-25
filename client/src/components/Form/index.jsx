@@ -1,13 +1,13 @@
 import { useFormik } from 'formik'
 import { Form, InputWrapper, Input } from "components/UI/styled-component"
 import { registerUser } from 'store/slices'
-import { validate } from 'utils/index'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { ErrorBoundary } from '..'
+import { validate } from 'utils/index'
 
-export const FormValidater = ({ initialValues, type, neededInputs, }) => {
+export const FormValidater = ({ initialValues, type, neededInputs }) => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -20,16 +20,20 @@ export const FormValidater = ({ initialValues, type, neededInputs, }) => {
     const formik = useFormik({
         initialValues,
         validate,
-        onSubmit: values => {
-            const { username, password } = values
-            dispatch(registerUser({ username, password }))
-        },
+        onSubmit: values => { },
     });
 
+    const error = (message) => <Error>{message}</Error>
+
     const showError = (name) => {
-        return formik.touched[name] && formik.errors[name] ?
-            <Error>{formik.errors[name]}</Error>
+        return formik?.touched[name] && formik?.errors[name] ?
+            error(formik?.errors[name])
             : null
+    }
+
+    const handleReset = () => {
+        formik.resetForm()
+        navigate(`/${btnText[type]?.path}`)
     }
 
     const allInputs = [
@@ -72,12 +76,11 @@ export const FormValidater = ({ initialValues, type, neededInputs, }) => {
                     </InputWrapper>
                 )}
                 <Button type="submit">{type}</Button>
-                {<Button type="button" onClick={() => navigate(`/${btnText[type]?.path}`)}>{btnText[type]?.text}</Button>}
             </Form>
+            <Button top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</Button>
         </ErrorBoundary>
     )
 }
-
 
 const Button = styled.button`
     color: #ffffff;
@@ -90,6 +93,7 @@ const Button = styled.button`
     cursor: pointer;
     transition: all 0.3s;
     text-transform: capitalize;
+    margin-top: ${({ top }) => top && "1rem"};
 
     :hover{
         background: white;

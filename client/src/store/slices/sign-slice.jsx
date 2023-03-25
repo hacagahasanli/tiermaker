@@ -10,7 +10,7 @@ const SignSlice = createSlice({
     initialState,
     reducers: {
         registerUser: (payload) => payload,
-        getLoginValues: (payload) => payload
+        getLoginValues: (payload) => payload,
     }
 })
 

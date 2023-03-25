@@ -1,16 +1,14 @@
 import React from 'react'
 import { Wrapper } from "components/UI/styled-component"
-import { Header } from 'components/index'
+import { ErrorBoundary, Header } from 'components/index'
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux'
 import { FormValidater } from 'components/Form'
 import { useLocation } from 'react-router-dom'
 
-
 const Login = () => {
-    // const [files, setFiles] = useState()
+
     const location = useLocation()
-    const pathname = location.pathname
+    const pathname = location?.pathname
     let userForm = null
 
     const form = {
@@ -39,9 +37,11 @@ const Login = () => {
     return (
         <Wrapper>
             <Header />
-            <FormWrapper>
-                {userForm}
-            </FormWrapper>
+            <ErrorBoundary>
+                <FormWrapper>
+                    {userForm}
+                </FormWrapper>
+            </ErrorBoundary>
         </Wrapper>
     )
 }
@@ -66,7 +66,6 @@ const Title = styled.span`
     margin-bottom: 2rem;
 `
 
-
 export default Login
 
     // useEffect(() => {
@@ -74,7 +73,7 @@ export default Login
     //     const controller = new AbortController()
     //     const getFiles = async () => {
     //         try {
-    //             const response = await axiosInstance.get('/get-all-tierlists', {
+    //             const response = await authAxios.get('/get-all-tierlists', {
     //                 signal: controller.signal
     //             })
     //             console.log(response.data);

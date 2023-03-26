@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const useAxiosPrivate = () => {
     const { auth } = useSelector(state => state.sign)
-
+    console.log(auth, "AUTH");
     useEffect(() => {
         const responseInterceptorPrivate = privateAxios.interceptors.response.use(
             (response) => response,

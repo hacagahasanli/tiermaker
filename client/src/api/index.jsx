@@ -3,7 +3,12 @@ import { baseURL } from "../../secrets"
 import { useSelector } from "react-redux"
 import { useRefreshToken } from "hooks/index"
 
-export const authAxios = axios.create({ baseURL })
+
+export const authAxios = axios.create({
+    baseURL,
+})
+
+axios.defaults.withCredentials = true;
 
 export const privateAxios = axios.create({
     baseURL,
@@ -30,9 +35,8 @@ const resInterceptor = authAxios.interceptors.response.use(
 )
 
 export const refresh = async () => {
-    const response = await axios.get('/refresh', {
-        withCredentials: true
-    })
+
+    const response = await authAxios.get('refresh', { withCredentials: true })
     const accessToken = response.data
     return accessToken;
 }

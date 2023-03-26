@@ -13,7 +13,13 @@ const app = express();
 
 app.use(express.static('uploads'))
 // app.use(credentials)
-app.use(cors(corsOptions))
+const corsConfig = {
+    origin: true,
+    credentials: true,
+};
+
+app.use(cors(corsConfig));
+app.options('*', cors(corsConfig))
 app.use(isValidPath)
 // app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

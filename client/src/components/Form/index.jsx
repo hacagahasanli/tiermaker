@@ -8,9 +8,9 @@ import { ErrorBoundary } from '..'
 import { validate } from 'utils/index'
 import Swal from 'sweetalert2'
 import { useEffect, useState } from 'react'
-import { setHideForm } from 'store/slices/sign-slice'
+import { setHideForm, setIsUserRegistered } from 'store/slices/sign-slice'
 
-export const FormValidater = ({ initialValues, type = "login", neededInputs, title }) => {
+export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const { auth, formVisible, isRegistered } = useSelector(state => state.sign)
     const [loginClicked, setLoginClicked] = useState(false)
 
@@ -32,16 +32,22 @@ export const FormValidater = ({ initialValues, type = "login", neededInputs, tit
 
     useEffect(() => {
         if ((Object.values(auth).length > 0 || isRegistered) && loginClicked) {
-            console.log("BURDAYAM USEEFFECT");
+            const text = isRegistered ? "Login" : pageName[from]
             Swal.fire({
                 icon: 'success',
                 title: 'You are a professor!',
-                text: `redirecting to ${pageName[from]}`,
+                text: `redirecting to ${text}`,
                 showConfirmButton: false,
                 allowOutsideClick: false,
                 timer: 1500,
-            }).then(() => navigate(from, { replace: true }))
-
+            }).then(() => {
+                if (isRegistered) {
+                    navigate('/login')
+                    dispatch(setHideForm(true))
+                    return dispatch(setIsUserRegistered(false))
+                }
+                navigate(from, { replace: true })
+            })
             setLoginClicked(false)
         }
     }, [auth, isRegistered])
@@ -59,7 +65,6 @@ export const FormValidater = ({ initialValues, type = "login", neededInputs, tit
             return setLoginClicked(true)
         }
         if (type === "register") {
-            console.log("BURDAYAM IF");
             dispatch(registerUser({ password, repeatedPassword, username }))
             setLoginClicked(true)
         }

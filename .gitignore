@@ -12,6 +12,7 @@ client/secrets.js
 server/.env
 client/node_modules
 server/node_modules
+server/uploads
 
 dist
 dist-ssr

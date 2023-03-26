@@ -6,8 +6,8 @@ const initialState = {
     },
     modalVisibility: false,
     columnDetail: {},
-    tierlists: [],
-    tierlistsCount: 0
+    tierLists: [],
+    tierListsCount: 0
 }
 
 const ImagesSlice = createSlice({
@@ -29,10 +29,8 @@ const ImagesSlice = createSlice({
         getTierLists: (payload) => payload,
         setTierLists: (state, action) => {
             const { data } = action.payload
-            state.tierlists = [...state.tierlists, ...data.allFiles]
-            console.log(data, "DATA");
-            console.log(state.tierlists, "DATA");
-            state.tierlistsCount = data?.totalCount
+            state.tierLists = [...data?.allFiles]
+            state.tierListsCount = data?.totalCount
         }
     }
 })

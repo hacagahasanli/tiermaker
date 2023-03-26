@@ -11,17 +11,12 @@ import { getTierLists } from 'store/slices/images-slice';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
-    const { auth } = useSelector(state => {
-        return {
-            tierLists: state.images.tierLists,
-            auth: state.sign.auth,
-        }
-    })
+    const { auth, tierLists, tierListsCounts } = useSelector(state => ({
+        tierLists: state.images.tierLists,
+        tierListsCounts: state.images.tierListsCounts,
+        auth: state.sign.auth
+    }))
     const privateAxios = useAxiosPrivate()
-
-    console.log(auth, "AUTH");
-
-    const { tierLists, tierListsCount } = useSelector(state => state.images)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -35,8 +30,6 @@ const Home = () => {
         navigate('/tierboard')
     }
 
-    console.log(tierLists, tierListsCount, "TIERLISTS");
-
     useEffect(() => {
         dispatch(getTierLists(privateAxios))
     }, [auth])
@@ -46,10 +39,10 @@ const Home = () => {
             <Header />
             <ErrorBoundary>
                 <CardWrapper>
-                    {cardTiers?.map(({ id, thumbnail, name }) => {
-                        return <CardContainer key={id} onClick={() => tierBoardNavigator(id)}>
-                            <img src={thumbnail} alt="tiers_image" />
-                            <span>{name}</span>
+                    {tierLists?.map(({ _id, coverPhoto, templateName }) => {
+                        return <CardContainer key={_id}>
+                            <img src={coverPhoto} alt="tiers_image" />
+                            <span>{templateName}</span>
                         </CardContainer>
                     })}
                 </CardWrapper>
@@ -80,7 +73,7 @@ const CardContainer = styled.div`
 
     img{
         max-width: 90%;
-        border-radius: 1rem;
+        border-radius: .2rem;
         object-fit: contain;
     }
     

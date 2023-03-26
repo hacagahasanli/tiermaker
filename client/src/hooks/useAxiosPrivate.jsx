@@ -1,11 +1,13 @@
 import { privateAxios, refresh } from "api/index";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setAuth } from "store/slices/sign-slice";
 
 const useAxiosPrivate = () => {
     const { auth } = useSelector(state => state.sign)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const l0cation = useLocation();
     const from = l0cation?.pathname
@@ -17,6 +19,7 @@ const useAxiosPrivate = () => {
                 const originalRequest = error?.config
                 const newAccessToken = await refresh()
                 if (newAccessToken === 401) {
+                    dispatch(setAuth({ accessToken: "" }))
                     navigate('/login', { replace: true, state: from })
                 }
                 else if (error?.response?.status === 403 && !originalRequest.sent) {

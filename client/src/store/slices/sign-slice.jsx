@@ -16,8 +16,8 @@ const SignSlice = createSlice({
         loginUser: (payload) => payload,
         setAuth: (state, action) => {
             console.log(action.payload);
-            const { accessToken } = action?.payload
-            state.auth = { accessToken }
+            const accessToken = action?.payload
+            state.auth = accessToken
         },
         setStuckPage: (state, action) => {
             state.stuckPage = action.payload

@@ -5,11 +5,13 @@ import { BoardsContext } from 'context/index';
 import { useNavigate } from 'react-router-dom';
 import { Header, ErrorBoundary } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from 'hooks/useAxiosPrivate';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
+    const { auth } = useSelector(state => state.sign)
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const privateAxios = useAxiosPrivate()
@@ -23,29 +25,31 @@ const Home = () => {
         navigate('/tierboard')
     }
 
+    const isValidSign = Object.values(auth).length > 0
 
     useEffect(() => {
         let isMounted = true;
         const controller = new AbortController()
 
-        const getTierLists = async () => {
-            try {
-                const tierLists = await privateAxios.get('/files/get-all-tierlists', {
-                    signal: controller.signal
-                })
-                console.log(tierLists?.data)
-                isMounted && dispatch()
-            } catch (err) {
-                // console.log(err);
+        if (isValidSign) {
+            const getTierLists = async () => {
+                try {
+                    const tierLists = await privateAxios.get('/files/get-all-tierlists', {
+                        signal: controller.signal
+                    })
+                    console.log(tierLists?.data)
+                    isMounted && dispatch()
+                } catch (err) {
+                    // console.log(err);
+                }
             }
+            getTierLists()
         }
-        getTierLists()
-
         return () => {
             isMounted = false;
             controller.abort()
         }
-    }, [])
+    }, [auth])
 
 
 

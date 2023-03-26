@@ -17,7 +17,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
-    const from = location.state || "/tierboard"
+    const from = location?.state?.from?.pathname || "/"
 
     const btnText = {
         login: { text: "Sign Up", path: "register" },
@@ -28,7 +28,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
         if (Object.values(auth).length > 0 && loginClicked) {
             Swal.fire({
                 icon: 'success',
-                title: 'Your work has been saved',
+                title: 'You are a professor!',
                 showConfirmButton: false,
                 timer: 1500
             }).then((result) => {

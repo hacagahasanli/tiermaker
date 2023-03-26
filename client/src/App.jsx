@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
 import { BoardProvider } from "./context"
 import router from "./routes"
+import { Suspense } from "react"
 
 
 const App = () => {
@@ -13,7 +14,9 @@ const App = () => {
     <ThemeProvider {...{ theme }}>
       <GlobalStyle />
       <BoardProvider>
-        <RouterProvider {...{ router }} />
+        <Suspense fallback={<p>Waitin...</p>}>
+          <RouterProvider {...{ router }} />
+        </Suspense>
       </BoardProvider>
     </ThemeProvider>
   )

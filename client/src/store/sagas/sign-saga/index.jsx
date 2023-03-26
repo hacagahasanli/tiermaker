@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 const sweetFire = () => {
     Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: 'Speechless...',
         text: 'Something went wrong!',
     })
 }

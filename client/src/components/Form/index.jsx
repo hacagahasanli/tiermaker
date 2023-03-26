@@ -14,8 +14,6 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const { auth, formVisible } = useSelector(state => state.sign)
     const [loginClicked, setLoginClicked] = useState(false)
 
-    // const [hideForm, setHideForm] = useState(true)
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -32,7 +30,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
                 'success'
             ).then((result) => {
                 if (result.isConfirmed) {
-
+                    navigate('/', { replace: true })
                 }
             })
             setLoginClicked(false)

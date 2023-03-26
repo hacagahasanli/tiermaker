@@ -20,8 +20,12 @@ const router = createBrowserRouter([
         }]
     },
     {
-        path: "/",
-        element: <Home />
+        element: <Auth />,
+        children: [{
+            path: "/",
+            element: <Home />
+        }]
+
     },
     {
         path: '/login',
@@ -32,8 +36,11 @@ const router = createBrowserRouter([
         element: <Login />
     },
     {
-        path: "/make-a-template",
-        element: <Template />
+        element: <Auth />,
+        children: [{
+            path: "/make-a-template",
+            element: <Template />
+        }]
     },
     {
         path: '*',

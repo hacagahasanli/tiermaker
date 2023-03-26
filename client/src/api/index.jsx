@@ -17,9 +17,10 @@ export const privateAxios = axios.create({
 })
 
 export const userRegistration = async (values) => {
-    await authAxios.post('/auth/registration', { ...values }, {
+    const response = await authAxios.post('/auth/registration', { ...values }, {
         model: "registration"
     })
+    return response?.data?.message
 }
 
 export const userLogin = async (values) => {

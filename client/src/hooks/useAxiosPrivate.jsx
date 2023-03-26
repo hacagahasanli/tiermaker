@@ -18,7 +18,7 @@ const useAxiosPrivate = () => {
             async (error) => {
                 const originalRequest = error?.config
                 const newAccessToken = await refresh()
-                if (newAccessToken === 401) {
+                if (newAccessToken === 401 || newAccessToken === 403) {
                     dispatch(setAuth({ accessToken: "" }))
                     navigate('/login', { replace: true, state: from })
                 }

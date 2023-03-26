@@ -10,8 +10,8 @@ import Swal from 'sweetalert2'
 import { useEffect, useState } from 'react'
 import { setHideForm } from 'store/slices/sign-slice'
 
-export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
-    const { auth, formVisible } = useSelector(state => state.sign)
+export const FormValidater = ({ initialValues, type = "login", neededInputs, title }) => {
+    const { auth, formVisible, isRegistered } = useSelector(state => state.sign)
     const [loginClicked, setLoginClicked] = useState(false)
 
     const dispatch = useDispatch()
@@ -21,7 +21,8 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     const pageName = {
         '/tierboard': "Tierboard",
-        '/': "Home"
+        '/': "Home",
+        '/login': "Login"
     }
 
     const btnText = {
@@ -30,19 +31,20 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     }
 
     useEffect(() => {
-        if (Object.values(auth).length > 0 && loginClicked) {
+        if ((Object.values(auth).length > 0 || isRegistered) && loginClicked) {
+            console.log("BURDAYAM USEEFFECT");
             Swal.fire({
                 icon: 'success',
                 title: 'You are a professor!',
                 text: `redirecting to ${pageName[from]}`,
                 showConfirmButton: false,
-                timer: 1500
-            }).then((result) => {
-                return navigate(from, { replace: true })
-            })
+                allowOutsideClick: false,
+                timer: 1500,
+            }).then(() => navigate(from, { replace: true }))
+
             setLoginClicked(false)
         }
-    }, [auth])
+    }, [auth, isRegistered])
 
     const formik = useFormik({
         initialValues,
@@ -54,9 +56,13 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
         dispatch(setHideForm(false))
         if (type === "login") {
             dispatch(loginUser({ password, username }))
+            return setLoginClicked(true)
+        }
+        if (type === "register") {
+            console.log("BURDAYAM IF");
+            dispatch(registerUser({ password, repeatedPassword, username }))
             setLoginClicked(true)
         }
-        type === "register" && dispatch(registerUser({ password, repeatedPassword, username }))
     }
 
     const error = (message) => <Error>{message}</Error>
@@ -70,10 +76,6 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const handleReset = () => {
         formik.resetForm()
         navigate(`/${btnText[type]?.path}`)
-    }
-
-    const handleSubmit = () => {
-
     }
 
     const allInputs = [
@@ -117,7 +119,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
                             {showError(name)}
                         </InputWrapper>
                     )}
-                    <Button type="submit" onClick={handleSubmit}>{type}</Button>
+                    <Button type="submit">{type}</Button>
                 </Form>
                 <Button top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</Button>
             </>}

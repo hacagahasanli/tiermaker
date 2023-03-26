@@ -122,7 +122,7 @@ export const SettingModal = () => {
                             <Palatte func={columnColourHandler} active={active} isBlack={"#000000"} palattes={palattes ?? {}} />
                         </div>
                         <h3>Edit Label Text Below:</h3>
-                        <textarea name="board_name" id="board_name" cols="30" rows="2" ref={ref}></textarea>
+                        <textarea name="board_name" id="board_name" cols="30" rows="3" ref={ref}></textarea>
                         <ButtonsContainer>
                             {
                                 buttons.map(({ id, value, func }) => <Button key={id} {...{ func, value }} isGray />)
@@ -173,9 +173,8 @@ const PalatteContainer = styled.div`
     }
 
     textarea{
-        margin-top: -1.5rem;
         width: 100%;
-        max-height: 25px;
+        max-height: 45px;
         border: 1px solid #f1f1f1;
         font-size: 1rem;
         padding: .7rem .7rem;
@@ -186,7 +185,7 @@ const Modal = styled.div`
     position: fixed;
     margin: 0 auto;
     min-height: 325px;
-    max-height: 325px;
+    max-height: 365px;
     left: 50%;
     transform: translateX(-50%);
     width: 713px;

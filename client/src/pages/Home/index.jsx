@@ -29,25 +29,25 @@ const Home = () => {
         navigate('/tierboard')
     }
 
-    console.log(tierListsCount, "tierListsCount");
-
     useEffect(() => {
         dispatch(getTierLists(privateAxios))
     }, [auth])
 
     return (
         <Wrapper>
-            <Header />
             <ErrorBoundary>
-                <CardWrapper>
-                    {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) => {
-                        return <CardContainer key={_id}>
-                            <img src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages)} />
-                            <span>{templateName}</span>
-                        </CardContainer>
-                    })}
-                </CardWrapper>
-                <h1 style={{ color: "white" }}>{tierListsCount}</h1>
+                {Object.values(auth).length !== 0 &&
+                    <><Header />
+                    <CardWrapper>
+                        {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) => {
+                            return <CardContainer key={_id}>
+                                <img src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages)} />
+                                <span>{templateName}</span>
+                            </CardContainer>
+                        })}
+                    </CardWrapper>
+                    <h1 style={{ color: "white" }}>{tierListsCount}</h1>
+                    </>}
             </ErrorBoundary>
         </Wrapper>
     )

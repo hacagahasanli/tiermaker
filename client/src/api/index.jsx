@@ -35,9 +35,12 @@ const resInterceptor = authAxios.interceptors.response.use(
 )
 
 export const refresh = async () => {
-
-    const response = await authAxios.get('refresh', { withCredentials: true })
-    const accessToken = response.data
-    return accessToken;
+    try {
+        const response = await authAxios.get('refresh', { withCredentials: true })
+        const accessToken = response.data
+        return accessToken;
+    } catch (err) {
+        return err.response.status;
+    }
 }
 

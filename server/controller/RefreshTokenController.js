@@ -9,10 +9,9 @@ class RefreshTokenController {
     async refreshTokenHandler(req, res) {
         try {
             const cookies = req.cookies
-            if (!cookies?.jwt) return response(res, 403)
+            if (!cookies?.jwt) return response(res, 401)
 
             const refreshToken = cookies.jwt
-            console.log(refreshToken, "REFRESH TOKEN");
 
             const matchedUser = await UserSchema.findOne({ refreshToken })
             if (!matchedUser) return response(res, 403)

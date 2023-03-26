@@ -1,24 +1,28 @@
 import { privateAxios, refresh } from "api/index";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const useAxiosPrivate = () => {
     const { auth } = useSelector(state => state.sign)
-    console.log(auth, "AUTH");
+    const navigate = useNavigate()
+
+    const l0cation = useLocation();
+    const from = l0cation?.pathname
+
     useEffect(() => {
         const responseInterceptorPrivate = privateAxios.interceptors.response.use(
             (response) => response,
             async (error) => {
-                const prevRequest = error?.config
-                console.log("ERROR INSIDE RESPONSE INTERCEPTOR");
-                console.log("PREVREQUEST INSIDE RESPONSE INTERCEPTOR");
+                const originalRequest = error?.config
                 const newAccessToken = await refresh()
-                console.log(newAccessToken);
-                if (error?.response?.status === 403 && !prevRequest.sent) {
-                    prevRequest.sent = true;
-                    console.log(newAccessToken, "NEW ACCESSTOKEN");
-                    prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-                    return privateAxios(prevRequest) // calling function again 
+                if (newAccessToken === 401) {
+                    navigate('/login', { replace: true, state: from })
+                }
+                else if (error?.response?.status === 403 && !originalRequest.sent) {
+                    originalRequest.sent = true;
+                    originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
+                    return privateAxios(originalRequest) // calling function again 
                 }
                 return Promise.reject(error)
             }
@@ -26,11 +30,9 @@ const useAxiosPrivate = () => {
 
         const requestInterceptorPrivate = privateAxios.interceptors.request.use(
             config => {
-                console.log(auth, "AUTH");
                 if (!config.headers['Authorization']) {
                     config.headers['Authorization'] = `Bearer ${auth?.accessToken}`;
                 }
-                console.log("CONFIG AFTER IF REQUEST INTERCEPTOR");
                 return config;
             }, (error) => Promise.reject(error)
         );

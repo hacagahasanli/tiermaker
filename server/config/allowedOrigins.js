@@ -2,9 +2,6 @@ import { config } from "dotenv"
 config()
 
 
-const allowedOrigins = [
-    process.env.ALLOWED_ORIGIN_1,
-    process.env.ALLOWED_ORIGIN_2
-]
+const allowedOrigins = ["http://127.0.0.1:5173"]
 
 export default allowedOrigins

@@ -3,7 +3,7 @@ import { Form, InputWrapper, Input } from "components/UI/styled-component"
 import { registerUser, loginUser } from 'store/slices'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ErrorBoundary } from '..'
 import { validate } from 'utils/index'
 import Swal from 'sweetalert2'
@@ -16,6 +16,8 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state || "/tierboard"
 
     const btnText = {
         login: { text: "Sign Up", path: "register" },
@@ -24,14 +26,13 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     useEffect(() => {
         if (Object.values(auth).length > 0 && loginClicked) {
-            Swal.fire(
-                'You are professor!',
-                'You made it!',
-                'success'
-            ).then((result) => {
-                if (result.isConfirmed) {
-                    navigate('/', { replace: true })
-                }
+            Swal.fire({
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                return navigate(from, { replace: true })
             })
             setLoginClicked(false)
         }

@@ -1,6 +1,7 @@
 import FileSchema from "../../models/File.js"
 import { config } from "dotenv"
 import { response } from "../../helper/response.js"
+import { v4 } from "uuid"
 
 config()
 
@@ -14,11 +15,11 @@ class File {
 
             const tierListPaths = tierlistImages?.map(({ path }) => {
                 if (path.length > 0) {
-                    const imagePath = `${process.env.IMAGE_SUB_URL}${path.split("\\")[1]}`
+                    const imagePath = { uri: `${process.env.IMAGE_SUB_URL}${path.split("\\")[1]}`, id: v4() }
                     return imagePath
                 }
-
             })
+
             const file = new FileSchema({
                 templateName,
                 templateDescription,

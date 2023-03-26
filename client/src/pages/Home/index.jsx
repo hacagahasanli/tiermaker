@@ -10,16 +10,18 @@ import useAxiosPrivate from 'hooks/useAxiosPrivate'
 import { getTierLists } from 'store/slices/images-slice';
 
 const Home = () => {
+    const privateAxios = useAxiosPrivate()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const { setBoards } = useContext(BoardsContext)
     const { auth, tierLists, tierListsCounts } = useSelector(state => ({
         tierLists: state.images.tierLists,
         tierListsCounts: state.images.tierListsCounts,
         auth: state.sign.auth
     }))
-    const privateAxios = useAxiosPrivate()
 
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    console.log(tierLists);
 
     const tierBoardNavigator = (id) => {
         const items = [...tiersCategories[id].items];

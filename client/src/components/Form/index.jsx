@@ -6,11 +6,15 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { ErrorBoundary } from '..'
 import { validate } from 'utils/index'
-import { useEffect } from 'react'
+import Swal from 'sweetalert2'
+import { useEffect, useState } from 'react'
+import { setHideForm } from 'store/slices/sign-slice'
 
-export const FormValidater = ({ initialValues, type, neededInputs }) => {
-    const { auth } = useSelector(state => state.sign)
+export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
+    const { auth, formVisible } = useSelector(state => state.sign)
+    const [loginClicked, setLoginClicked] = useState(false)
 
+    // const [hideForm, setHideForm] = useState(true)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -20,15 +24,32 @@ export const FormValidater = ({ initialValues, type, neededInputs }) => {
         register: { text: "login", path: 'login' }
     }
 
+    useEffect(() => {
+        if (Object.values(auth).length > 0 && loginClicked) {
+            Swal.fire(
+                'You are professor!',
+                'You made it!',
+                'success'
+            ).then((result) => {
+                if (result.isConfirmed) {
+
+                }
+            })
+            setLoginClicked(false)
+        }
+    }, [auth])
+
     const formik = useFormik({
         initialValues,
         validate,
         onSubmit: values => { submitHandler(values) },
     });
 
-    const submitHandler = ({ password, repeatedPassword, username }) => {
+    const submitHandler = async ({ password, repeatedPassword, username }) => {
+        dispatch(setHideForm(false))
         if (type === "login") {
             dispatch(loginUser({ password, username }))
+            setLoginClicked(true)
         }
         type === "register" && dispatch(registerUser({ password, repeatedPassword, username }))
     }
@@ -44,6 +65,10 @@ export const FormValidater = ({ initialValues, type, neededInputs }) => {
     const handleReset = () => {
         formik.resetForm()
         navigate(`/${btnText[type]?.path}`)
+    }
+
+    const handleSubmit = () => {
+
     }
 
     const allInputs = [
@@ -78,19 +103,30 @@ export const FormValidater = ({ initialValues, type, neededInputs }) => {
 
     return (
         <ErrorBoundary>
-            <Form midGap="true" onSubmit={formik.handleSubmit} >
-                {inputs?.map(({ id, name, ...rest }) =>
-                    <InputWrapper key={id}>
-                        <Input {...rest} {...{ name }} autoComplete="off" />
-                        {showError(name)}
-                    </InputWrapper>
-                )}
-                <Button type="submit">{type}</Button>
-            </Form>
-            <Button top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</Button>
+            {formVisible && <>
+                <Title>{title}</Title>
+                <Form midGap="true" onSubmit={formik.handleSubmit} >
+                    {inputs?.map(({ id, name, ...rest }) =>
+                        <InputWrapper key={id}>
+                            <Input {...rest} {...{ name }} autoComplete="off" />
+                            {showError(name)}
+                        </InputWrapper>
+                    )}
+                    <Button type="submit" onClick={handleSubmit}>{type}</Button>
+                </Form>
+                <Button top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</Button>
+            </>}
         </ErrorBoundary>
     )
 }
+
+const Title = styled.span`
+    display: block;
+    font-size: 2rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 2rem;
+`
 
 const Button = styled.button`
     color: #ffffff;

@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     registerValues: {},
     loginValues: {},
-    auth: {}
+    auth: {},
+    stuckPage: false,
+    formVisible: true
 }
 
 const SignSlice = createSlice({
@@ -16,9 +18,15 @@ const SignSlice = createSlice({
             console.log(action.payload);
             const { accessToken } = action?.payload
             state.auth = { accessToken }
+        },
+        setStuckPage: (state, action) => {
+            state.stuckPage = action.payload
+        },
+        setHideForm: (state, action) => {
+            state.formVisible = action.payload
         }
     }
 })
 
 export const signReducer = SignSlice.reducer
-export const { registerUser, loginUser, setAuth } = SignSlice.actions
+export const { registerUser, loginUser, setAuth, setStuckPage, setHideForm } = SignSlice.actions

@@ -3,15 +3,17 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import rootSaga from "./sagas/rootSaga";
 import { imagesReducer, signReducer } from "./slices";
 
+
 const sagaMiddleware = createSagaMiddleware();
 
-const rootReducer = combineReducers({
+const rootReducer = () => combineReducers({
     images: imagesReducer,
     sign: signReducer
 })
 
+
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: rootReducer(history),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: false, serializableCheck: false }).concat(
         sagaMiddleware
     )

@@ -2,7 +2,6 @@ import { GlobalStyle } from "components/UI/styled-component"
 import { useSelector } from "react-redux"
 import { RouterProvider } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
-import { Footer } from "./components"
 import { BoardProvider } from "./context"
 import router from "./routes"
 

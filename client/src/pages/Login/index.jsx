@@ -29,8 +29,7 @@ const Login = () => {
     if (pathname === "/login" || pathname === "/register") {
         const { title, initialValues, type, neededInputs } = form[pathname]
         userForm = <>
-            <Title>{title}</Title>
-            <FormValidater {...{ initialValues, type, neededInputs }} />
+            <FormValidater {...{ initialValues, type, neededInputs, title }} />
         </>
     }
 
@@ -56,14 +55,6 @@ const FormWrapper = styled.div`
         opacity: 0.9 !important;
     }
 
-`
-
-const Title = styled.span`
-    display: block;
-    font-size: 2rem;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 2rem;
 `
 
 export default Login

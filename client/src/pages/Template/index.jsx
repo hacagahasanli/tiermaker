@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import React from "react"
 import styled from "styled-components"
-import { Header, TemplateTitle } from "components/index"
+import { ErrorBoundary, Header, TemplateTitle } from "components/index"
 import { Form, InputWrapper, Label, Input, Wrapper } from "components/UI/styled-component"
 
 
@@ -145,16 +145,18 @@ const Template = () => {
     return <Wrapper>
         <Header />
         <Container>
-            <TemplateTitle />
-            <Form midGap={true} onSubmit={formik.handleSubmit} enctype="multipart/form-data">
-                {inputs?.map(({ id, title, ...rest }) =>
-                    <InputWrapper key={id}>
-                        <Label htmlFor={id}>{title}</Label>
-                        {sendInputByType({ id, title, ...rest })}
-                    </InputWrapper>
-                )}
-                <button type="submit">SUBMIT</button>
-            </Form>
+            <ErrorBoundary>
+                <TemplateTitle />
+                <Form midGap={true} onSubmit={formik.handleSubmit} enctype="multipart/form-data">
+                    {inputs?.map(({ id, title, ...rest }) =>
+                        <InputWrapper key={id}>
+                            <Label htmlFor={id}>{title}</Label>
+                            {sendInputByType({ id, title, ...rest })}
+                        </InputWrapper>
+                    )}
+                    <button type="submit">SUBMIT</button>
+                </Form>
+            </ErrorBoundary>
         </Container>
     </Wrapper>
 }

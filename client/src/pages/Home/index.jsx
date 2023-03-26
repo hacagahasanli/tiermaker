@@ -15,22 +15,21 @@ const Home = () => {
     const dispatch = useDispatch()
 
     const { setBoards } = useContext(BoardsContext)
-    const { auth, tierLists, tierListsCounts } = useSelector(state => ({
+    const { auth, tierLists, tierListsCount } = useSelector(state => ({
         tierLists: state.images.tierLists,
-        tierListsCounts: state.images.tierListsCounts,
+        tierListsCount: state.images.tierListsCount,
         auth: state.sign.auth
     }))
 
-    console.log(tierLists);
-
-    const tierBoardNavigator = (id) => {
-        const items = [...tiersCategories[id].items];
+    const tierBoardNavigator = (tierlistImages) => {
         setBoards(defaultBoards?.map((item) => {
-            if (item.id === 8) return { ...item, items: [...items] }
+            if (item.id === 8) return { ...item, items: [...tierlistImages] }
             return item
         }))
         navigate('/tierboard')
     }
+
+    console.log(tierListsCount, "tierListsCount");
 
     useEffect(() => {
         dispatch(getTierLists(privateAxios))
@@ -41,13 +40,14 @@ const Home = () => {
             <Header />
             <ErrorBoundary>
                 <CardWrapper>
-                    {tierLists?.map(({ _id, coverPhoto, templateName }) => {
+                    {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) => {
                         return <CardContainer key={_id}>
-                            <img src={coverPhoto} alt="tiers_image" />
+                            <img src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages)} />
                             <span>{templateName}</span>
                         </CardContainer>
                     })}
                 </CardWrapper>
+                <h1 style={{ color: "white" }}>{tierListsCount}</h1>
             </ErrorBoundary>
         </Wrapper>
     )

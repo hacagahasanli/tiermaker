@@ -29,6 +29,7 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
         {items?.map((item) => {
             const { id, uri } = item
             return <StyledImage
+                img={uri}
                 id={id}
                 src={uri}
                 alt={id}
@@ -62,8 +63,10 @@ const ImageWrapper = styled.div`
 `
 const StyledImage = styled.img`
     height: 80px;
-    object-fit: contain;
+    max-width: 80px;
     margin: 0;
     padding: 0;
     background: #eeeeee;
+    background-image: url(${({ uri }) => uri});
+    background-size: cover;
 `

@@ -5,7 +5,6 @@ const initialState = {
     loginValues: {},
     auth: {},
     stuckPage: false,
-    formVisible: true,
     isRegistered: false
 }
 
@@ -21,9 +20,6 @@ const SignSlice = createSlice({
         },
         setStuckPage: (state, action) => {
             state.stuckPage = action.payload
-        },  
-        setHideForm: (state, action) => {
-            state.formVisible = action.payload
         },
         setIsUserRegistered: (state, action) => {
             state.isRegistered = action.payload
@@ -32,4 +28,4 @@ const SignSlice = createSlice({
 })
 
 export const signReducer = SignSlice.reducer
-export const { registerUser, loginUser, setAuth, setStuckPage, setHideForm, setIsUserRegistered } = SignSlice.actions
+export const { registerUser, loginUser, setAuth, setStuckPage, setIsUserRegistered } = SignSlice.actions

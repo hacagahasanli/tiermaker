@@ -8,10 +8,12 @@ import { ErrorBoundary } from '..'
 import { validate } from 'utils/index'
 import Swal from 'sweetalert2'
 import { useEffect, useState } from 'react'
-import { setHideForm, setIsUserRegistered } from 'store/slices/sign-slice'
+import { setIsUserRegistered } from 'store/slices/sign-slice'
+import { pageName, btnText } from 'constants/index'
+
 
 export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
-    const { auth, formVisible, isRegistered } = useSelector(state => state.sign)
+    const { auth, isRegistered } = useSelector(state => state.sign)
     const [loginClicked, setLoginClicked] = useState(false)
 
     const dispatch = useDispatch()
@@ -19,16 +21,11 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const location = useLocation()
     const from = location?.state?.from?.pathname || "/"
 
-    const pageName = {
-        '/tierboard': "Tierboard",
-        '/': "Home",
-        '/login': "Login"
-    }
-
-    const btnText = {
-        login: { text: "Sign Up", path: "register" },
-        register: { text: "login", path: 'login' }
-    }
+    const formik = useFormik({
+        initialValues,
+        validate,
+        onSubmit: values => { submitHandler(values) },
+    });
 
     useEffect(() => {
         if ((Object.values(auth).length > 0 || isRegistered) && loginClicked) {
@@ -43,7 +40,6 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
             }).then(() => {
                 if (isRegistered) {
                     navigate('/login')
-                    dispatch(setHideForm(true))
                     return dispatch(setIsUserRegistered(false))
                 }
                 navigate(from, { replace: true })
@@ -52,22 +48,13 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
         }
     }, [auth, isRegistered])
 
-    const formik = useFormik({
-        initialValues,
-        validate,
-        onSubmit: values => { submitHandler(values) },
-    });
-
-    const submitHandler = async ({ password, repeatedPassword, username }) => {
-        dispatch(setHideForm(false))
+    const submitHandler = async ({ repeatedPassword, ...rest }) => {
         if (type === "login") {
-            dispatch(loginUser({ password, username }))
+            dispatch(loginUser({ ...rest }))
             return setLoginClicked(true)
         }
-        if (type === "register") {
-            dispatch(registerUser({ password, repeatedPassword, username }))
-            setLoginClicked(true)
-        }
+        dispatch(registerUser({ repeatedPassword, ...rest }))
+        setLoginClicked(true)
     }
 
     const error = (message) => <Error>{message}</Error>
@@ -115,19 +102,17 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     return (
         <ErrorBoundary>
-            {formVisible && <>
-                <Title>{title}</Title>
-                <Form midGap="true" onSubmit={formik.handleSubmit} >
-                    {inputs?.map(({ id, name, ...rest }) =>
-                        <InputWrapper key={id}>
-                            <Input {...rest} {...{ name }} autoComplete="off" />
-                            {showError(name)}
-                        </InputWrapper>
-                    )}
-                    <Button type="submit">{type}</Button>
-                </Form>
-                <Button top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</Button>
-            </>}
+            <Title>{title}</Title>
+            <Form midGap="true" onSubmit={formik.handleSubmit} >
+                {inputs?.map(({ id, name, ...rest }) =>
+                    <InputWrapper key={id}>
+                        <Input {...rest} {...{ name }} autoComplete="off" />
+                        {showError(name)}
+                    </InputWrapper>
+                )}
+                <Button type="submit">{type}</Button>
+            </Form>
+            <Button top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</Button>
         </ErrorBoundary>
     )
 }

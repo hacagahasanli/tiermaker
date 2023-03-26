@@ -1,6 +1,6 @@
 import { userRegistration, userLogin } from "api/index";
 import { put, call, fork, takeLatest } from "redux-saga/effects";
-import { registerUser, loginUser, setAuth, setHideForm, setIsUserRegistered } from "store/slices/sign-slice";
+import { registerUser, loginUser, setAuth, setIsUserRegistered } from "store/slices/sign-slice";
 import Swal from 'sweetalert2'
 
 const sweetFire = (text) => {
@@ -20,7 +20,6 @@ function* RegisterUserAsync({ payload }) {
         yield put(setIsUserRegistered(true))
     } catch (err) {
         yield sweetFire(`User with username ${payload?.username} has already exist`)
-        yield put(setHideForm(true))
     }
 }
 
@@ -31,7 +30,6 @@ function* LoginUserAsync({ payload }) {
         yield put(setAuth(token))
     } catch (err) {
         yield sweetFire()
-        yield put(setHideForm(true))
     }
 }
 

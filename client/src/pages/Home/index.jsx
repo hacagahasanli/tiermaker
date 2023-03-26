@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components';
-import { tiersCategories, cardTiers, defaultBoards } from 'constants/index';
+import { defaultBoards } from 'constants/index';
 import { BoardsContext } from 'context/index';
 import { useNavigate } from 'react-router-dom';
 import { Header, ErrorBoundary } from 'components/index';

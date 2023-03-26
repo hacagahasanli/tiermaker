@@ -19,6 +19,11 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const location = useLocation()
     const from = location?.state?.from?.pathname || "/"
 
+    const pageName = {
+        '/tierboard': "Tierboard",
+        '/': "Home"
+    }
+
     const btnText = {
         login: { text: "Sign Up", path: "register" },
         register: { text: "login", path: 'login' }
@@ -29,6 +34,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
             Swal.fire({
                 icon: 'success',
                 title: 'You are a professor!',
+                text: `redirecting to ${pageName[from]}`,
                 showConfirmButton: false,
                 timer: 1500
             }).then((result) => {

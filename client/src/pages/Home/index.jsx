@@ -6,15 +6,25 @@ import { useNavigate } from 'react-router-dom';
 import { Header, ErrorBoundary } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
 import { useDispatch, useSelector } from 'react-redux';
-import useAxiosPrivate from 'hooks/useAxiosPrivate';
+import useAxiosPrivate from 'hooks/useAxiosPrivate'
+import { getTierLists } from 'store/slices/images-slice';
 
 const Home = () => {
     const { setBoards } = useContext(BoardsContext)
-    const { auth } = useSelector(state => state.sign)
+    const { auth } = useSelector(state => {
+        return {
+            tierLists: state.images.tierLists,
+            auth: state.sign.auth,
+        }
+    })
+    const privateAxios = useAxiosPrivate()
+
+    console.log(auth, "AUTH");
+
+    const { tierLists, tierListsCount } = useSelector(state => state.images)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const privateAxios = useAxiosPrivate()
 
     const tierBoardNavigator = (id) => {
         const items = [...tiersCategories[id].items];
@@ -25,33 +35,11 @@ const Home = () => {
         navigate('/tierboard')
     }
 
-    const isValidSign = Object.values(auth).length > 0
+    console.log(tierLists, tierListsCount, "TIERLISTS");
 
     useEffect(() => {
-        let isMounted = true;
-        const controller = new AbortController()
-
-        if (isValidSign) {
-            const getTierLists = async () => {
-                try {
-                    const tierLists = await privateAxios.get('/files/get-all-tierlists', {
-                        signal: controller.signal
-                    })
-                    console.log(tierLists?.data)
-                    isMounted && dispatch()
-                } catch (err) {
-                    // console.log(err);
-                }
-            }
-            getTierLists()
-        }
-        return () => {
-            isMounted = false;
-            controller.abort()
-        }
+        dispatch(getTierLists(privateAxios))
     }, [auth])
-
-
 
     return (
         <Wrapper>

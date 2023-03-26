@@ -34,6 +34,15 @@ const resInterceptor = authAxios.interceptors.response.use(
     (error) => Promise.reject(error)
 )
 
+export const fetchTierLists = async (axiosPrivate) => {
+    try {
+        const tierLists = await axiosPrivate.get('/files/get-all-tierlists')
+        return tierLists
+    } catch (err) {
+        return "Error"
+    }
+}
+
 export const refresh = async () => {
     try {
         const response = await authAxios.get('refresh', { withCredentials: true })

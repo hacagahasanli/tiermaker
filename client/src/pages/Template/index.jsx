@@ -4,9 +4,15 @@ import styled from "styled-components"
 import { ErrorBoundary, Header, TButton, TemplateTitle } from "components/index"
 import { Form, InputWrapper, Label, Wrapper } from "components/UI/styled-component"
 import { useSendInputByType } from "hooks/index"
+import { categoriesOptions, imageOrientations } from "constants/index"
+import useAxiosPrivate from "hooks/useAxiosPrivate"
+import { useDispatch } from "react-redux"
+import { createTierList } from "store/slices/images-slice"
 
 const Template = () => {
     const { sendInputByType } = useSendInputByType()
+    const dispatch = useDispatch()
+    const privateAxios = useAxiosPrivate()
 
     const formik = useFormik({
         initialValues: {
@@ -18,9 +24,8 @@ const Template = () => {
             tierlistImages: "",
             imageCreditsUrl: ""
         },
-        onSubmit: values => {
-
-        },
+        validate: tierListTemplateValidater,
+        onSubmit: values => { dispatch(createTierList({ privateAxios, values })) },
     });
 
     const inputs = [
@@ -39,28 +44,7 @@ const Template = () => {
             value: formik.values.selectCategory,
             onChange: formik.handleChange,
             inputType: "select",
-            options: [
-                {
-                    id: "Select a Category",
-                    value: "Select a Category"
-                },
-                {
-                    id: "Actors && Actresses",
-                    value: "Actors && Actresses"
-                },
-                {
-                    id: "Albums",
-                    value: "Albums"
-                },
-                {
-                    id: "AMC Shows",
-                    value: "AMC Shows"
-                },
-                {
-                    id: "Among Us",
-                    value: "Among Us"
-                },
-            ]
+            options: categoriesOptions
         },
         {
             id: "templateDescription",
@@ -104,27 +88,11 @@ const Template = () => {
             value: formik.values.selectImageOrientation,
             onChange: formik.handleChange,
             inputType: "select",
-            options: [
-                {
-                    id: "Square",
-                    value: "Square"
-                },
-                {
-                    id: "Landscape",
-                    value: "Landscape"
-                },
-                {
-                    id: "Portrait",
-                    value: "Portrait"
-                },
-                {
-                    id: "Circle",
-                    value: "Circle"
-                },
-            ]
+            options: imageOrientations
         },
     ]
-    return <ErrorBoundary>
+
+    return (
         <Wrapper>
             <Header />
             <Container>
@@ -137,12 +105,12 @@ const Template = () => {
                                 {sendInputByType({ id, title, ...rest })}
                             </InputWrapper>
                         )}
-                        <TButton />
+                        <TButton fullWidth="true" />
                     </Form>
                 </ErrorBoundary>
             </Container>
         </Wrapper>
-    </ErrorBoundary>
+    )
 }
 
 

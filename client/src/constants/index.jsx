@@ -96,3 +96,46 @@ export const btnText = {
     login: { text: "Sign Up", path: "register" },
     register: { text: "login", path: 'login' }
 }
+
+export const categoriesOptions = [
+    {
+        id: "Select a Category",
+        value: "Select a Category"
+    },
+    {
+        id: "Actors && Actresses",
+        value: "Actors && Actresses"
+    },
+    {
+        id: "Albums",
+        value: "Albums"
+    },
+    {
+        id: "AMC Shows",
+        value: "AMC Shows"
+    },
+    {
+        id: "Among Us",
+        value: "Among Us"
+    },
+
+]
+
+export const imageOrientations = [
+    {
+        id: "Square",
+        value: "Square"
+    },
+    {
+        id: "Landscape",
+        value: "Landscape"
+    },
+    {
+        id: "Portrait",
+        value: "Portrait"
+    },
+    {
+        id: "Circle",
+        value: "Circle"
+    },
+]

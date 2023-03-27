@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ErrorBoundary, FormFields, LoadingMessage } from '..'
-import { validate } from 'utils/index'
+import { authValidate } from 'utils/index'
 import Swal from 'sweetalert2'
 import { Form, AuthButton } from "components/UI/styled-component"
 import { setIsUserRegistered } from 'store/slices/sign-slice'
@@ -28,7 +28,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     const formik = useFormik({
         initialValues,
-        validate,
+        validate: authValidate,
         onSubmit: values => { submitHandler(values) },
     });
 

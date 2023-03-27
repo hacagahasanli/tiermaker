@@ -5,7 +5,7 @@ export const MainButton = memo(({ value, func }) => <MButton onClick={func}>{val
 
 export const Button = memo(({ value, func, isGray }) => <SButton {...{ isGray }} onClick={func}>{value}</SButton>)
 
-export const TButton = (({ value = "Make a Template", func }) => <TemplateButton onClick={func}>{value}</TemplateButton>)
+export const TButton = (({ value = "Make", func, fullWidth }) => <TemplateButton {...{ fullWidth }} onClick={func}>{`${value} a Template`}</TemplateButton>)
 
 
 const sameStyles = css`
@@ -20,13 +20,13 @@ const sameStyles = css`
 `
 const TemplateButton = styled.button`
     background-color: #3A5795;
-    border-radius: 8px;
+    border-radius: ${({ fullWidth }) => fullWidth ? "1px" : "8px"};
     color: white;
     font-size: 17px;
     min-width: 150px;
-    max-width: 250px;
+    max-width: ${({ fullWidth }) => fullWidth ? "100%" : "250px"};
     border: none;
-    padding: .4rem;
+    padding: ${({ fullWidth }) => fullWidth ? ".6rem" : ".4rem"};;
     height: fit-content;
     cursor: pointer;
 

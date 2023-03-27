@@ -37,10 +37,18 @@ const ImagesSlice = createSlice({
             const boardId = action.payload
             state.cachedBoardId = boardId
             localStorage.setItem("cachedId", JSON.stringify(boardId))
-        }
+        },
+        createTierList: (payload) => payload
     }
 })
 
-
 export const imagesReducer = ImagesSlice.reducer
-export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists, setCachedBoardId } = ImagesSlice.actions 
+export const {
+    setTheme,
+    setModalVisible,
+    setColumnDetail,
+    setTierLists,
+    getTierLists,
+    setCachedBoardId,
+    createTierList
+} = ImagesSlice.actions 

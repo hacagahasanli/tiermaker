@@ -27,6 +27,13 @@ export const userLogin = async (values) => {
     return response
 }
 
+export const addTierListTemplate = async ({ axiosPrivate, values }) => {
+    const response = await axiosPrivate.post('/files/add-tier-list', { ...values }, {
+        model: "add-tier-list"
+    })
+    return response
+}
+
 const resInterceptor = authAxios.interceptors.response.use(
     (response) => response?.data,
     (error) => Promise.reject(error)

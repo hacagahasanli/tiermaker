@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import { Auth, Redirect } from "components/index";
+import { Auth } from "components/index";
 
 import TierBoard from "pages/TierBoard";
 import Template from "pages/Template";

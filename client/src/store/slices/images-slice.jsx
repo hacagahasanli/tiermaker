@@ -8,7 +8,7 @@ const initialState = {
     columnDetail: {},
     tierLists: [],
     tierListsCount: 0,
-    cachedBoardId: ""
+    cachedBoardId: "",
 }
 
 const ImagesSlice = createSlice({

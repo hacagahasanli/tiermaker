@@ -18,6 +18,7 @@ export { LocaleStorage } from "./LogicalComponents/LocaleStorage";
 export { ErrorBoundary } from "./LogicalComponents/ErrorBoundary";
 export { TierCard } from "./LogicalComponents/TierCard";
 export { Palatte } from "./LogicalComponents/Palatte";
+export { LoadMore } from "./LogicalComponents/LoadMore";
 
 //Components
 export { FormFields } from "./LogicalComponents/FormFields";

@@ -14,7 +14,7 @@ function* GetAllTierListsAsync({ payload }) {
         }
     } catch (err) {
         yield put(setLoading(false))
-        yield sweetFire()
+        yield sweetFire({ type: "error" })
     }
 }
 

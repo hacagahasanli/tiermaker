@@ -37,8 +37,7 @@ class File {
         }
     }
     async getFiles(req, res) {
-        console.log("BURDAYAM");
-        const pageSize = 2;
+        const pageSize = 6;
         const currentPage = req.query.page || 1;
 
         FileSchema.countDocuments()

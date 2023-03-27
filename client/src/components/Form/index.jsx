@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 import { Form, AuthButton } from "components/UI/styled-component"
 import { setIsUserRegistered } from 'store/slices/sign-slice'
 import { pageName, btnText } from 'constants/index'
+import { sweetFire } from 'utils/swal'
 
 export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const { auth, isRegistered } = useSelector(state => state.sign)
@@ -31,14 +32,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     useEffect(() => {
         if ((Object.values(auth).length > 0 || isRegistered) && loginClicked) {
             const text = isRegistered ? "Login" : pageName[from]
-            Swal.fire({
-                icon: 'success',
-                title: 'You are a professor!',
-                text: `redirecting to ${text}`,
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                timer: 1500,
-            }).then(() => {
+            Swal.fire(sweetFire({ text, type: "success" })).then(() => {
                 if (isRegistered) {
                     navigate('/login')
                     return dispatch(setIsUserRegistered(false))

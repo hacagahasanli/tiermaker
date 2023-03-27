@@ -10,7 +10,7 @@ function* RegisterUserAsync({ payload }) {
         yield call(userRegistration, userValues)
         yield put(setIsUserRegistered(true))
     } catch (err) {
-        yield sweetFire(`User with username ${payload?.username} has already exist`)
+        yield sweetFire({ text: `User with username ${payload?.username} has already exist` })
     }
 }
 
@@ -22,7 +22,7 @@ function* LoginUserAsync({ payload }) {
         yield put(setAuth(token))
         yield put(setLoading(false))
     } catch (err) {
-        yield sweetFire()
+        yield sweetFire({ type: "error" })
     }
 }
 

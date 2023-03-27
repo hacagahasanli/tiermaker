@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Header, ErrorBoundary, TierCard } from 'components/index';
+import { Header, ErrorBoundary, TierCard, LoadMore } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from 'hooks/useAxiosPrivate'
@@ -9,8 +9,7 @@ const Home = () => {
     const privateAxios = useAxiosPrivate()
     const dispatch = useDispatch()
 
-    const { auth, tierListsCount, isLoading } = useSelector(state => ({
-        tierListsCount: state.images.tierListsCount,
+    const { auth, isLoading } = useSelector(state => ({
         auth: state.sign.auth,
         isLoading: state.loading.isLoading
     }))
@@ -20,10 +19,10 @@ const Home = () => {
     }, [auth])
 
     const currentItem = isLoading
-        ? <h2 style={{ color: "white " }}>Tierlists cominn...</h2>
+        ? <h2 style={{ color: "white" }}>Tierlists cominn...</h2>
         : <>
             <TierCard />
-            <h1 style={{ color: "white" }}>{tierListsCount}</h1>
+            <LoadMore />
         </>
 
     return (

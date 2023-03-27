@@ -1,17 +1,7 @@
 import { userRegistration, userLogin } from "api/index";
 import { put, call, fork, takeLatest } from "redux-saga/effects";
 import { registerUser, loginUser, setAuth, setIsUserRegistered } from "store/slices/sign-slice";
-import Swal from 'sweetalert2'
-
-const sweetFire = (text) => {
-    Swal.fire({
-        icon: 'error',
-        title: 'Speechless...',
-        text: text ?? 'Something went wrong!',
-        showConfirmButton: false,
-        timer: 2000
-    })
-}
+import { sweetFire } from "utils/swal";
 
 function* RegisterUserAsync({ payload }) {
     try {

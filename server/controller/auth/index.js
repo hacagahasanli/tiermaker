@@ -45,7 +45,7 @@ class Auth {
                 const accessToken = await JwtHelper.signAuthToken({
                     userId: user._id,
                     secretKey: process.env.ACCESS_TOKEN_SECRET_KEY,
-                    ei: '130s'
+                    ei: '230s'
                 })
 
                 const refreshToken = await JwtHelper.signAuthToken({

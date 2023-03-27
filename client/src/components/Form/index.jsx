@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { ErrorBoundary } from '..'
 import { validate } from 'utils/index'
 import Swal from 'sweetalert2'
-import { Form, InputWrapper, Input, SweetAlert } from "components/UI/styled-component"
+import { Form, InputWrapper, Input } from "components/UI/styled-component"
 import { setIsUserRegistered } from 'store/slices/sign-slice'
 import { pageName, btnText } from 'constants/index'
 

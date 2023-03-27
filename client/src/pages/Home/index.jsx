@@ -9,25 +9,28 @@ const Home = () => {
     const privateAxios = useAxiosPrivate()
     const dispatch = useDispatch()
 
-    const { auth, tierListsCount } = useSelector(state => ({
+    const { auth, tierListsCount, isLoading } = useSelector(state => ({
         tierListsCount: state.images.tierListsCount,
-        auth: state.sign.auth
+        auth: state.sign.auth,
+        isLoading: state.images.loading
     }))
-
-    const isValidAuth = Object.values(auth).length !== 0
 
     useEffect(() => {
         dispatch(getTierLists(privateAxios))
     }, [auth])
 
+    const currentItem = isLoading ?
+        <h2 style={{ color: "white " }}>Tierlists cominn...</h2>
+        : <>
+            <TierCard />
+            <h1 style={{ color: "white" }}>{tierListsCount}</h1>
+        </>
+
     return (
         <Wrapper>
             <ErrorBoundary>
-                {isValidAuth && <>
-                    <Header />
-                    <TierCard />
-                    <h1 style={{ color: "white" }}>{tierListsCount}</h1>
-                </>}
+                <Header />
+                {currentItem}
             </ErrorBoundary>
         </Wrapper>
     )

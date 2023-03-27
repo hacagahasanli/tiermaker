@@ -14,7 +14,7 @@ const useAxiosPrivate = () => {
 
     useEffect(() => {
         const responseInterceptorPrivate = privateAxios.interceptors.response.use(
-            (response) => response,
+            async (response) => response,
             async (error) => {
                 const originalRequest = error?.config
                 const newAccessToken = await refresh()

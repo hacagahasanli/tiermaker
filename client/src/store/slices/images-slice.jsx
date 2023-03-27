@@ -7,7 +7,8 @@ const initialState = {
     modalVisibility: false,
     columnDetail: {},
     tierLists: [],
-    tierListsCount: 0
+    tierListsCount: 0,
+    loading: false,
 }
 
 const ImagesSlice = createSlice({
@@ -31,10 +32,13 @@ const ImagesSlice = createSlice({
             const { data } = action.payload
             state.tierLists = [...data?.allFiles]
             state.tierListsCount = data?.totalCount
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload
         }
     }
 })
 
 
 export const imagesReducer = ImagesSlice.reducer
-export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists } = ImagesSlice.actions 
+export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists, setLoading } = ImagesSlice.actions 

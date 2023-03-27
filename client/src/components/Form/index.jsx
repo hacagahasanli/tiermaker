@@ -20,6 +20,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || "/"
+    console.log("CHECK");
 
     const formik = useFormik({
         initialValues,

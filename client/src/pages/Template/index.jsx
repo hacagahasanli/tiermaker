@@ -1,11 +1,13 @@
 import { useFormik } from "formik"
 import React from "react"
 import styled from "styled-components"
-import { ErrorBoundary, Header, TemplateTitle } from "components/index"
-import { Form, InputWrapper, Label, Input, Wrapper } from "components/UI/styled-component"
-
+import { ErrorBoundary, Header, TButton, TemplateTitle } from "components/index"
+import { Form, InputWrapper, Label, Wrapper } from "components/UI/styled-component"
+import { useSendInputByType } from "hooks/index"
 
 const Template = () => {
+    const { sendInputByType } = useSendInputByType()
+
     const formik = useFormik({
         initialValues: {
             templateName: '',
@@ -17,29 +19,9 @@ const Template = () => {
             imageCreditsUrl: ""
         },
         onSubmit: values => {
-            console.log(values, "VALUESS");
+
         },
     });
-
-    const sendInputByType = ({ id, type, placeholder, value, onChange, inputType, options, multiple, rows, text }) => {
-        if (id === "coverPhoto" || id === "tierlistImages") {
-            return <>
-                {text && <span>{text}</span>}
-                <Input {...{ id, type, onChange, multiple }} name={id} />
-            </>
-        }
-        switch (inputType) {
-            case "input":
-                return <Input {...{ id, type, value, placeholder, onChange, multiple }} name={id} />
-            case "select":
-                return <select {...{ id, onChange, value }} name={id}>
-                    {options.map(({ value, id }) => <option key={id} {...{ value }}>{value}</option>)}
-                </select>
-            case "textarea":
-                return <Textarea {...{ rows, id, placeholder, onChange, value }} name={id} />
-            default: <span>Something went wrong!</span>
-        }
-    }
 
     const inputs = [
         {
@@ -142,33 +124,27 @@ const Template = () => {
             ]
         },
     ]
-    return <Wrapper>
-        <Header />
-        <Container>
-            <ErrorBoundary>
-                <TemplateTitle />
-                <Form midGap={true} onSubmit={formik.handleSubmit} enctype="multipart/form-data">
-                    {inputs?.map(({ id, title, ...rest }) =>
-                        <InputWrapper key={id}>
-                            <Label htmlFor={id}>{title}</Label>
-                            {sendInputByType({ id, title, ...rest })}
-                        </InputWrapper>
-                    )}
-                    <button type="submit">SUBMIT</button>
-                </Form>
-            </ErrorBoundary>
-        </Container>
-    </Wrapper>
+    return <ErrorBoundary>
+        <Wrapper>
+            <Header />
+            <Container>
+                <ErrorBoundary>
+                    <TemplateTitle />
+                    <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
+                        {inputs?.map(({ id, title, ...rest }) =>
+                            <InputWrapper key={id}>
+                                <Label htmlFor={id}>{title}</Label>
+                                {sendInputByType({ id, title, ...rest })}
+                            </InputWrapper>
+                        )}
+                        <TButton />
+                    </Form>
+                </ErrorBoundary>
+            </Container>
+        </Wrapper>
+    </ErrorBoundary>
 }
 
-const Textarea = styled.textarea`
-    background: #000000;
-    border: 1px solid #474747;
-    color: white;
-    font-size: 1.2rem;
-    padding: .4rem;
-    font-family: Arial, Helvetica, sans-serif;
-`
 
 const Container = styled.div`
     max-width: 840px;

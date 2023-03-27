@@ -1,5 +1,3 @@
-import Swal from "sweetalert2"
-
 export const sweetFire = ({ text, time, type }) => {
     const sweetPopups = {
         error: {

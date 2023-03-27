@@ -28,6 +28,7 @@ const TemplateButton = styled.button`
     border: none;
     padding: .4rem;
     height: fit-content;
+    cursor: pointer;
 
 `
 const SButton = styled.button`

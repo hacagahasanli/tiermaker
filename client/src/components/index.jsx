@@ -21,5 +21,5 @@ export { Palatte } from "./LogicalComponents/Palatte";
 
 //Components
 export { FormFields } from "./LogicalComponents/FormFields";
-
+export { SettingModal } from "./Modal";
 

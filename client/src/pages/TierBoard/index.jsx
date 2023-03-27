@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
-import { Header } from 'components/index';
 import { TiersBoard, Buttons } from 'shared/index';
-import { SettingModal } from 'components/Modal';
-import { LocaleStorage } from 'components/index';
+import { LocaleStorage, Header, SettingModal } from 'components/index';
 
 const TierBoard = () => {
     return (

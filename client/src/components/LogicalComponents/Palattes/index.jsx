@@ -39,7 +39,7 @@ const Container = styled.div`
         gap:.7rem;
         min-height: 100%;
         position: absolute;
-        transform:${({ showPalatte }) => showPalatte ? "translateX(232px)" : 'translateX(-200px)'};
+        transform:${({ showPalatte }) => showPalatte ? "translateX(260px)" : 'translateX(-200px)'};
         transition:all .8s;
     }
 `

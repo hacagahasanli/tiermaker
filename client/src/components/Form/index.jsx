@@ -11,6 +11,7 @@ import { Form, AuthButton } from "components/UI/styled-component"
 import { setIsUserRegistered } from 'store/slices/sign-slice'
 import { pageName, btnText } from 'constants/index'
 import { sweetFire } from 'utils/swal'
+import { useAuthValid } from 'hooks/index'
 
 export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const { auth, isRegistered } = useSelector(state => state.sign)
@@ -21,6 +22,8 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
+    const { isValid } = useAuthValid()
+
     const from = location?.state?.from?.pathname || "/"
 
     const formik = useFormik({
@@ -30,7 +33,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     });
 
     useEffect(() => {
-        if ((Object.values(auth).length > 0 || isRegistered) && loginClicked) {
+        if ((isValid || isRegistered) && loginClicked) {
             const text = isRegistered ? "Login" : pageName[from]
             Swal.fire(sweetFire({ text, type: "success" })).then(() => {
                 if (isRegistered) {

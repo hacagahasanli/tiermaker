@@ -3,6 +3,7 @@ import { put, call, takeLatest, fork } from "redux-saga/effects";
 import { getTierLists, setTierLists } from "store/slices/images-slice";
 import { setLoading } from "store/slices/loading";
 import { sweetFire } from "utils/swal";
+import Swal from "sweetalert2";
 
 function* GetAllTierListsAsync({ payload }) {
     try {
@@ -14,7 +15,7 @@ function* GetAllTierListsAsync({ payload }) {
         }
     } catch (err) {
         yield put(setLoading(false))
-        yield sweetFire({ type: "error" })
+        yield Swal.fire(sweetFire({ type: "error" }))
     }
 }
 

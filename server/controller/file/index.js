@@ -4,7 +4,6 @@ import { response } from "../../helper/response.js"
 import { v4 } from "uuid"
 
 config()
-
 class File {
     async create(req, res) {
         try {
@@ -37,7 +36,7 @@ class File {
         }
     }
     async getFiles(req, res) {
-        const pageSize = 6;
+        const pageSize = 18;
         const currentPage = req.query.page || 1;
 
         FileSchema.countDocuments()
@@ -52,12 +51,9 @@ class File {
 
                         res.status(200).json({ ...files, totalCount })
                     })
-                    .catch(err => {
-                        response(res, 500, { message: err.message })
-                    })
-            }).catch(err => {
-                response(res, 500, { message: err.message })
-            })
+                    .catch(err => response(res, 500, { message: err.message }))
+            }).catch(err => response(res, 500, { message: err.message })
+            )
     }
 }
 

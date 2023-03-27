@@ -1,4 +1,5 @@
 import useBoxShadow from "./useBoards";
 import { useRefreshToken } from "./useRefreshToken";
+import { useAuthValid } from "./useAuthValid";
 
-export { useBoxShadow, useRefreshToken }
+export { useBoxShadow, useRefreshToken, useAuthValid }

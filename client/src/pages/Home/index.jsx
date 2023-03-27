@@ -9,14 +9,18 @@ const Home = () => {
     const privateAxios = useAxiosPrivate()
     const dispatch = useDispatch()
 
-    const { auth, isLoading } = useSelector(state => ({
+    const { auth, isLoading, tierListsCount, tierLists } = useSelector(state => ({
         auth: state.sign.auth,
-        isLoading: state.loading.isLoading
+        isLoading: state.loading.isLoading,
+        tierListsCount: state.images.tierListsCount,
+        tierLists: state.images.tierLists,
     }))
 
     useEffect(() => {
-        dispatch(getTierLists(privateAxios))
-    }, [auth])
+        if (tierLists?.length === 0) {
+            dispatch(getTierLists(privateAxios))
+        }
+    }, [])
 
     const currentItem = isLoading
         ? <h2 style={{ color: "white" }}>Tierlists cominn...</h2>

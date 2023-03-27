@@ -1,6 +1,8 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 export const LoadMore = () => {
+    const dispatch = useDispatch()
     const getMoreTierLists = () => {
 
     }

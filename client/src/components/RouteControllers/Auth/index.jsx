@@ -1,14 +1,11 @@
-import { BoardsContext } from "context/index"
-import { useContext } from "react"
-import { useSelector } from "react-redux"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
-
+import { useAuthValid } from "hooks/index"
 
 export const Auth = () => {
     const location = useLocation()
-    const { auth } = useSelector(state => state.sign)
+    const { isValid } = useAuthValid()
 
-    if (Object.values(auth).length > 0) return <Outlet />
+    if (isValid) return <Outlet />
 
     return <Navigate to="/login" state={{ from: location }} replace />
 }

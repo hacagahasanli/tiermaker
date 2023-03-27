@@ -1,8 +1,5 @@
 import axios from "axios"
 import { baseURL } from "../../secrets"
-import { useSelector } from "react-redux"
-import { useRefreshToken } from "hooks/index"
-
 
 export const authAxios = axios.create({
     baseURL,

@@ -12,15 +12,15 @@ const Home = () => {
     const { auth, tierListsCount, isLoading } = useSelector(state => ({
         tierListsCount: state.images.tierListsCount,
         auth: state.sign.auth,
-        isLoading: state.images.loading
+        isLoading: state.loading.isLoading
     }))
 
     useEffect(() => {
         dispatch(getTierLists(privateAxios))
     }, [auth])
 
-    const currentItem = isLoading ?
-        <h2 style={{ color: "white " }}>Tierlists cominn...</h2>
+    const currentItem = isLoading
+        ? <h2 style={{ color: "white " }}>Tierlists cominn...</h2>
         : <>
             <TierCard />
             <h1 style={{ color: "white" }}>{tierListsCount}</h1>

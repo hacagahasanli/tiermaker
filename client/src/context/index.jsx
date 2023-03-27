@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { defaultBoards } from 'constants/index';
 
 export const BoardsContext = createContext()
@@ -30,6 +30,16 @@ export const BoardProvider = ({ children }) => {
         );
     }
 
+    useEffect(() => {
+        const urlChangeHandler = () => {
+            localStorage.setItem('boards', JSON.stringify(boards))
+        }
+        window.addEventListener('popstate', urlChangeHandler);
+        return () => {
+            window.removeEventListener('popstate', urlChangeHandler);
+        };
+    }, [window.location.href, boards])
+
     return <BoardsContext.Provider
         value={{
             boards,
@@ -47,7 +57,6 @@ export const BoardProvider = ({ children }) => {
         {children}
     </BoardsContext.Provider>
 }
-
     // const defaultValue = [
     //     {
     //         id: 1,

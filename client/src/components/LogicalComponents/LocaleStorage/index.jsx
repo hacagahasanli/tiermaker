@@ -14,7 +14,7 @@ export const LocaleStorage = ({ children }) => {
         return () => {
             window.removeEventListener('beforeunload', beforeUnloadHandler);
         };
-    }, [boards]);
+    }, [boards, window.location.href]);
 
     return <div>{children}</div>
 }

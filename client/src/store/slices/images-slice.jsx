@@ -8,7 +8,7 @@ const initialState = {
     columnDetail: {},
     tierLists: [],
     tierListsCount: 0,
-    loading: false,
+    cachedBoardId: ""
 }
 
 const ImagesSlice = createSlice({
@@ -33,12 +33,14 @@ const ImagesSlice = createSlice({
             state.tierLists = [...data?.allFiles]
             state.tierListsCount = data?.totalCount
         },
-        setLoading: (state, action) => {
-            state.loading = action.payload
+        setCachedBoardId: (state, action) => {
+            const boardId = action.payload
+            state.cachedBoardId = boardId
+            localStorage.setItem("cachedId", JSON.stringify(boardId))
         }
     }
 })
 
 
 export const imagesReducer = ImagesSlice.reducer
-export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists } = ImagesSlice.actions 
+export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists, setCachedBoardId } = ImagesSlice.actions 

@@ -1,27 +1,38 @@
 import { defaultBoards } from "constants/index"
 import { BoardsContext } from "context/index"
 import { useContext } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { setCachedBoardId } from "store/slices/images-slice"
 import styled from "styled-components"
 
 export const TierCard = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const { setBoards } = useContext(BoardsContext)
     const { tierLists } = useSelector(state => state.images)
 
-    const tierBoardNavigator = (tierlistImages) => {
-        setBoards(defaultBoards?.map((item) => {
-            if (item.id === 8) return { ...item, items: [...tierlistImages] }
-            return item
-        }))
+    const tierBoardNavigator = (tierlistImages, id) => {
+        const cachedId = localStorage.getItem("cachedId")
+
+        if (JSON.parse(cachedId) === id) {
+            const boards = localStorage.getItem('boards')
+            setBoards(JSON.parse(boards)?.map(item => item))
+        } else {
+            dispatch(setCachedBoardId(id))
+            setBoards(defaultBoards?.map((item) => {
+                if (item.id === 8) return { ...item, items: [...tierlistImages] }
+                return { ...item, items: [] }
+            }))
+        }
         navigate('/tierboard')
     }
+
 
     return <CardWrapper>
         {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) =>
             <CardContainer key={_id}>
-                <img src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages)} />
+                <img src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages, _id)} />
                 <span>{templateName}</span>
             </CardContainer>
         )}

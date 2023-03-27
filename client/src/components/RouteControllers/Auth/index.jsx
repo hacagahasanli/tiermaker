@@ -3,6 +3,7 @@ import { useContext } from "react"
 import { useSelector } from "react-redux"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
 
+
 export const Auth = () => {
     const location = useLocation()
     const { boards } = useContext(BoardsContext)

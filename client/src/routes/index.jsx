@@ -1,14 +1,11 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
+import { Auth, Redirect } from "components/index";
 
-const Home = lazy(() => import("pages/Home"))
-// const TierBoard = lazy(() => import("pages/TierBoard"))
-// const Template = lazy(() => import("pages/Template"))
 import TierBoard from "pages/TierBoard";
 import Template from "pages/Template";
-import { Auth } from "components/Auth";
-// const Auth = lazy(() => import("components/Auth"));
+const Home = lazy(() => import("pages/Home"))
 const Login = lazy(() => import("pages/Login"))
 
 const router = createBrowserRouter([
@@ -28,12 +25,18 @@ const router = createBrowserRouter([
 
     },
     {
-        path: '/login',
-        element: <Login />
+        element: <Redirect />,
+        children: [{
+            path: '/login',
+            element: <Login />
+        }]
     },
     {
-        path: '/register',
-        element: <Login />
+        element: <Redirect />,
+        children: [{
+            path: '/register',
+            element: <Login />
+        }]
     },
     {
         element: <Auth />,

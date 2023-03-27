@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components"
+import Swal from "sweetalert2"
 
 export const GlobalStyle = createGlobalStyle`
  *{
@@ -76,3 +77,9 @@ export const Wrapper = styled.div`
         margin-top: 1rem;
     }
 `
+
+export const SweetAlert = styled(Swal)`
+  & .swal2-popup {
+    top: 30px;
+  }
+`;

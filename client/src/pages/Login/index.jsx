@@ -6,7 +6,6 @@ import { FormValidater } from 'components/Form'
 import { useLocation } from 'react-router-dom'
 
 const Login = () => {
-
     const location = useLocation()
     const pathname = location?.pathname
     let userForm = null
@@ -28,9 +27,7 @@ const Login = () => {
 
     if (pathname === "/login" || pathname === "/register") {
         const { title, initialValues, type, neededInputs } = form[pathname]
-        userForm = <>
-            <FormValidater {...{ initialValues, type, neededInputs, title }} />
-        </>
+        userForm = <FormValidater {...{ initialValues, type, neededInputs, title }} />
     }
 
     return (

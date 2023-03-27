@@ -1,10 +1,9 @@
-import { Palatte } from "components/Palattes"
 import { useContext, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setModalVisible } from "store/slices/images-slice"
 import styled from "styled-components"
 import { colourPalattes } from "constants/index"
-import { Button } from ".."
+import { Button, Palatte } from ".."
 import { close_icon_svg } from "assets/index"
 import { BoardsContext } from "context/index"
 import { v4 } from "uuid"
@@ -124,9 +123,7 @@ export const SettingModal = () => {
                         <h3>Edit Label Text Below:</h3>
                         <textarea name="board_name" id="board_name" cols="30" rows="3" ref={ref}></textarea>
                         <ButtonsContainer>
-                            {
-                                buttons.map(({ id, value, func }) => <Button key={id} {...{ func, value }} isGray />)
-                            }
+                            {buttons.map(({ id, value, func }) => <Button key={id} {...{ func, value }} isGray />)}
                         </ButtonsContainer>
                     </PalatteContainer>
                 </Modal>

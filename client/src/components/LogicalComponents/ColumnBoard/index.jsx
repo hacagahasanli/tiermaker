@@ -56,11 +56,6 @@ const ImageWrapper = styled.div`
     flex-shrink: 1;
     flex-grow: 1;
     background: ${({ diff, theme }) => diff ? "#000000" : theme.colour};
-    /* display: grid;
-    grid-template-columns: repeat(10, minmax(100px, 1fr));
-    grid-template-rows: repeat(auto-fill, 80px);
-    justify-content: start; */
-
 `
 const StyledImage = styled.img`
     height: 80px;

@@ -1,8 +1,9 @@
 import { colourPalattes } from "constants/index"
-import { memo, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { setTheme } from "store/slices/images-slice"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
+import { Palatte } from "../Palatte"
 
 export const Palattes = ({ showPalatte }) => {
     const [active, setActive] = useState()
@@ -19,14 +20,6 @@ export const Palattes = ({ showPalatte }) => {
         </div>
     </Container>
 }
-
-export const Palatte = memo(({ func, active, isBlack, palattes }) => {
-    return <>
-        {Object?.entries(palattes ?? {})?.reverse().map(([key, value]) => (
-            <Colour color={value} borderColor={isBlack} active={active === value} key={key} onClick={() => func(value)}></Colour>
-        ))}
-    </>
-})
 
 const Container = styled.div`
     justify-content: center;
@@ -49,22 +42,4 @@ const Container = styled.div`
         transform:${({ showPalatte }) => showPalatte ? "translateX(232px)" : 'translateX(-200px)'};
         transition:all .8s;
     }
-`
-
-const Colour = styled.span`
-        ${({ borderColor }) => borderColor ?
-        css`
-            width: 30px;
-            height: 30px;
-            border: 2px solid ${({ active }) => active ? "#000000" : "#ffffff"};
-        `
-        : css`   
-            width: ${({ active }) => active ? "25px" : "30px"};
-            height: ${({ active }) => active ? "25px" : "30px"};
-            border: 2px solid #ffffff;
-        ` }
-        
-    border-radius: 50%;
-    background-color: ${({ color }) => color};
-    cursor: pointer;
 `

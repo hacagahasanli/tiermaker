@@ -41,4 +41,4 @@ const ImagesSlice = createSlice({
 
 
 export const imagesReducer = ImagesSlice.reducer
-export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists, setLoading } = ImagesSlice.actions 
+export const { setTheme, setModalVisible, setColumnDetail, setTierLists, getTierLists } = ImagesSlice.actions 

@@ -1,16 +1,16 @@
 import createSagaMiddleware from "@redux-saga/core";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import rootSaga from "./sagas/rootSaga";
-import { imagesReducer, signReducer } from "./slices";
+import { imagesReducer, signReducer, loadingReducer } from "./slices";
 
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = () => combineReducers({
     images: imagesReducer,
-    sign: signReducer
+    sign: signReducer,
+    loading: loadingReducer
 })
-
 
 const store = configureStore({
     reducer: rootReducer(history),

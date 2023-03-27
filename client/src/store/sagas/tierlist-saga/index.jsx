@@ -1,6 +1,7 @@
 import { fetchTierLists } from "api/index";
 import { put, call, takeLatest, fork } from "redux-saga/effects";
-import { getTierLists, setLoading, setTierLists } from "store/slices/images-slice";
+import { getTierLists, setTierLists } from "store/slices/images-slice";
+import { setLoading } from "store/slices/loading";
 import { sweetFire } from "utils/swal";
 
 function* GetAllTierListsAsync({ payload }) {

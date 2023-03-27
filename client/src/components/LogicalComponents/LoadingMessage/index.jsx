@@ -2,17 +2,16 @@ import { loading_img } from "assets/index"
 import styled from "styled-components"
 
 const messagePortal = {
-    auth: "Waiting for Credentials....",
+    auth: "Your authentication credentials....",
 }
 
-export const LoadingMessage = ({ port }) => {
-    return <Message>
-        <h3>{"Waiting for Credentials...."}</h3>
+export const LoadingMessage = ({ port }) => (
+    <Message>
+        <h3>{messagePortal[port] ?? "Waitin..."}</h3>
         <img src={loading_img} loading="lazy" alt="loading_img" />
     </Message>
-}
+)
 
-console.log("");
 const Message = styled.div`
     max-width: 500px;
     margin: 0 auto;

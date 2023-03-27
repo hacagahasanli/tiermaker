@@ -29,6 +29,7 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
         {items?.map((item) => {
             const { id, uri } = item
             return <StyledImage
+                loading="lazy"
                 img={uri}
                 id={id}
                 src={uri}

@@ -1,27 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { registerUser, loginUser } from 'store/slices'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { ErrorBoundary } from '..'
+import { ErrorBoundary, FormFields, LoadingMessage } from '..'
 import { validate } from 'utils/index'
 import Swal from 'sweetalert2'
-import { Form, InputWrapper, Input } from "components/UI/styled-component"
+import { Form, AuthButton } from "components/UI/styled-component"
 import { setIsUserRegistered } from 'store/slices/sign-slice'
 import { pageName, btnText } from 'constants/index'
 
-
 export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
     const { auth, isRegistered } = useSelector(state => state.sign)
+    const { isLoading } = useSelector(state => state.loading)
+
     const [loginClicked, setLoginClicked] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || "/"
-
-    console.log();
 
     const formik = useFormik({
         initialValues,
@@ -61,11 +60,11 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     const error = (message) => <Error>{message}</Error>
 
-    const showError = (name) => {
+    const showError = useCallback((name) => {
         return formik?.touched[name] && formik?.errors[name] ?
             error(formik?.errors[name])
             : null
-    }
+    }, [formik])
 
     const handleReset = () => {
         formik.resetForm()
@@ -104,17 +103,14 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     return (
         <ErrorBoundary>
-            <Title>{title}</Title>
-            <Form midGap="true" onSubmit={formik.handleSubmit} >
-                {inputs?.map(({ id, name, ...rest }) =>
-                    <InputWrapper key={id}>
-                        <Input {...rest} {...{ name }} autoComplete="off" />
-                        {showError(name)}
-                    </InputWrapper>
-                )}
-                <Button type="submit">{type}</Button>
-            </Form>
-            <Button top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</Button>
+            {!isLoading ? <>
+                <Title>{title}</Title>
+                <Form midGap="true" onSubmit={formik.handleSubmit} >
+                    <FormFields {...{ inputs, showError, type }} />
+                </Form>
+                <AuthButton top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</AuthButton>
+            </>
+                : <LoadingMessage port={"auth"} />}
         </ErrorBoundary>
     )
 }
@@ -125,25 +121,6 @@ const Title = styled.span`
     color: #ffffff;
     text-align: center;
     margin-bottom: 2rem;
-`
-
-const Button = styled.button`
-    color: #ffffff;
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 0.6rem 0;
-    width: 100%;
-    background: transparent;
-    border: 1px solid gray;
-    cursor: pointer;
-    transition: all 0.3s;
-    text-transform: capitalize;
-    margin-top: ${({ top }) => top && "1rem"};
-
-    :hover{
-        background: white;
-        color: black;
-    }
 `
 
 const Error = styled.div`

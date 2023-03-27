@@ -6,6 +6,7 @@ export const sweetFire = (text) => {
         title: 'Speechless...',
         text: text ?? 'Something went wrong!',
         showConfirmButton: false,
+        allowOutsideClick: false,
         timer: 2000
     })
 }

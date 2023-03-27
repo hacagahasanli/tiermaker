@@ -83,3 +83,22 @@ export const SweetAlert = styled(Swal)`
     top: 30px;
   }
 `;
+
+export const AuthButton = styled.button`
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 0.6rem 0;
+    width: 100%;
+    background: transparent;
+    border: 1px solid gray;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: capitalize;
+    margin-top: ${({ top }) => top && "1rem"};
+
+    :hover{
+        background: white;
+        color: black;
+    }
+`

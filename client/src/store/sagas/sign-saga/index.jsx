@@ -1,5 +1,6 @@
 import { userRegistration, userLogin } from "api/index";
 import { put, call, fork, takeLatest } from "redux-saga/effects";
+import { setLoading } from "store/slices/loading";
 import { registerUser, loginUser, setAuth, setIsUserRegistered } from "store/slices/sign-slice";
 import { sweetFire } from "utils/swal";
 
@@ -15,9 +16,11 @@ function* RegisterUserAsync({ payload }) {
 
 function* LoginUserAsync({ payload }) {
     try {
+        yield put(setLoading(true))
         const userValues = payload
         const token = yield call(userLogin, userValues)
         yield put(setAuth(token))
+        yield put(setLoading(false))
     } catch (err) {
         yield sweetFire()
     }

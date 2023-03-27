@@ -43,6 +43,7 @@ const CardContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     border: 1px solid #6c6c6c;
+    min-width: 350px;
     max-width: 450px;
     min-height: 400px;
     max-height: 420px;

@@ -22,10 +22,20 @@ const Template = () => {
             templateDescription: '',
             coverPhoto: "",
             tierlistImages: "",
-            imageCreditsUrl: ""
+            // imageCreditsUrl: ""
         },
-        validate: tierListTemplateValidater,
-        onSubmit: values => { dispatch(createTierList({ privateAxios, values })) },
+        // validate: tierListTemplateValidater,
+        onSubmit: values => {
+            const formData = new FormData()
+            console.log(values, "VALUES");
+            Object.entries(values).map(([key, value]) => {
+                key === "tierListImages"
+                    ? Object.entries(value).map(([, value]) => formData.append("tierListImages", value))
+                    : formData.append(key, value)
+                console.log(formData, "FORM DATA");
+                // dispatch(createTierList({ privateAxios, formData }))
+            })
+        },
     });
 
     const inputs = [
@@ -73,15 +83,15 @@ const Template = () => {
             onChange: (e) => formik.setFieldValue("tierlistImages", e.target.files),
             inputType: "input"
         },
-        {
-            id: "imageCreditsUrl",
-            title: "Add a URL for Image Credits:",
-            type: "text",
-            placeholder: "URL of site",
-            value: formik.values.imageCreditsUrl,
-            onChange: formik.handleChange,
-            inputType: "input"
-        },
+        // {
+        //     id: "imageCreditsUrl",
+        //     title: "Add a URL for Image Credits:",
+        //     type: "text",
+        //     placeholder: "URL of site",
+        //     value: formik.values.imageCreditsUrl,
+        //     onChange: formik.handleChange,
+        //     inputType: "input"
+        // },
         {
             id: "selectImageOrientation",
             title: "Image Orientation",
@@ -105,7 +115,7 @@ const Template = () => {
                                 {sendInputByType({ id, title, ...rest })}
                             </InputWrapper>
                         )}
-                        <TButton fullWidth="true" />
+                        <TButton fullWidth="true" type="submit" />
                     </Form>
                 </ErrorBoundary>
             </Container>

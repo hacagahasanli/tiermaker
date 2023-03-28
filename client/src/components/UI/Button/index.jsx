@@ -5,7 +5,7 @@ export const MainButton = memo(({ value, func }) => <MButton onClick={func}>{val
 
 export const Button = memo(({ value, func, isGray }) => <SButton {...{ isGray }} onClick={func}>{value}</SButton>)
 
-export const TButton = (({ value = "Make", func, fullWidth }) => <TemplateButton {...{ fullWidth }} onClick={func}>{`${value} a Template`}</TemplateButton>)
+export const TButton = (({ value = "Make", func, fullWidth, type = "button" }) => <TemplateButton {...{ fullWidth, type }} onClick={func}>{`${value} a Template`}</TemplateButton>)
 
 
 const sameStyles = css`

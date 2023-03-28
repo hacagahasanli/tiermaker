@@ -89,7 +89,8 @@ export const colourPalattes = {
 export const pageName = {
     '/tierboard': "Tierboard",
     '/': "Home",
-    '/login': "Login"
+    '/login': "Login",
+    "/make-a-template": "Make a Template"
 }
 
 export const btnText = {

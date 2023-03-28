@@ -21,6 +21,7 @@ function* GetAllTierListsAsync({ payload }) {
 
 function* AddTierlistAsync({ payload }) {
     try {
+        console.log(payload, "PAYLOAD");
         yield call(addTierListTemplate, payload)
     } catch (err) {
         yield Swal.fire(sweetFire({ type: "error", text: "Tierlist was not created !" }))

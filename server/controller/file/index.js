@@ -7,6 +7,8 @@ config()
 class File {
     async create(req, res) {
         try {
+            console.log(req.body);
+            console.log(req.files);
             const { templateName, templateDescription, selectImageOrientation, selectCategory } = req.body
             const { coverPhoto, tierlistImages } = req.files
 

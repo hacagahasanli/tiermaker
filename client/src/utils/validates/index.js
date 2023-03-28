@@ -3,7 +3,8 @@ const errorMessage = {
     emptyUsername: 'Okay , Set your username!',
     notMatchFields: "Speechless , Passwords did not match !",
     incorrect_short: 'Password must be at least 4 characters long !',
-    iccorrect_long: 'Password must be less than 17 !'
+    iccorrect_long: 'Password must be less than 17 !',
+    noCoverPhoto: ""
 }
 
 
@@ -27,3 +28,18 @@ export const authValidate = (values) => {
 
     return errors;
 };
+
+export const tierListTemplateValidater = (values) => {
+    const errors = {}
+    const {
+        templateName,
+        selectCategory,
+        selectImageOrientation,
+        templateDescription,
+        coverPhoto,
+        tierlistImages,
+        imageCreditsUrl
+    } = values
+
+    return
+}

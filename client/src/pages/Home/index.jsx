@@ -9,10 +9,8 @@ const Home = () => {
     const privateAxios = useAxiosPrivate()
     const dispatch = useDispatch()
 
-    const { auth, isLoading, tierListsCount, tierLists } = useSelector(state => ({
-        auth: state.sign.auth,
+    const { isLoading, tierLists } = useSelector(state => ({
         isLoading: state.loading.isLoading,
-        tierListsCount: state.images.tierListsCount,
         tierLists: state.images.tierLists,
     }))
 

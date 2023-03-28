@@ -27,8 +27,8 @@ export const userLogin = async (values) => {
     return response
 }
 
-export const addTierListTemplate = async ({ axiosPrivate, values }) => {
-    const response = await axiosPrivate.post('/files/add-tier-list', { ...values }, {
+export const addTierListTemplate = async ({ privateAxios, formData }) => {
+    const response = await privateAxios.post('/files/add-tier-list', formData, {
         model: "add-tier-list"
     })
     return response

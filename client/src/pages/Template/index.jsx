@@ -37,7 +37,6 @@ const Template = () => {
     });
 
 
-    console.log("CHECK");
     const inputs = [
         {
             id: "templateName",

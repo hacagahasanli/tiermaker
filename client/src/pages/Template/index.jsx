@@ -27,17 +27,17 @@ const Template = () => {
         // validate: tierListTemplateValidater,
         onSubmit: values => {
             const formData = new FormData()
-            console.log(values, "VALUES");
             Object.entries(values).map(([key, value]) => {
                 key === "tierListImages"
                     ? Object.entries(value).map(([, value]) => formData.append("tierListImages", value))
                     : formData.append(key, value)
-                console.log(formData, "FORM DATA");
                 // dispatch(createTierList({ privateAxios, formData }))
             })
         },
     });
 
+
+    console.log("CHECK");
     const inputs = [
         {
             id: "templateName",

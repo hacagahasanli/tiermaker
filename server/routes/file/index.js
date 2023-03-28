@@ -10,6 +10,8 @@ const storage = multer.diskStorage({
         cb(null, `uploads/`)
     },
     filename: function (req, file, cb) {
+        console.log(file.originalname, "FILE ORIGINALNAME");
+        console.log(file.fieldname, "FILE FIELDNAME");
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
@@ -22,6 +24,8 @@ const tierImagesUpload = upload.fields([
     { name: 'coverPhoto', maxCount: 1 },
     { name: 'tierlistImages', maxCount: 22 },
 ])
+
+console.log(tierImagesUpload, "TIER IMAGES UPLOAD");
 
 router.post('/add-tier-list', tierImagesUpload, FileController.create)
 router.get('/get-all-tierlists', FileController.getFiles)

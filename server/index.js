@@ -35,7 +35,8 @@ const start = async () => {
         app.listen(process.env.PORT, () => console.log("everythin is okay"))
         await mongoose.connect(DB_URL, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 30000,
         })
     } catch (err) {
         console.log("Something went wrong during starting app")

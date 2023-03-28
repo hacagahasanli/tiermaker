@@ -33,7 +33,8 @@ class Auth {
             if (!username || !password)
                 return response(res, 400, { message: 'Username and password are required.' })
 
-            const user = await UserSchema.findOne({ username }).exec()
+            const user = await UserSchema.findOne({ name: 'John' }).timeout(10000).exec()
+
             if (!user)
                 return response(res, 401)
 
@@ -62,9 +63,14 @@ class Auth {
                 res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, sameSite: "None" })
                 return res.json({ accessToken })
             }
-        } catch (err) {
+        } catch (error) {
             response(res, 404)
-            console.log(err);
+            if (error.name === 'MongooseTimeoutError') {
+                console.error('Query timed out:', error);
+            } else {
+                console.error('Query error:', error);
+            }
+            console.log(error);
         }
 
     }

@@ -25,8 +25,6 @@ const tierImagesUpload = upload.fields([
     { name: 'tierlistImages', maxCount: 22 },
 ])
 
-console.log(tierImagesUpload, "TIER IMAGES UPLOAD");
-
 router.post('/add-tier-list', tierImagesUpload, FileController.create)
 router.get('/get-all-tierlists', FileController.getFiles)
 

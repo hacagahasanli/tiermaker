@@ -32,7 +32,7 @@ export const TierCard = () => {
     return <CardWrapper>
         {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) =>
             <CardContainer key={_id}>
-                <img src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages, _id)} />
+                <Image src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages, _id)} />
                 <span>{templateName}</span>
             </CardContainer>
         )}
@@ -41,11 +41,18 @@ export const TierCard = () => {
 
 const CardWrapper = styled.article`
     display: grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
     place-items: center;
     width: 100%;
     gap:2rem;
     margin-bottom: 2rem;
+`
+
+const Image = styled.img`
+    max-width: 100%;
+    border-radius: .2rem;
+    object-fit: contain;
+    transition: transform .3s ease-in;
 `
 
 const CardContainer = styled.div`
@@ -54,28 +61,27 @@ const CardContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     border: 1px solid #6c6c6c;
-    min-width: 350px;
-    max-width: 450px;
-    min-height: 400px;
+    width: 100%;
+    min-height: 300px;
     max-height: 420px;
     color: white;
     text-align: center;
     cursor: pointer;
-    transition:opacity 0.6s;
+    overflow: hidden;
     border-radius: 5px;
-    padding: 2rem 0;
+    padding: 1.2rem;
+    transition: all .8s;
+
+    :hover ${Image}{
+        transform: scale(1.1);
+    }
 
     :hover{
-        opacity: 0.7;
+        border: 1px solid #ffffff;
     }
 
-    img{
-        max-width: 90%;
-        border-radius: .2rem;
-        object-fit: contain;
-    }
-    
     span{
         font-size: 1.2rem;
     }
 `
+

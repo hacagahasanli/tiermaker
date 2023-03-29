@@ -37,8 +37,9 @@ class Auth {
 
             if (!user)
                 return response(res, 401)
-            console.log(username, password, "USERNAME PASSWORD");
+
             const isPasswordValid = bcrypt.compareSync(password, user.password)
+
             if (!isPasswordValid)
                 return response(res, 400, 'pass')
 

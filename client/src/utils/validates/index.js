@@ -1,36 +1,47 @@
+import { checkFieldCorrectnessRgx } from "utils/regex";
+
 const errorMessage = {
     emptyPass: 'Are u okay ? Set your password!',
     emptyUsername: 'Okay , Set your username!',
     notMatchFields: "Speechless , Passwords did not match !",
     incorrect_short: 'Password must be at least 4 characters long !',
     iccorrect_long: 'Password must be less than 17 !',
+    onlyCanBeUsed: 'Only letters, numbers, ., and ? is allowed',
     noCoverPhoto: ""
 }
 
-
 export const authValidate = (values) => {
-    const errors = {};
+    const authErrors = {};
     const { password, repeatedPassword, username } = values
+
+    const helperAuth = (fieldValue, fieldName) => {
+        !checkFieldCorrectnessRgx(fieldValue)
+            ? authErrors[fieldName] = errorMessage.onlyCanBeUsed
+            : null
+    }
+
     if (!password)
-        errors.password = errorMessage.emptyPass;
+        authErrors.password = errorMessage.emptyPass;
+    else helperAuth(password, "password")
 
     if (!username)
-        errors.username = errorMessage.username;
+        authErrors.username = errorMessage.username;
+    else helperAuth(username, "username")
 
     if (repeatedPassword !== undefined && repeatedPassword !== password)
-        errors.repeatedPassword = errorMessage.notMatchFields
+        authErrors.repeatedPassword = errorMessage.notMatchFields
 
     if (password?.length && password.length < 4)
-        errors.password = errorMessage.incorrect_short;
+        authErrors.password = errorMessage.incorrect_short;
 
     if (password?.length > 17)
-        errors.password = errorMessage.iccorrect_long
+        authErrors.password = errorMessage.iccorrect_long
 
-    return errors;
+    return authErrors;
 };
 
 export const tierListTemplateValidater = (values) => {
-    const errors = {}
+    const temaplateErrors = {}
     const {
         templateName,
         selectCategory,

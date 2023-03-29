@@ -11,7 +11,7 @@ function* RegisterUserAsync({ payload }) {
         yield call(userRegistration, userValues)
         yield put(setIsUserRegistered(true))
     } catch (err) {
-        yield Swal.fire(sweetFire({ text: `User with username ${payload?.username} has already exist` }))
+        yield Swal.fire(sweetFire({ type: "error", text: `User with username ${payload?.username} has already exist` }))
     }
 }
 

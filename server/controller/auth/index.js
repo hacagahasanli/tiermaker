@@ -11,7 +11,7 @@ class Auth {
     async registration(req, res) {
         try {
             const { username, password } = req.body
-            console.log(username, password);
+
             const candidate = await UserSchema.findOne({ username })
             if (candidate)
                 return response(res, 400, "user", { username })
@@ -33,11 +33,11 @@ class Auth {
             if (!username || !password)
                 return response(res, 400, { message: 'Username and password are required.' })
 
-            const user = await UserSchema.findOne({ name: 'John' }).timeout(10000).exec()
+            const user = await UserSchema.findOne({ username }).maxTimeMS(10000).exec()
 
             if (!user)
                 return response(res, 401)
-
+            console.log(username, password, "USERNAME PASSWORD");
             const isPasswordValid = bcrypt.compareSync(password, user.password)
             if (!isPasswordValid)
                 return response(res, 400, 'pass')

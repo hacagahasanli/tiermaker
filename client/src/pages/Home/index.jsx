@@ -15,9 +15,7 @@ const Home = () => {
     }))
 
     useEffect(() => {
-        if (tierLists?.length === 0) {
-            dispatch(getTierLists(privateAxios))
-        }
+        tierLists?.length === 0 && dispatch(getTierLists(privateAxios))
     }, [])
 
     const currentItem = isLoading

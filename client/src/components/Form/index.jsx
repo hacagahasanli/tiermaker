@@ -98,16 +98,19 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     const inputs = allInputs.filter(({ id }) => neededInputs.includes(id))
 
+    const currentComponent = !isLoading
+        ? <>
+            <Title>{title}</Title>
+            <Form midGap="true" onSubmit={formik.handleSubmit} >
+                <FormFields {...{ inputs, showError, type }} />
+            </Form>
+            <AuthButton top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</AuthButton>
+        </>
+        : <LoadingMessage port={"auth"} />
+
     return (
         <ErrorBoundary>
-            {!isLoading ? <>
-                <Title>{title}</Title>
-                <Form midGap="true" onSubmit={formik.handleSubmit} >
-                    <FormFields {...{ inputs, showError, type }} />
-                </Form>
-                <AuthButton top="true" type="button" onClick={handleReset}>{btnText[type]?.text}</AuthButton>
-            </>
-                : <LoadingMessage port={"auth"} />}
+            {currentComponent}
         </ErrorBoundary>
     )
 }

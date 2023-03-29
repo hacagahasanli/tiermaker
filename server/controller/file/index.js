@@ -11,9 +11,6 @@ class File {
             const { templateName, templateDescription, selectImageOrientation, selectCategory } = req.body
             const { tierlistImages, coverPhoto } = req.files
 
-            console.log(tierlistImages, "TIERLIST IMAGES");
-            console.log(coverPhoto, "COVER PHOTO");
-
             const coverPhotoPath = process.env.IMAGE_SUB_URL + coverPhoto[0]?.path.split('\\')[1]
 
             const tierListPaths = tierlistImages?.map(({ path }) => {
@@ -40,12 +37,14 @@ class File {
         }
     }
     async getFiles(req, res) {
-        const pageSize = 18;
+        const pageSize = 29;
         const currentPage = req.query.page || 1;
+        const sortType = req.query.sort ?? 'desc'
 
         FileSchema.countDocuments()
             .then(totalCount => {
                 FileSchema.find()
+                    .sort({ createdAt: sortType })
                     .skip((pageSize * currentPage) - pageSize)
                     .limit(pageSize)
                     .then(allFiles => {

@@ -50,6 +50,9 @@ const CardWrapper = styled.article`
 
 const Image = styled.img`
     max-width: 100%;
+    min-height: 100%;
+    min-height: 200px;
+    object-fit: cover;
     border-radius: .2rem;
     object-fit: contain;
     transition: transform .3s ease-in;

@@ -18,7 +18,7 @@ function* RegisterUserAsync({ payload }) {
 function* LoginUserAsync({ payload }) {
     try {
         const userValues = payload
-        put(setLoading(true))
+        yield put(setLoading(true))
         const token = yield call(userLogin, userValues)
         yield put(setAuth(token))
         yield put(setLoading(false))

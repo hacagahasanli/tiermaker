@@ -8,7 +8,7 @@ const messagePortal = {
 export const LoadingMessage = ({ port }) => (
     <Message>
         <h3>{messagePortal[port] ?? "Waitin..."}</h3>
-        <img src={loading_img} loading="lazy" alt="loading_img" />
+        <img src={loading_img} alt="loading_img" />
     </Message>
 )
 

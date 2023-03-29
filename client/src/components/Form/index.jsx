@@ -98,6 +98,8 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     const inputs = allInputs.filter(({ id }) => neededInputs.includes(id))
 
+    console.log(isLoading, "isLoading");
+
     const currentComponent = !isLoading
         ? <>
             <Title>{title}</Title>

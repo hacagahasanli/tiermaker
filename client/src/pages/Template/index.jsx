@@ -29,9 +29,9 @@ const Template = () => {
             console.log();
             const formData = new FormData()
             Object.entries(values).map(([key, value]) => {
-                if (key === "tierlistImages") {
-                    Object.entries(value).map(([, file]) => formData.append("tierlistImages", file))
-                } else formData.append(key, value)
+                if (key === "tierlistImages")
+                    Object.entries(value).forEach(([, file]) => formData.append("tierlistImages", file))
+                else formData.append(key, value)
             })
             dispatch(createTierList({ privateAxios, formData }))
         },

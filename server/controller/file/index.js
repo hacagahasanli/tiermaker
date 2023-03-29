@@ -9,7 +9,7 @@ class File {
         try {
             console.log(req.body);
             const { templateName, templateDescription, selectImageOrientation, selectCategory } = req.body
-            const { tierlistImages, coverPhoto } = req.file
+            const { tierlistImages, coverPhoto } = req.files
 
             console.log(tierlistImages, "TIERLIST IMAGES");
             console.log(coverPhoto, "COVER PHOTO");

@@ -32,7 +32,6 @@ export const addTierListTemplate = async ({ privateAxios, formData }) => {
         headers: {
             'Content-Type': 'multipart/form-data'
         },
-        model: "add-tier-list"
     })
     return response
 }

@@ -1,6 +1,6 @@
 import { fetchTierLists, addTierListTemplate } from "api/index";
 import { put, call, takeLatest, fork } from "redux-saga/effects";
-import { createTierList, getTierLists, setTierLists } from "store/slices/images-slice";
+import { createTierList, getTierLists, setTierLists } from "store/slices/images";
 import { setLoading } from "store/slices/loading";
 import { sweetFire } from "utils/swal";
 import Swal from "sweetalert2";
@@ -22,7 +22,7 @@ function* GetAllTierListsAsync({ payload }) {
 function* AddTierlistAsync({ payload }) {
     try {
         yield call(addTierListTemplate, payload)
-        yield Swal.fire(sweetFire({ type: "success", text: "You successfully create a tierlist template!" }))
+        yield Swal.fire(sweetFire({ type: "success", text: "Tierboards", title: "You made it!" }))
     } catch (err) {
         yield Swal.fire(sweetFire({ type: "error", text: "Tierlist was not created !" }))
     }

@@ -2,7 +2,7 @@ import { privateAxios, refresh } from "api/index";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { setAuth } from "store/slices/sign-slice";
+import { setAuth } from "store/slices/sign";
 
 const useAxiosPrivate = () => {
     const { auth } = useSelector(state => state.sign)

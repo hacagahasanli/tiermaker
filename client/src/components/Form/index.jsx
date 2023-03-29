@@ -8,7 +8,7 @@ import { ErrorBoundary, FormFields, LoadingMessage } from '..'
 import { authValidate } from 'utils/index'
 import Swal from 'sweetalert2'
 import { Form, AuthButton } from "components/UI/styled-component"
-import { setIsUserRegistered } from 'store/slices/sign-slice'
+import { setIsUserRegistered } from 'store/slices/sign'
 import { pageName, btnText } from 'constants/index'
 import { sweetFire } from 'utils/swal'
 import { useAuthValid } from 'hooks/index'

@@ -10,7 +10,7 @@ export const sweetFire = ({ text, time, type }) => {
         },
         success: {
             icon: 'success',
-            title: 'You are a professor!',
+            title: `${title ?? "You are a professor!"}`,
             text: `redirecting to ${text ?? "prev page"}`,
             showConfirmButton: false,
             allowOutsideClick: false,

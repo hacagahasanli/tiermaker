@@ -2,7 +2,7 @@ import { arrow_svg, settings_svg } from "assets/index"
 import { BoardsContext } from "context/index"
 import { memo, useContext } from "react"
 import { useDispatch } from "react-redux"
-import { setColumnDetail, setModalVisible } from "store/slices/images-slice"
+import { setColumnDetail, setModalVisible } from "store/slices/images"
 import styled from "styled-components"
 
 export const Settings = memo(({ board }) => {

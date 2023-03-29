@@ -1,6 +1,6 @@
 import { memo, useContext, useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setModalVisible } from "store/slices/images-slice"
+import { setModalVisible } from "store/slices/images"
 import styled from "styled-components"
 import { colourPalattes } from "constants/index"
 import { Button, Palatte } from ".."

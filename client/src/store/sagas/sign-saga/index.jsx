@@ -1,7 +1,7 @@
 import { userRegistration, userLogin } from "api/index";
 import { put, call, fork, takeLatest } from "redux-saga/effects";
 import { setLoading } from "store/slices/loading";
-import { registerUser, loginUser, setAuth, setIsUserRegistered } from "store/slices/sign-slice";
+import { registerUser, loginUser, setAuth, setIsUserRegistered } from "store/slices/sign";
 import { sweetFire } from "utils/swal";
 import Swal from "sweetalert2";
 

@@ -3,7 +3,7 @@ import { Header, ErrorBoundary, TierCard, LoadMore } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from 'hooks/useAxiosPrivate'
-import { getTierLists } from 'store/slices/images-slice';
+import { getTierLists } from 'store/slices/images';
 
 const Home = () => {
     const privateAxios = useAxiosPrivate()

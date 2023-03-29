@@ -3,7 +3,7 @@ import { BoardsContext } from "context/index"
 import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { setCachedBoardId } from "store/slices/images-slice"
+import { setCachedBoardId } from "store/slices/images"
 import styled from "styled-components"
 
 export const TierCard = () => {

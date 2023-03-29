@@ -7,7 +7,7 @@ import { useSendInputByType } from "hooks/index"
 import { categoriesOptions, imageOrientations } from "constants/index"
 import useAxiosPrivate from "hooks/useAxiosPrivate"
 import { useDispatch } from "react-redux"
-import { createTierList } from "store/slices/images-slice"
+import { createTierList } from "store/slices/images"
 
 const Template = () => {
     const { sendInputByType } = useSendInputByType()
@@ -26,12 +26,11 @@ const Template = () => {
         },
         // validate: tierListTemplateValidater,
         onSubmit: values => {
-            console.log();
             const formData = new FormData()
             Object.entries(values).map(([key, value]) => {
-                if (key === "tierlistImages")
-                    Object.entries(value).forEach(([, file]) => formData.append("tierlistImages", file))
-                else formData.append(key, value)
+                key === "tierlistImages"
+                    ? Object.entries(value).forEach(([, file]) => formData.append("tierlistImages", file))
+                    : formData.append(key, value)
             })
             dispatch(createTierList({ privateAxios, formData }))
         },

@@ -1,7 +1,7 @@
 import { colourPalattes } from "constants/index"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { setTheme } from "store/slices/images-slice"
+import { setTheme } from "store/slices/images"
 import styled from "styled-components"
 import { Palatte } from "../Palatte"
 

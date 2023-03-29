@@ -26,16 +26,16 @@ const Template = () => {
         },
         // validate: tierListTemplateValidater,
         onSubmit: values => {
+            console.log();
             const formData = new FormData()
             Object.entries(values).map(([key, value]) => {
-                key === "tierListImages"
-                    ? Object.entries(value).map(([, value]) => formData.append("tierListImages", value))
-                    : formData.append(key, value)
-                // dispatch(createTierList({ privateAxios, formData }))
+                if (key === "tierlistImages") {
+                    Object.entries(value).map(([, file]) => formData.append("tierlistImages", file))
+                } else formData.append(key, value)
             })
+            dispatch(createTierList({ privateAxios, formData }))
         },
     });
-
 
     const inputs = [
         {

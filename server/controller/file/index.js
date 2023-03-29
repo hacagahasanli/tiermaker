@@ -8,9 +8,11 @@ class File {
     async create(req, res) {
         try {
             console.log(req.body);
-            const { templateName, templateDescription, selectImageOrientation, selectCategory, tierlistImages, coverPhoto } = req.body
-            console.log(tierlistImages);
-            console.log(coverPhoto);
+            const { templateName, templateDescription, selectImageOrientation, selectCategory } = req.body
+            const { tierlistImages, coverPhoto } = req.file
+
+            console.log(tierlistImages, "TIERLIST IMAGES");
+            console.log(coverPhoto, "COVER PHOTO");
 
             const coverPhotoPath = process.env.IMAGE_SUB_URL + coverPhoto[0]?.path.split('\\')[1]
 

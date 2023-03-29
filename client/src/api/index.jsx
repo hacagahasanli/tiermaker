@@ -29,6 +29,9 @@ export const userLogin = async (values) => {
 
 export const addTierListTemplate = async ({ privateAxios, formData }) => {
     const response = await privateAxios.post('/files/add-tier-list', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
         model: "add-tier-list"
     })
     return response

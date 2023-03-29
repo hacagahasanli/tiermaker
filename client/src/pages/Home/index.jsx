@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { Header, ErrorBoundary, TierCard, LoadMore } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from 'hooks/useAxiosPrivate'
-import { getTierLists } from 'store/slices/images';
+import { getTierLists, setIsTemplateCreated } from 'store/slices/images';
 
 const Home = () => {
     const privateAxios = useAxiosPrivate()
@@ -15,7 +15,7 @@ const Home = () => {
     }))
 
     useEffect(() => {
-        tierLists?.length === 0 && dispatch(getTierLists(privateAxios))
+        tierLists?.length < 2 && dispatch(getTierLists(privateAxios))
     }, [])
 
     const currentItem = isLoading

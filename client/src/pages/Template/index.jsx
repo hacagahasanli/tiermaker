@@ -6,13 +6,16 @@ import { Form, InputWrapper, Label, Wrapper } from "components/UI/styled-compone
 import { useSendInputByType } from "hooks/index"
 import { categoriesOptions, imageOrientations } from "constants/index"
 import useAxiosPrivate from "hooks/useAxiosPrivate"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { createTierList } from "store/slices/images"
+import { useNavigate } from "react-router-dom"
 
 const Template = () => {
     const { sendInputByType } = useSendInputByType()
+
     const dispatch = useDispatch()
     const privateAxios = useAxiosPrivate()
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -32,7 +35,8 @@ const Template = () => {
                     ? Object.entries(value).forEach(([, file]) => formData.append("tierlistImages", file))
                     : formData.append(key, value)
             })
-            dispatch(createTierList({ privateAxios, formData }))
+            console.log("BURDAYAM,");
+            dispatch(createTierList({ privateAxios, formData, navigate }))
         },
     });
 

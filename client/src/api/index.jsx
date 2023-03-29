@@ -33,7 +33,7 @@ export const addTierListTemplate = async ({ privateAxios, formData }) => {
             'Content-Type': 'multipart/form-data'
         },
     })
-    return response
+    return response.data
 }
 
 const resInterceptor = authAxios.interceptors.response.use(

@@ -1,4 +1,4 @@
-export const sweetFire = ({ text, time, type }) => {
+export const sweetFire = ({ text, time, type, title }) => {
     const sweetPopups = {
         error: {
             icon: 'error',

@@ -9,6 +9,7 @@ const initialState = {
     tierLists: [],
     tierListsCount: 0,
     cachedBoardId: "",
+    templateCreated: false
 }
 
 const ImagesSlice = createSlice({
@@ -38,7 +39,15 @@ const ImagesSlice = createSlice({
             state.cachedBoardId = boardId
             localStorage.setItem("cachedId", JSON.stringify(boardId))
         },
-        createTierList: (payload) => payload
+        createTierList: (payload) => payload,
+        setCreatedTemplate: (state, action) => {
+            const createdTemplate = action.payload;
+            const prevTierLists = [...state.tierLists]
+            state.tierLists = [createdTemplate, ...prevTierLists]
+            state.templateCreated = true
+        },
+        setIsTemplateCreated: (state, action) => state.templateCreated = false
+
     }
 })
 
@@ -50,5 +59,7 @@ export const {
     setTierLists,
     getTierLists,
     setCachedBoardId,
-    createTierList
+    createTierList,
+    setCreatedTemplate,
+    setIsTemplateCreated
 } = ImagesSlice.actions 

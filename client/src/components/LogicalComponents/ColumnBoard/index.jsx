@@ -64,5 +64,5 @@ const StyledImage = styled.img`
     padding: 0;
     background: #eeeeee;
     background-image: url(${({ uri }) => uri});
-    background-size: cover;
+    background-size:contain;
 `

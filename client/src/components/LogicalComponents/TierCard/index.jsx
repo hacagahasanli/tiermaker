@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setCachedBoardId } from "store/slices/images"
 import styled from "styled-components"
+import { v4 } from "uuid"
 
 export const TierCard = () => {
     const navigate = useNavigate()
@@ -31,7 +32,7 @@ export const TierCard = () => {
 
     return <CardWrapper>
         {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) =>
-            <CardContainer key={_id}>
+            <CardContainer key={`${_id}${v4()}`}>
                 <Image src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages, _id)} />
                 <span>{templateName}</span>
             </CardContainer>
@@ -50,8 +51,7 @@ const CardWrapper = styled.article`
 
 const Image = styled.img`
     max-width: 100%;
-    min-height: 100%;
-    min-height: 200px;
+    height: 250px;
     object-fit: cover;
     border-radius: .2rem;
     object-fit: contain;
@@ -65,8 +65,7 @@ const CardContainer = styled.div`
     align-items: center;
     border: 1px solid #6c6c6c;
     width: 100%;
-    min-height: 300px;
-    max-height: 420px;
+    height: 350px;
     color: white;
     text-align: center;
     cursor: pointer;

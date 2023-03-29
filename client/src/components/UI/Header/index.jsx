@@ -11,7 +11,7 @@ export const Header = memo(() => {
     const navigateToMakeTemplate = () =>
         navigate('/make-a-template')
 
-    return <LogoHeader>
+    return <LogoHeader tabIndex={-1}>
         <LogoContainer>
             <img src={tier_maker} alt="tier_maker" />
         </LogoContainer>

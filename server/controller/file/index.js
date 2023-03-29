@@ -39,7 +39,7 @@ class File {
     async getFiles(req, res) {
         const pageSize = 29;
         const currentPage = req.query.page || 1;
-        const sortType = req.query.sort ?? 'desc'
+        const sortType = req.query.page ?? 'desc'
 
         FileSchema.countDocuments()
             .then(totalCount => {

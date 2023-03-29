@@ -8,6 +8,7 @@ const FileSchema = new Schema({
     templateDescription: { type: String, required: true },
     selectImageOrientation: { type: String, required: true },
     selectCategory: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 

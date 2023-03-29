@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 export const LoadMore = () => {
-    const dispatch = useDispatch()
     const { tierListsCount, tierLists } = useSelector(state => state.images)
     const text = tierListsCount === tierLists.length ? "No more tierlists" : "Load More"
 

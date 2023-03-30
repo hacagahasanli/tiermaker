@@ -4,6 +4,7 @@ export { TierTitle } from "./UI/TierTitle";
 export { Footer } from "./UI/Footer";
 export { Header } from "./UI/Header";
 export { Button, MainButton, TButton } from "./UI/Button";
+export { ErrorBoundaryMessage } from "./UI/ErrorBoundaryMessage";
 
 //Route Controllers
 export { Auth } from "./RouteControllers/Auth";

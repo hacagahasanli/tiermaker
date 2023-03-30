@@ -6,7 +6,7 @@ import { Form, InputWrapper, Label, Wrapper } from "components/UI/styled-compone
 import { useSendInputByType } from "hooks/index"
 import { categoriesOptions, imageOrientations } from "constants/index"
 import useAxiosPrivate from "hooks/useAxiosPrivate"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { createTierList } from "store/slices/images"
 import { useNavigate } from "react-router-dom"
 
@@ -35,7 +35,6 @@ const Template = () => {
                     ? Object.entries(value).forEach(([, file]) => formData.append("tierlistImages", file))
                     : formData.append(key, value)
             })
-            console.log("BURDAYAM,");
             dispatch(createTierList({ privateAxios, formData, navigate }))
         },
     });

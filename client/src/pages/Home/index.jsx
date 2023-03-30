@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Header, ErrorBoundary, TierCard, LoadMore, LoadingMessage } from 'components/index';
+import { Header, ErrorBoundary, TierCard, LoadMore, LoadingMessage, AnimatedPage } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from 'hooks/useAxiosPrivate'
@@ -26,12 +26,14 @@ const Home = () => {
         </>
 
     return (
-        <Wrapper>
-            <ErrorBoundary>
-                <Header />
-                {currentItem}
-            </ErrorBoundary>
-        </Wrapper>
+        <AnimatedPage>
+            <Wrapper>
+                <ErrorBoundary>
+                    <Header />
+                    {currentItem}
+                </ErrorBoundary>
+            </Wrapper>
+        </AnimatedPage>
     )
 }
 

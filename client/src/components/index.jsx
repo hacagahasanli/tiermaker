@@ -20,8 +20,9 @@ export { ErrorBoundary } from "./LogicalComponents/ErrorBoundary";
 export { TierCard } from "./LogicalComponents/TierCard";
 export { Palatte } from "./LogicalComponents/Palatte";
 export { LoadMore } from "./LogicalComponents/LoadMore";
+export { FormFields } from "./LogicalComponents/FormFields";
 
 //Components
-export { FormFields } from "./LogicalComponents/FormFields";
 export { SettingModal } from "./Modal";
+export { AnimatedPage } from "./AnimatedPage";
 

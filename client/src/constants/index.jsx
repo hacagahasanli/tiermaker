@@ -140,3 +140,18 @@ export const imageOrientations = [
         value: "Circle"
     },
 ]
+
+export const formFields = {
+    "/login": {
+        title: "Waitin you!",
+        initialValues: { username: "", password: "" },
+        type: "login",
+        neededInputs: ["username", "password"]
+    },
+    "/register": {
+        title: "Register",
+        initialValues: { username: "", password: "", repeatedPassword: "" },
+        type: "register",
+        neededInputs: ["username", "password", "repeatedPassword"]
+    }
+}

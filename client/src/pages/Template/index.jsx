@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import React from "react"
 import styled from "styled-components"
-import { ErrorBoundary, Header, LocaleStorage, TButton, TemplateTitle } from "components/index"
+import { AnimatedPage, ErrorBoundary, Header, LocaleStorage, TButton, TemplateTitle } from "components/index"
 import { Form, InputWrapper, Label, Wrapper } from "components/UI/styled-component"
 import { useSendInputByType } from "hooks/index"
 import { categoriesOptions, imageOrientations } from "constants/index"
@@ -9,6 +9,7 @@ import useAxiosPrivate from "hooks/useAxiosPrivate"
 import { useDispatch } from "react-redux"
 import { createTierList } from "store/slices/images"
 import { useNavigate } from "react-router-dom"
+import { tierListTemplateValidater } from "utils/validates"
 
 const Template = () => {
     const { sendInputByType } = useSendInputByType()
@@ -17,10 +18,10 @@ const Template = () => {
     const privateAxios = useAxiosPrivate()
     const navigate = useNavigate()
 
-    if (localStorage.getItem('createdTemplate')) {
-        navigate(-1)
-        localStorage.removeItem('createdTemplate')
-    }
+    // if (localStorage.getItem('createdTemplate')) {
+    //     navigate(-1)
+    //     localStorage.removeItem('createdTemplate')
+    // }
 
     const formik = useFormik({
         initialValues: {
@@ -30,12 +31,10 @@ const Template = () => {
             templateDescription: '',
             coverPhoto: "",
             tierlistImages: "",
-            // imageCreditsUrl: ""
         },
-        // validate: tierListTemplateValidater,
+        validate: tierListTemplateValidater,
         onSubmit: values => {
             const formData = new FormData()
-            console.log(values, "VALUES");
             Object.entries(values).map(([key, value]) => {
                 key === "tierlistImages"
                     ? Object.entries(value).forEach(([, file]) => formData.append("tierlistImages", file))
@@ -44,6 +43,15 @@ const Template = () => {
             dispatch(createTierList({ privateAxios, formData }))
         },
     });
+
+
+    const error = (message) => <h1 style={{ color: "white" }}>{message}</h1>
+
+    const showError = (name) => {
+        formik?.touched[name] && formik?.errors[name]
+            ? error(formik?.errors[name])
+            : null
+    }
 
     const inputs = [
         {
@@ -90,15 +98,6 @@ const Template = () => {
             onChange: (e) => formik.setFieldValue("tierlistImages", e.target.files),
             inputType: "input"
         },
-        // {
-        //     id: "imageCreditsUrl",
-        //     title: "Add a URL for Image Credits:",
-        //     type: "text",
-        //     placeholder: "URL of site",
-        //     value: formik.values.imageCreditsUrl,
-        //     onChange: formik.handleChange,
-        //     inputType: "input"
-        // },
         {
             id: "selectImageOrientation",
             title: "Image Orientation",
@@ -110,30 +109,37 @@ const Template = () => {
     ]
 
     return (
-        <Wrapper>
-            <Header />
-            <Container>
-                <ErrorBoundary>
-                    <TemplateTitle />
-                    <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
-                        {inputs?.map(({ id, title, ...rest }) =>
-                            <InputWrapper key={id}>
-                                <Label htmlFor={id}>{title}</Label>
-                                {sendInputByType({ id, title, ...rest })}
-                            </InputWrapper>
-                        )}
-                        <TButton fullWidth="true" type="submit" />
-                    </Form>
-                </ErrorBoundary>
-            </Container>
-        </Wrapper>
+        <AnimatedPage>
+            <Wrapper>
+                <Header />
+                <Container>
+                    <ErrorBoundary>
+                        <TemplateTitle />
+                        <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
+                            {inputs?.map(({ id, title, ...rest }) =>
+                                <InputWrapper key={id}>
+                                    <Label htmlFor={id}>{title}</Label>
+                                    {sendInputByType({ id, title, ...rest })}
+                                    {showError(id)}
+                                </InputWrapper>
+                            )}
+                            <TButton fullWidth type="submit" />
+                        </Form>
+                    </ErrorBoundary>
+                </Container>
+            </Wrapper>
+        </AnimatedPage>
     )
 }
-
 
 const Container = styled.div`
     max-width: 840px;
     width: 100%;
     margin-bottom: 6rem;
 `
+
+const Error = styled.div`
+    color: #7c1f1f;
+`
+
 export default Template

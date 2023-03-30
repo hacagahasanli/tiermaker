@@ -7,7 +7,7 @@ export const useSendInputByType = () => {
             if (id === "coverPhoto" || id === "tierlistImages") {
                 return <>
                     {text && <span>{text}</span>}
-                    <Input {...{ id, type, onChange, multiple }} name={id} />
+                    <Input {...{ id, type, onChange, multiple }} accept=".jpeg, .jpg, .png" name={id} />
                 </>
             }
             switch (inputType) {

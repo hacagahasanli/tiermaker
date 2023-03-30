@@ -122,7 +122,3 @@ const Title = styled.span`
     text-align: center;
     margin-bottom: 2rem;
 `
-
-const Error = styled.div`
-    color: #7c1f1f;
-`

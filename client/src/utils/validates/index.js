@@ -6,27 +6,38 @@ const errorMessage = {
     notMatchFields: "Speechless , Passwords did not match !",
     incorrect_short: 'Password must be at least 4 characters long !',
     iccorrect_long: 'Password must be less than 17 !',
-    onlyCanBeUsed: 'Only letters, numbers, ., and ? is allowed',
-    noCoverPhoto: ""
+    onlyCanBeUsed: 'Only letters and numbers are allowed',
+    noCoverPhoto: "",
+    emptyTemplateName: "Are u okay? Set template name!",
+    notSelectedCategory: "Select any category",
+    longDescription: "Long description (max desc length 100)",
+    tierListImagesLength: "You can select max 25 images"
+}
+
+const helperAuth = (fieldValue) => {
+    return !checkFieldCorrectnessRgx(fieldValue)
+
 }
 
 export const authValidate = (values) => {
     const authErrors = {};
     const { password, repeatedPassword, username } = values
 
-    const helperAuth = (fieldValue, fieldName) => {
-        !checkFieldCorrectnessRgx(fieldValue)
-            ? authErrors[fieldName] = errorMessage.onlyCanBeUsed
+    if (!password)
+        authErrors.password = errorMessage.emptyPass;
+    else {
+        helperAuth(password)
+            ? authErrors.password = errorMessage.onlyCanBeUsed
             : null
     }
 
-    if (!password)
-        authErrors.password = errorMessage.emptyPass;
-    else helperAuth(password, "password")
-
     if (!username)
         authErrors.username = errorMessage.username;
-    else helperAuth(username, "username")
+    else {
+        helperAuth(username)
+            ? authErrors.username = errorMessage.onlyCanBeUsed
+            : null
+    }
 
     if (repeatedPassword !== undefined && repeatedPassword !== password)
         authErrors.repeatedPassword = errorMessage.notMatchFields
@@ -41,7 +52,7 @@ export const authValidate = (values) => {
 };
 
 export const tierListTemplateValidater = (values) => {
-    const temaplateErrors = {}
+    const templateErrors = {}
     const {
         templateName,
         selectCategory,
@@ -49,8 +60,25 @@ export const tierListTemplateValidater = (values) => {
         templateDescription,
         coverPhoto,
         tierlistImages,
-        imageCreditsUrl
     } = values
 
-    return
+    if (!templateName)
+        templateErrors.templateName = errorMessage.emptyTemplateName;
+    else {
+        helperAuth(templateName)
+            ? templateErrors.templateName = errorMessage.onlyCanBeUsed
+            : null
+    }
+
+    if (selectCategory === "Select a Category")
+        templateErrors.selectCategory = errorMessage.notSelectedCategory
+
+    if (templateDescription.length > 100)
+        templateErrors.templateDescription = errorMessage.longDescription
+
+    if (Object.entries(tierlistImages).length > 25)
+        templateErrors.tierlistImages = errorMessage.tierListImagesLength
+
+
+    return templateErrors
 }

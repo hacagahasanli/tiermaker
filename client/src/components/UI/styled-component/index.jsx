@@ -1,5 +1,4 @@
 import styled, { createGlobalStyle } from "styled-components"
-import Swal from "sweetalert2"
 
 export const GlobalStyle = createGlobalStyle`
  *{
@@ -9,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
  }
  html{
     scroll-behavior: smooth;
+    position: relative;
  }
 `
 
@@ -49,7 +49,7 @@ export const Form = styled.form`
 
 export const Input = styled.input`
      padding: 1rem;
-     background: #000000;
+     background: #000000 !important;
      border: 1px solid #474747;
      color: white;
      font-size: 1rem;
@@ -61,6 +61,7 @@ export const Input = styled.input`
 
      :focus,:focus-visible,:focus-within{
         outline: none;
+        background: #000000;
      }
 `
 
@@ -74,18 +75,13 @@ export const Wrapper = styled.div`
     margin: 0 auto;
     gap:2rem;
     overflow: ${({ isHide }) => isHide ? "hidden" : "visible"};
+    overflow: hidden;
     h2{
         color: #ffffff;
         font-size: 2rem;
         margin-top: 1rem;
     }
 `
-
-export const SweetAlert = styled(Swal)`
-  & .swal2-popup {
-    top: 30px;
-  }
-`;
 
 export const AuthButton = styled.button`
     color: #ffffff;

@@ -1,18 +1,20 @@
 import React from 'react'
 import styled from 'styled-components';
 import { TiersBoard, Buttons } from 'shared/index';
-import { LocaleStorage, Header, SettingModal } from 'components/index';
+import { LocaleStorage, Header, SettingModal, AnimatedPage } from 'components/index';
 
 const TierBoard = () => {
     return (
-        <LocaleStorage>
-            <Wrapper id="tier_board">
-                <Header />
-                <TiersBoard />
-                <Buttons />
-                <SettingModal />
-            </Wrapper>
-        </LocaleStorage>
+        <AnimatedPage>
+            <LocaleStorage>
+                <Wrapper id="tier_board">
+                    <Header />
+                    <TiersBoard />
+                    <Buttons />
+                    <SettingModal />
+                </Wrapper>
+            </LocaleStorage>
+        </AnimatedPage>
     )
 }
 

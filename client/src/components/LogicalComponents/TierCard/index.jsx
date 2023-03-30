@@ -31,10 +31,19 @@ export const TierCard = () => {
 
 
     return <CardWrapper>
+        <CardContainer>
+            <Opacity />
+            <CardText height="100%">
+                <span>{"Create New Template"}</span>
+            </CardText>
+        </CardContainer>
         {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) =>
-            <CardContainer key={`${_id}${v4()}`}>
-                <Image src={coverPhoto} alt="tiers_image" onClick={() => tierBoardNavigator(tierlistImages, _id)} />
-                <span>{templateName}</span>
+            <CardContainer key={`${_id}${v4()}`} onClick={() => tierBoardNavigator(tierlistImages, _id)} >
+                <Opacity />
+                <Image img={coverPhoto} />
+                <CardText>
+                    <span>{templateName}</span>
+                </CardText>
             </CardContainer>
         )}
     </CardWrapper>
@@ -42,48 +51,67 @@ export const TierCard = () => {
 
 const CardWrapper = styled.article`
     display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
     place-items: center;
     width: 100%;
-    gap:2rem;
+    gap:0.4rem;
     margin-bottom: 2rem;
 `
 
-const Image = styled.img`
-    max-width: 100%;
-    height: 250px;
-    object-fit: cover;
+const Image = styled.div`
+    background-image: url(${({ img }) => img});
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size:cover;
+    overflow: hidden;
+    width: 100%;
+    min-height:100%;
     border-radius: .2rem;
-    object-fit: contain;
-    transition: transform .3s ease-in;
 `
 
+const Opacity = styled.div`
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    opacity: 0;
+    transition: all .25s ease-in-out;
+`
 const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #6c6c6c;
+    position: relative;
     width: 100%;
-    height: 350px;
-    color: white;
+    height: 200px;
     text-align: center;
     cursor: pointer;
     overflow: hidden;
-    border-radius: 5px;
-    padding: 1.2rem;
-    transition: all .8s;
+    border-radius: 4px;
+    transition: all .5s ease-in-out;
+    border: 1px solid #fffffe32;    
 
-    :hover ${Image}{
-        transform: scale(1.1);
+    :hover ${Opacity}{
+        opacity: .25;
     }
 
-    :hover{
-        border: 1px solid #ffffff;
-    }
 
-    span{
-        font-size: 1.2rem;
-    }
+`
+
+const CardText = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: ${({ height }) => height ?? "30px"};
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    background-color: #000000;
+    font-size: 1rem;
 `
 

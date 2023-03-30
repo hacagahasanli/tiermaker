@@ -37,7 +37,7 @@ class File {
         }
     }
     async getFiles(req, res) {
-        const pageSize = 29;
+        const pageSize = 20;
         const currentPage = req.query.page || 1;
         const sortType = req.query.page ?? 'desc'
 

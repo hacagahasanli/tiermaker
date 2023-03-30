@@ -1,7 +1,5 @@
 import { check, validationResult } from "express-validator"
-import createError from "http-errors"
 
-const fieldLengthRange = { min: 4, max: 17 }
 export const userValidation = [
     check('username')
         .not()

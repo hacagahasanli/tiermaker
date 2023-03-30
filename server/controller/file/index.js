@@ -7,11 +7,17 @@ config()
 class File {
     async create(req, res) {
         try {
-            console.log(req.body);
             const { templateName, templateDescription, selectImageOrientation, selectCategory } = req.body
             const { tierlistImages, coverPhoto } = req.files
 
             const coverPhotoPath = process.env.IMAGE_SUB_URL + coverPhoto[0]?.path.split('\\')[1]
+
+            const user = await UserSchema.findOne({ ip: ip });
+
+            if (user) {
+                user.lastRequestTime = now;
+                await user.save();
+            }
 
             const tierListPaths = tierlistImages?.map(({ path }) => {
                 if (path.length > 0) {

@@ -24,6 +24,9 @@ const Message = (statusCode, type, infos) => {
             405: {
                 serv: "Method not allowed!"
             },
+            429: {
+                serv: "To Many Request"
+            },
             500: {
                 serv: "Server Error"
             }

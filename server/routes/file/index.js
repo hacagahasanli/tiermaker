@@ -2,6 +2,7 @@ import { FileController } from "../../controller/index.js";
 import multer from "multer";
 import { Router } from "express";
 import path from "path";
+import { rateLimit } from "../../middleware/index.js";
 
 const router = new Router()
 
@@ -25,7 +26,7 @@ const tierImagesUpload = upload.fields([
     { name: 'tierlistImages', maxCount: 22 },
 ])
 
-router.post('/add-tier-list', tierImagesUpload, FileController.create)
+router.post('/add-tier-list', rateLimit, tierImagesUpload, FileController.create)
 router.get('/get-all-tierlists', FileController.getFiles)
 
 export { router }

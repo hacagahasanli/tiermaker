@@ -17,5 +17,5 @@ const ErrorMessage = styled.div`
     gap:2rem;
     color: #ffffff;
     letter-spacing: 1.5px;
-    color: '#ffffff' 
+    color: #ffffff
 `

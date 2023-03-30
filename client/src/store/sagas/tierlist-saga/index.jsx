@@ -21,12 +21,10 @@ function* GetAllTierListsAsync({ payload }) {
 
 function* AddTierlistAsync({ payload }) {
     try {
-        const { navigate, ...rest } = payload
-        console.log(...rest, "REST");
-        const createdTemplate = yield call(addTierListTemplate, ...rest)
+        const createdTemplate = yield call(addTierListTemplate, payload)
+        yield localStorage.setItem('createdTemplate', true)
         yield put(setCreatedTemplate(createdTemplate))
         yield Swal.fire(sweetFire({ type: "success", text: "Tierboards", title: "You made it!" }))
-        yield setTimeout(() => navigate('/', { replace: true }), 700)
     } catch (err) {
         yield Swal.fire(sweetFire({ type: "error", text: "Tierlist was not created !" }))
     }

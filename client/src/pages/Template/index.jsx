@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import React from "react"
 import styled from "styled-components"
-import { ErrorBoundary, Header, TButton, TemplateTitle } from "components/index"
+import { ErrorBoundary, Header, LocaleStorage, TButton, TemplateTitle } from "components/index"
 import { Form, InputWrapper, Label, Wrapper } from "components/UI/styled-component"
 import { useSendInputByType } from "hooks/index"
 import { categoriesOptions, imageOrientations } from "constants/index"
@@ -17,6 +17,11 @@ const Template = () => {
     const privateAxios = useAxiosPrivate()
     const navigate = useNavigate()
 
+    if (localStorage.getItem('createdTemplate')) {
+        navigate(-1)
+        localStorage.removeItem('createdTemplate')
+    }
+
     const formik = useFormik({
         initialValues: {
             templateName: '',
@@ -30,12 +35,13 @@ const Template = () => {
         // validate: tierListTemplateValidater,
         onSubmit: values => {
             const formData = new FormData()
+            console.log(values, "VALUES");
             Object.entries(values).map(([key, value]) => {
                 key === "tierlistImages"
                     ? Object.entries(value).forEach(([, file]) => formData.append("tierlistImages", file))
                     : formData.append(key, value)
             })
-            dispatch(createTierList({ privateAxios, formData, navigate }))
+            dispatch(createTierList({ privateAxios, formData }))
         },
     });
 

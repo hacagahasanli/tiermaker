@@ -87,9 +87,9 @@ export const colourPalattes = {
 }
 
 export const pageName = {
+    '/login': "Login",
     '/tierboard': "Tierboard",
     '/': "Home",
-    '/login': "Login",
     "/make-a-template": "Make a Template"
 }
 

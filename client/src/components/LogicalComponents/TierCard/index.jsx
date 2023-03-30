@@ -38,7 +38,7 @@ export const TierCard = () => {
             </CardText>
         </CardContainer>
         {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) =>
-            <CardContainer key={`${_id}${v4()}`} onClick={() => tierBoardNavigator(tierlistImages, _id)} >
+            <CardContainer cardDivider={tierLists.length === 28} key={`${_id}${v4()}`} onClick={() => tierBoardNavigator(tierlistImages, _id)} >
                 <Opacity />
                 <Image img={coverPhoto} />
                 <CardText>
@@ -86,6 +86,7 @@ const CardContainer = styled.div`
     width: 100%;
     height: 200px;
     text-align: center;
+    margin-bottom:${({ cardDivider }) => cardDivider && "7rem"} ;
     cursor: pointer;
     overflow: hidden;
     border-radius: 4px;

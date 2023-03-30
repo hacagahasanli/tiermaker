@@ -27,6 +27,11 @@ export const userLogin = async (values) => {
     return response
 }
 
+export const userLogout = async ({ privateAxios }) => {
+    const response = await privateAxios.get('/logout')
+    return response
+}
+
 export const addTierListTemplate = async ({ privateAxios, formData }) => {
     const response = await privateAxios.post('/files/add-tier-list', formData, {
         headers: {
@@ -41,9 +46,9 @@ const resInterceptor = authAxios.interceptors.response.use(
     (error) => Promise.reject(error)
 )
 
-export const fetchTierLists = async (axiosPrivate) => {
+export const fetchTierLists = async (privateAxios) => {
     try {
-        const tierLists = await axiosPrivate.get('/files/get-all-tierlists')
+        const tierLists = await privateAxios.get('/files/get-all-tierlists')
         return tierLists
     } catch (err) {
         return "Error"

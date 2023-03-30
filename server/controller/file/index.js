@@ -37,7 +37,7 @@ class File {
         }
     }
     async getFiles(req, res) {
-        const pageSize = 20;
+        const pageSize = 56;
         const currentPage = req.query.page || 1;
         const sortType = req.query.page ?? 'desc'
 
@@ -55,8 +55,7 @@ class File {
                         res.status(200).json({ ...files, totalCount })
                     })
                     .catch(err => response(res, 500, { message: err.message }))
-            }).catch(err => response(res, 500, { message: err.message })
-            )
+            }).catch(err => response(res, 500, { message: err.message }))
     }
 }
 

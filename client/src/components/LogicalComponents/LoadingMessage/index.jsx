@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const messagePortal = {
     auth: "Your authentication credentials....",
-    tierLists: "Tierlists loading...."
+    tierLists: "Tierlists templates...."
 }
 
 export const LoadingMessage = ({ port }) => (

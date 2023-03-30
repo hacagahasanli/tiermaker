@@ -2,7 +2,7 @@ import { FileController } from "../../controller/index.js";
 import multer from "multer";
 import { Router } from "express";
 import path from "path";
-import { rateLimit, checkPermission } from "../../middleware/index.js";
+import { rateLimit } from "../../middleware/index.js";
 
 const router = new Router()
 
@@ -11,8 +11,6 @@ const storage = multer.diskStorage({
         cb(null, `uploads/`)
     },
     filename: function (req, file, cb) {
-        console.log(file.originalname, "FILE ORIGINALNAME");
-        console.log(file.fieldname, "FILE FIELDNAME");
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 });
@@ -26,7 +24,7 @@ const tierImagesUpload = upload.fields([
     { name: 'tierlistImages', maxCount: 22 },
 ])
 
-router.post('/add-tier-list', checkPermission, rateLimit, tierImagesUpload, FileController.create)
-router.get('/get-all-tierlists', checkPermission, FileController.getFiles)
+router.post('/add-tier-list', rateLimit, tierImagesUpload, FileController.create)
+router.get('/get-all-tierlists', FileController.getFiles)
 
 export { router }

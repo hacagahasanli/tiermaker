@@ -8,6 +8,7 @@ config()
 class File {
     async create(req, res) {
         try {
+            const ip = req.ip
             const { templateName, templateDescription, selectImageOrientation, selectCategory } = req.body
             const { tierlistImages, coverPhoto } = req.files
 
@@ -19,6 +20,10 @@ class File {
                     return imagePath
                 }
             })
+            console.log(req.userId.userId, "req.userId.userId");
+            console.log(req.userId, "req.userId");
+
+            await UserSchema.findOneAndUpdate({ _id: req.userId.userId }, { lastRequest: Date.now(), ip })
 
             const file = new FileSchema({
                 templateName,

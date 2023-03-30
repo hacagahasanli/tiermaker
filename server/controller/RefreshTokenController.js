@@ -10,7 +10,6 @@ class RefreshTokenController {
         try {
             const cookies = req.cookies
             if (!cookies?.jwt) return response(res, 401)
-
             const refreshToken = cookies.jwt
 
             const matchedUser = await UserSchema.findOne({ refreshToken })

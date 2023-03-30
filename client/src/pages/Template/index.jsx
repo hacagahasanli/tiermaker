@@ -18,10 +18,10 @@ const Template = () => {
     const privateAxios = useAxiosPrivate()
     const navigate = useNavigate()
 
-    // if (localStorage.getItem('createdTemplate')) {
-    //     navigate(-1)
-    //     localStorage.removeItem('createdTemplate')
-    // }
+    if (localStorage.getItem('createdTemplate')) {
+        navigate(-1)
+        localStorage.removeItem('createdTemplate')
+    }
 
     const formik = useFormik({
         initialValues: {

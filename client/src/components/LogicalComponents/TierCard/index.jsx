@@ -51,7 +51,7 @@ export const TierCard = () => {
 
 const CardWrapper = styled.article`
     display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns:repeat(auto-fit, minmax(200px, 230px));
     place-items: center;
     width: 100%;
     gap:0.4rem;

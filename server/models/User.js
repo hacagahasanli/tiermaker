@@ -6,7 +6,8 @@ const UserSchema = new Schema({
     refreshToken: { type: String },
     createdLists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'File' }],
     blocked: { type: Boolean, default: false },
-    ip: { type: String }
+    ip: { type: String },
+    lastRequest: { type: Date, default: null },
 });
 
 export default model('Users', UserSchema)

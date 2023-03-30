@@ -10,6 +10,7 @@ config()
 class Auth {
     async registration(req, res) {
         try {
+            const ip = req.ip
             const { username, password } = req.body
 
             const candidate = await UserSchema.findOne({ username })
@@ -17,7 +18,7 @@ class Auth {
                 return response(res, 400, "user", { username })
 
             const hashPassword = await bcrypt.hash(password, 7)
-            const user = await UserSchema.create({ username, password: hashPassword })
+            const user = await UserSchema.create({ username, password: hashPassword, ip, blocked: false })
 
             await user.save()
             response(res, 200)
@@ -29,6 +30,7 @@ class Auth {
     async login(req, res) {
         try {
             const { username, password } = req.body
+            const ip = req.ip
 
             if (!username || !password)
                 return response(res, 400, { message: 'Username and password are required.' })
@@ -58,7 +60,7 @@ class Auth {
 
                 const updatedUser = await UserSchema.findOneAndUpdate(
                     { username: user.username },
-                    { refreshToken },
+                    { refreshToken, ip },
                     { new: true }
                 )
                 res.cookie('jwt', refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, sameSite: "None" })

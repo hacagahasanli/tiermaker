@@ -3,29 +3,27 @@ import UserSchema from "../../models/User.js"
 
 export const rateLimit = async (req, res, next) => {
     try {
-        const ip = req.ip;
+        const refreshToken = req.cookies.jwt
         const now = Date.now();
         const twoMinuteAgo = now - 2 * 60 * 1000;
 
         const requests = await UserSchema.find({
-            ip: ip,
-            timestamp: { $gt: twoMinuteAgo },
-            blocked: false
+            refreshToken,
+            lastRequest: { $gt: twoMinuteAgo },
         });
 
         const blockedMessage = () => {
             response(res, 429, "serv", "You have blocked temporary to create new template")
-            return;
-        }
-
-        if (requests.length > 2 && now - user.lastRequestTime < 120000) {
-            await UserSchema.updateMany({ ip }, { blocked: true });
-            blockedMessage()
         }
 
         const user = await UserSchema.findOne({ ip: ip }, { blocked: 1 })?.blocked;
         if (user) {
-            blockedMessage()
+            return blockedMessage()
+        }
+
+        if (requests.length > 3 && now - user.lastRequest < 120000) {
+            await UserSchema.findOneAndUpdate({ refreshToken }, { blocked: true });
+            return blockedMessage()
         }
 
         next();

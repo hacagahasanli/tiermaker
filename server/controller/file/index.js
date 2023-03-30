@@ -1,4 +1,5 @@
 import FileSchema from "../../models/File.js"
+import UserSchema from "../../models/User.js"
 import { config } from "dotenv"
 import { response } from "../../helper/response.js"
 import { v4 } from "uuid"
@@ -11,13 +12,6 @@ class File {
             const { tierlistImages, coverPhoto } = req.files
 
             const coverPhotoPath = process.env.IMAGE_SUB_URL + coverPhoto[0]?.path.split('\\')[1]
-
-            const user = await UserSchema.findOne({ ip: ip });
-
-            if (user) {
-                user.lastRequestTime = now;
-                await user.save();
-            }
 
             const tierListPaths = tierlistImages?.map(({ path }) => {
                 if (path.length > 0) {

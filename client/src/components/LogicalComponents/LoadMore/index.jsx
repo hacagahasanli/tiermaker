@@ -3,12 +3,15 @@ import styled from "styled-components";
 
 export const LoadMore = () => {
     const { tierListsCount, tierLists } = useSelector(state => state.images)
-    const text = tierListsCount === tierLists.length ? "No more tierlists" : "Load More"
+    const btn = tierListsCount === tierLists.length
+        ? { text: "No more tierlists" }
+        : { text: "Load More", func: () => getMoreTierLists() }
 
     const getMoreTierLists = () => {
 
     }
-    return <StyledLoadmore onClick={() => getMoreTierLists()}>{text}</StyledLoadmore>
+
+    return <StyledLoadmore onClick={btn?.func}>{btn?.text}</StyledLoadmore>
 }
 
 const StyledLoadmore = styled.div`

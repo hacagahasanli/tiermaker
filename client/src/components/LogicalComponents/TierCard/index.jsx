@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setCachedBoardId } from "store/slices/images"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { v4 } from "uuid"
 
 export const TierCard = () => {
@@ -31,9 +31,9 @@ export const TierCard = () => {
 
 
     return <CardWrapper>
-        <CardContainer>
+        <CardContainer onClick={() => navigate('/make-a-template')}>
             <Opacity />
-            <CardText height="100%">
+            <CardText template>
                 <span>{"Create New Template"}</span>
             </CardText>
         </CardContainer>
@@ -57,7 +57,6 @@ const CardWrapper = styled.article`
     gap:0.4rem;
     margin-bottom: 2rem;
 `
-
 const Image = styled.div`
     background-image: url(${({ img }) => img});
     background-position: top;
@@ -68,7 +67,6 @@ const Image = styled.div`
     min-height:100%;
     border-radius: .2rem;
 `
-
 const Opacity = styled.div`
     width: 100%;
     min-height: 100%;
@@ -100,15 +98,17 @@ const CardContainer = styled.div`
 
 
 `
-
 const CardText = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    min-height: ${({ height }) => height ?? "30px"};
+    min-height: 30px;
     position: absolute;
-    bottom: 0;
+    ${({ template }) => template
+        ? css` top:2rem;`
+        : css` bottom:0;`
+    }
     left: 0;
     color: white;
     background-color: #000000;

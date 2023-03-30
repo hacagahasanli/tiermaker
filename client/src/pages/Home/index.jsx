@@ -1,9 +1,9 @@
-import React, { useEffect, useLayoutEffect } from 'react'
-import { Header, ErrorBoundary, TierCard, LoadMore } from 'components/index';
+import React, { useEffect } from 'react'
+import { Header, ErrorBoundary, TierCard, LoadMore, LoadingMessage } from 'components/index';
 import { Wrapper } from 'components/UI/styled-component';
 import { useDispatch, useSelector } from 'react-redux';
 import useAxiosPrivate from 'hooks/useAxiosPrivate'
-import { getTierLists, setIsTemplateCreated } from 'store/slices/images';
+import { getTierLists } from 'store/slices/images';
 
 const Home = () => {
     const privateAxios = useAxiosPrivate()
@@ -19,7 +19,7 @@ const Home = () => {
     }, [])
 
     const currentItem = isLoading
-        ? <h2 style={{ color: "white" }}>Tierlists cominn...</h2>
+        ? <LoadingMessage port={"tierLists"} />
         : <>
             <TierCard />
             <LoadMore />
@@ -34,7 +34,5 @@ const Home = () => {
         </Wrapper>
     )
 }
-
-
 
 export default Home;

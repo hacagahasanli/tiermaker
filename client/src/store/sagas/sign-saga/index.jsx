@@ -8,10 +8,13 @@ import Swal from "sweetalert2";
 function* RegisterUserAsync({ payload }) {
     try {
         const userValues = payload;
-        yield call(userRegistration, userValues)
-        yield put(setIsUserRegistered(true))
+        const res = yield call(userRegistration, userValues)
+        if (res.type === "success")
+            yield put(setIsUserRegistered(true))
+        else
+            yield Swal.fire(sweetFire({ text: res.message }))
     } catch (err) {
-        yield Swal.fire(sweetFire({ type: "error", text: `User with username ${payload?.username} has already exist` }))
+        yield Swal.fire(sweetFire())
     }
 }
 
@@ -19,22 +22,29 @@ function* LoginUserAsync({ payload }) {
     try {
         const userValues = payload
         yield put(setLoading(true))
-        const token = yield call(userLogin, userValues)
-        yield put(setAuth(token))
-        yield put(setLoading(false))
+        const res = yield call(userLogin, userValues)
+        if (res.type === "success") {
+            yield put(setAuth(token))
+            yield put(setLoading(false))
+        } else {
+            yield put(setLoading(false))
+            yield Swal.fire(sweetFire({ text: response.message }))
+        }
     } catch (err) {
-        yield put(setLoading(false))
-        yield Swal.fire(sweetFire({ type: "error" }))
+        yield Swal.fire(sweetFire())
     }
 }
 
 function* LogoutUserAsync({ payload }) {
     try {
-        yield call(userLogout, payload)
-        yield Swal.fire(sweetFire({ type: "success", text: `Login`, title: "You made It!" }))
-        yield put(setAuth({}))
+        const res = yield call(userLogout, payload)
+        if (res.type === "success") {
+            yield Swal.fire(sweetFire({ type: "success", text: `Login`, title: "You made It!" }))
+            yield put(setAuth({}))
+        } else
+            yield Swal.fire(sweetFire())
     } catch (err) {
-        yield Swal.fire(sweetFire({ type: "error" }))
+        yield Swal.fire(sweetFire())
     }
 }
 

@@ -12,10 +12,10 @@ class Auth {
         try {
             const ip = req.ip
             const { username, password } = req.body
-
+            console.log({ username, password })
             const candidate = await UserSchema.findOne({ username })
             if (candidate)
-                return response(res, 400, "user", { username })
+                return response(res, 400, "user", { message: `User with username ${username} has already exist` })
 
             const hashPassword = await bcrypt.hash(password, 7)
             const user = await UserSchema.create({ username, password: hashPassword, ip, blocked: false })
@@ -68,11 +68,11 @@ class Auth {
             }
         } catch (error) {
             response(res, 404)
-            if (error.name === 'MongooseTimeoutError') {
+            if (error.name === 'MongooseTimeoutError')
                 console.error('Query timed out:', error);
-            } else {
+            else
                 console.error('Query error:', error);
-            }
+
             console.log(error);
         }
 

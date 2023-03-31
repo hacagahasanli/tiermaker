@@ -14,31 +14,55 @@ export const privateAxios = axios.create({
 })
 
 export const userRegistration = async (values) => {
-    const response = await authAxios.post('/auth/registration', { ...values }, {
-        model: "registration"
-    })
-    return response?.data?.message
+    try {
+        const response = await authAxios.post('/auth/registration', { ...values }, {
+            model: "registration"
+        })
+        return { res: response?.data?.message, type: "success" }
+    } catch (err) {
+        return {
+            message: err.response.data?.message, type: "error"
+        }
+
+    }
 }
 
 export const userLogin = async (values) => {
-    const response = await authAxios.post('/auth/login', { ...values }, {
-        model: "login"
-    })
-    return response
+    try {
+        const response = await authAxios.post('/auth/login', { ...values }, {
+            model: "login"
+        })
+        console.log(response, "RESPONSE")
+        return { res: response, type: "success" }
+    } catch (err) {
+        console.log({ message: err.response.data?.message, type: "error" });
+        return { message: err.response.data?.message, type: "error" }
+    }
+
 }
 
 export const userLogout = async ({ privateAxios }) => {
-    const response = await privateAxios.get('/logout')
-    return response
+    try {
+        const response = await privateAxios.get('/logout')
+        return { res: response, type: "success" }
+    } catch (err) {
+        return { message: err.response.data?.message, type: "error" }
+    }
+
 }
 
 export const addTierListTemplate = async ({ privateAxios, formData }) => {
-    const response = await privateAxios.post('/files/add-tier-list', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        },
-    })
-    return response.data
+    try {
+        const response = await privateAxios.post('/files/add-tier-list', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+        })
+        return { res: response.data, type: "success" }
+    } catch (err) {
+        return { message: err.response.data?.message, type: "error" }
+    }
+
 }
 
 const resInterceptor = authAxios.interceptors.response.use(
@@ -49,9 +73,9 @@ const resInterceptor = authAxios.interceptors.response.use(
 export const fetchTierLists = async (privateAxios) => {
     try {
         const tierLists = await privateAxios.get('/files/get-all-tierlists')
-        return tierLists
+        return { res: tierLists, type: "success" }
     } catch (err) {
-        return "Error"
+        return { message: err.response.data?.message, type: "error" }
     }
 }
 
@@ -59,9 +83,9 @@ export const refresh = async () => {
     try {
         const response = await authAxios.get('refresh', { withCredentials: true })
         const accessToken = response.data
-        return accessToken;
+        return { res: accessToken, type: "success" }
     } catch (err) {
-        return err.response.status;
+        return { message: err.response.data?.message, type: "error" }
     }
 }
 

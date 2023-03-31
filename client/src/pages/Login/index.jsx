@@ -13,10 +13,7 @@ const Login = () => {
 
     if (pathname === "/login" || pathname === "/register") {
         const { title, initialValues, type, neededInputs } = formFields[pathname]
-        userForm = <AnimatedPage>
-            <FormValidater {...{ initialValues, type, neededInputs, title }} />
-        </AnimatedPage>
-
+        userForm = <FormValidater {...{ initialValues, type, neededInputs, title }} />
     }
 
     return (

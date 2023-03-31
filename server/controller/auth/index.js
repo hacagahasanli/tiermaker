@@ -12,7 +12,7 @@ class Auth {
         try {
             const ip = req.ip
             const { username, password } = req.body
-            console.log({ username, password })
+
             const candidate = await UserSchema.findOne({ username })
             if (candidate)
                 return response(res, 400, "user", { message: `User with username ${username} has already exist` })

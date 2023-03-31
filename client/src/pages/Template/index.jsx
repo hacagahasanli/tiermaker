@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import React from "react"
 import styled from "styled-components"
-import { AnimatedPage, ErrorBoundary, Header, LocaleStorage, TButton, TemplateTitle } from "components/index"
+import { AnimatedPage, ErrorBoundary, Header, TButton, TemplateTitle } from "components/index"
 import { Form, InputWrapper, Label, Wrapper } from "components/UI/styled-component"
 import { useSendInputByType } from "hooks/index"
 import { categoriesOptions, imageOrientations } from "constants/index"
@@ -45,17 +45,18 @@ const Template = () => {
     });
 
 
-    const error = (message) => <h1 style={{ color: "white" }}>{message}</h1>
+    const error = (message) => <Error>{message}</Error>
 
     const showError = (name) => {
-        formik?.touched[name] && formik?.errors[name]
-            ? error(formik?.errors[name])
+        return formik?.errors[name] ?
+            error(formik?.errors[name])
             : null
     }
 
     const inputs = [
         {
             id: "templateName",
+            name: "templateName",
             title: "Name of Template",
             type: "text",
             placeholder: "Describe the image set, ex. 'Game of Thrones characters'",
@@ -65,6 +66,7 @@ const Template = () => {
         },
         {
             id: "selectCategory",
+            name: "selectCategory",
             title: "Select a Category:",
             value: formik.values.selectCategory,
             onChange: formik.handleChange,
@@ -73,6 +75,7 @@ const Template = () => {
         },
         {
             id: "templateDescription",
+            name: "templateDescription",
             title: "Description of Template:",
             rows: "3",
             placeholder: "A great description helps users find your template in search results",
@@ -82,6 +85,7 @@ const Template = () => {
         },
         {
             id: "coverPhoto",
+            name: "coverPhoto",
             title: "Select Template Cover Photo:",
             type: "file",
             value: formik.values.coverPhoto,
@@ -90,6 +94,7 @@ const Template = () => {
         },
         {
             id: "tierlistImages",
+            name: "tierlistImages",
             title: "Upload a Set of Images for the Tier List Template:",
             text: "Consistent image size and orientation (square, portrait or landscape) work best. You can use our Text to Image Generator to quickly add text labels on your images. Large file sizes may cause the upload to fail. A minimum of 2 images are needed to make a template.",
             type: "file",
@@ -100,6 +105,7 @@ const Template = () => {
         },
         {
             id: "selectImageOrientation",
+            name: "selectImageOrientation",
             title: "Image Orientation",
             value: formik.values.selectImageOrientation,
             onChange: formik.handleChange,
@@ -116,11 +122,11 @@ const Template = () => {
                     <ErrorBoundary>
                         <TemplateTitle />
                         <Form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
-                            {inputs?.map(({ id, title, ...rest }) =>
+                            {inputs?.map(({ id, title, name, ...rest }) =>
                                 <InputWrapper key={id}>
                                     <Label htmlFor={id}>{title}</Label>
-                                    {sendInputByType({ id, title, ...rest })}
-                                    {showError(id)}
+                                    {sendInputByType({ id, title, name, ...rest })}
+                                    {showError(name)}
                                 </InputWrapper>
                             )}
                             <TButton fullWidth type="submit" />

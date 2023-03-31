@@ -1,12 +1,14 @@
 import styled from "styled-components"
-import React, { useContext } from 'react'
+import React, { useCallback, useContext, useMemo } from 'react'
 import { BoardsContext } from "context"
 import { TierTitle, ErrorBoundary, Settings, ColumnBoard } from "components/index"
 import { useBoxShadow } from "hooks/index"
+import { useSelector } from "react-redux"
 
 export const TiersBoard = () => {
     const { boards, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
     const { dragOverHandler } = useBoxShadow()
+    const { cachedBoardId, tierLists } = useSelector(state => state.images)
 
     const dropCardHandler = (e, board) => {
         if (!e.target.classList.value.includes('item')) {
@@ -17,8 +19,17 @@ export const TiersBoard = () => {
         e.target.style.boxShadow = "none"
     };
 
+    const templateName = useMemo(() => {
+        const name = tierLists.find((item) => item._id === cachedBoardId).templateName
+        return name;
+    }, [cachedBoardId])
+
     return (
         <RowsContainer>
+            <TempalateName>
+                <span>{templateName}</span>
+                <span>{templateName}</span>
+            </TempalateName>
             <ErrorBoundary>
                 {boards?.map((board) => {
                     const defultImageBoard = board.id !== 8;
@@ -39,6 +50,22 @@ export const TiersBoard = () => {
     )
 }
 
+
+const TempalateName = styled.div`
+   width: 100%;
+   text-align: left;
+   display: flex;
+   flex-direction: column;
+   gap:1rem;
+   margin-bottom: 2rem;
+   color:white;
+   text-transform: capitalize;
+
+   span:first-child{
+        font-size: 2rem;
+   }
+
+`
 
 const ColumnContainer = styled.div`
     display: grid;

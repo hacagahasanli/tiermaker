@@ -23,7 +23,6 @@ export const userRegistration = async (values) => {
         return {
             message: err.response.data?.message, type: "error"
         }
-
     }
 }
 
@@ -62,11 +61,6 @@ export const addTierListTemplate = async ({ privateAxios, formData }) => {
 
 }
 
-const resInterceptor = authAxios.interceptors.response.use(
-    (response) => response?.data,
-    (error) => Promise.reject(error)
-)
-
 export const fetchTierLists = async (privateAxios) => {
     try {
         const tierLists = await privateAxios.get('/files/get-all-tierlists')
@@ -85,4 +79,10 @@ export const refresh = async () => {
         return { message: err.response.data?.message, type: "error" }
     }
 }
+
+
+const resInterceptor = authAxios.interceptors.response.use(
+    (response) => response?.data,
+    (error) => Promise.reject(error)
+)
 

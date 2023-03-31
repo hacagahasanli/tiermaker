@@ -20,9 +20,6 @@ class File {
                     return imagePath
                 }
             })
-            console.log(req.userId.userId, "req.userId.userId");
-            console.log(req.userId, "req.userId");
-
             await UserSchema.findOneAndUpdate({ _id: req.userId.userId }, { lastRequest: Date.now(), ip })
 
             const file = new FileSchema({
@@ -32,7 +29,7 @@ class File {
                 selectCategory,
                 coverPhoto: coverPhotoPath ?? '',
                 tierlistImages: tierListPaths ?? [],
-                owner: req.userId?.id
+                owner: req.userId?.userId
             })
             await file.save()
             res.status(200).json(file)

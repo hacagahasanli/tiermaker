@@ -11,7 +11,8 @@ const errorMessage = {
     emptyTemplateName: "Are u okay? Set template name!",
     notSelectedCategory: "Select any category",
     longDescription: "Long description (max desc length 100)",
-    tierListImagesLength: "You can select max 25 images"
+    tierListImagesLength: "You can select max 25 images",
+    longTemplateName: "Max length of template name is 50"
 }
 
 const helperAuth = (fieldValue) => {
@@ -70,6 +71,9 @@ export const tierListTemplateValidater = (values) => {
             : null
     }
 
+    if (templateName.length > 50)
+        templateErrors.templateName = errorMessage.longTemplateName
+
     if (selectCategory === "Select a Category")
         templateErrors.selectCategory = errorMessage.notSelectedCategory
 
@@ -78,7 +82,6 @@ export const tierListTemplateValidater = (values) => {
 
     if (Object.entries(tierlistImages).length > 25)
         templateErrors.tierlistImages = errorMessage.tierListImagesLength
-
 
     return templateErrors
 }

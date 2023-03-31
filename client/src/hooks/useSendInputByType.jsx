@@ -2,23 +2,23 @@ import { Input } from "components/UI/styled-component"
 import styled from "styled-components"
 
 export const useSendInputByType = () => {
-    const sendInputByType = ({ id, type, placeholder, value, onChange, inputType, options, multiple, rows, text }) => {
+    const sendInputByType = ({ id, type, placeholder, value, onChange, inputType, options, multiple, rows, text, name }) => {
         try {
             if (id === "coverPhoto" || id === "tierlistImages") {
                 return <>
                     {text && <span>{text}</span>}
-                    <Input {...{ id, type, onChange, multiple }} accept=".jpeg, .jpg, .png" name={id} />
+                    <Input {...{ id, type, onChange, multiple, name }} accept=".jpeg, .jpg, .png" name={id} />
                 </>
             }
             switch (inputType) {
                 case "input":
-                    return <Input {...{ id, type, value, placeholder, onChange, multiple }} name={id} />
+                    return <Input {...{ id, type, value, placeholder, onChange, multiple, name }} name={id} />
                 case "select":
-                    return <select {...{ id, onChange, value }} name={id}>
+                    return <select {...{ id, onChange, value, name }} name={id}>
                         {options.map(({ value, id }) => <option key={id} {...{ value }}>{value}</option>)}
                     </select>
                 case "textarea":
-                    return <Textarea {...{ rows, id, placeholder, onChange, value }} name={id} />
+                    return <Textarea {...{ rows, id, placeholder, onChange, value, name }} name={id} />
                 default: <span>Something went wrong!</span>
             }
         } catch (err) {

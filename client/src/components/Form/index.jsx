@@ -110,7 +110,7 @@ export const FormValidater = ({ initialValues, type, neededInputs, title }) => {
 
     return (
         <ErrorBoundary>
-            {currentComponent}
+            {currentComponent ?? {}}
         </ErrorBoundary>
     )
 }

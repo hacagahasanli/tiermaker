@@ -15,7 +15,6 @@ export const TierCard = () => {
 
     const tierBoardNavigator = (tierlistImages, id) => {
         const cachedId = localStorage.getItem("cachedId")
-        console.log(tierlistImages, "TIER LIST IMAGES");
 
         if (JSON.parse(cachedId) === id) {
             const boards = localStorage.getItem('boards')

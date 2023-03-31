@@ -34,7 +34,6 @@ export const BoardProvider = ({ children }) => {
         const urlChangeHandler = () => {
             localStorage.setItem('boards', JSON.stringify(boards))
         }
-        console.log("BURA DAXIL OLURAMA");
         window.addEventListener('popstate', urlChangeHandler);
         return () => {
             window.removeEventListener('popstate', urlChangeHandler);

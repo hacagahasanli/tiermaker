@@ -20,10 +20,11 @@ export const TiersBoard = () => {
         e.target.style.boxShadow = "none"
     };
 
-    const templateNames = () => {
-        const name = tierLists.find((item) => item._id === cachedBoardId)?.templateName ?? "unknown"
-        return [name, name];
-    }
+    const templateNames = useMemo(() => {
+        const tierList = tierLists.find((item) => item._id === cachedBoardId) ?? { templateName: "Unknown", templateDescription: "Unknown" }
+        const { templateName, templateDescription } = tierList
+        return [templateName, templateDescription];
+    }, [cachedBoardId])
 
     const preventDropZone = (e) => {
         e.preventDefault();
@@ -32,9 +33,11 @@ export const TiersBoard = () => {
 
     return (
         <RowsContainer>
-            <TempalateName>
-                {templateNames().map((tempName) => <span key={v4()}>{tempName}</span>)}
-            </TempalateName>
+            <ErrorBoundary>
+                <TempalateName>
+                    {templateNames.map((name) => <span key={v4()}>{name}</span>)}
+                </TempalateName>
+            </ErrorBoundary>
             <ErrorBoundary>
                 {boards?.map((board) => {
                     const defultImageBoard = board.id !== 8;

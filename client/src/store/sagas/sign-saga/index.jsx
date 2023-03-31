@@ -9,12 +9,14 @@ function* RegisterUserAsync({ payload }) {
     try {
         const userValues = payload;
         const res = yield call(userRegistration, userValues)
+
         if (res.type === "success")
             yield put(setIsUserRegistered(true))
         else
-            yield Swal.fire(sweetFire({ text: res.message }))
+            yield Swal.fire(sweetFire({ type: "error", text: res.message }))
+
     } catch (err) {
-        yield Swal.fire(sweetFire())
+        yield Swal.fire(sweetFire({ type: "error" }))
     }
 }
 
@@ -23,28 +25,32 @@ function* LoginUserAsync({ payload }) {
         const userValues = payload
         yield put(setLoading(true))
         const res = yield call(userLogin, userValues)
+
         if (res.type === "success") {
-            yield put(setAuth(token))
+            yield put(setAuth(res.data))
             yield put(setLoading(false))
         } else {
+            yield Swal.fire(sweetFire({ type: "error", text: res.message }))
             yield put(setLoading(false))
-            yield Swal.fire(sweetFire({ text: response.message }))
         }
+
     } catch (err) {
-        yield Swal.fire(sweetFire())
+        yield Swal.fire(sweetFire({ type: "error" }))
     }
 }
 
 function* LogoutUserAsync({ payload }) {
     try {
         const res = yield call(userLogout, payload)
+
         if (res.type === "success") {
             yield Swal.fire(sweetFire({ type: "success", text: `Login`, title: "You made It!" }))
             yield put(setAuth({}))
         } else
-            yield Swal.fire(sweetFire())
+            yield Swal.fire(sweetFire({ type: "error" }))
+
     } catch (err) {
-        yield Swal.fire(sweetFire())
+        yield Swal.fire(sweetFire({ type: "error" }))
     }
 }
 

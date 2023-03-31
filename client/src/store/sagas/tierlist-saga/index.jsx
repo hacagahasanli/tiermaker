@@ -8,25 +8,32 @@ import Swal from "sweetalert2";
 function* GetAllTierListsAsync({ payload }) {
     try {
         yield put(setLoading(true))
-        const tierLists = yield call(fetchTierLists, payload)
-        if (tierLists !== "Error") {
-            yield put(setTierLists(tierLists))
+        const res = yield call(fetchTierLists, payload)
+        if (res.type === "success") {
+            yield put(setTierLists(res?.data))
             yield put(setLoading(false))
         }
+        else {
+            yield put(setLoading(false))
+            yield Swal.fire(sweetFire({ type: "error", text: res.message }))
+        }
     } catch (err) {
-        yield put(setLoading(false))
         yield Swal.fire(sweetFire({ type: "error" }))
     }
 }
 
 function* AddTierlistAsync({ payload }) {
     try {
-        const createdTemplate = yield call(addTierListTemplate, payload)
-        yield localStorage.setItem('createdTemplate', true)
-        yield put(setCreatedTemplate(createdTemplate))
-        yield Swal.fire(sweetFire({ type: "success", text: "Tierboards", title: "You made it!" }))
+        const res = yield call(addTierListTemplate, payload)
+        if (type === "success") {
+            yield localStorage.setItem('createdTemplate', true)
+            yield put(setCreatedTemplate(res?.data))
+            yield Swal.fire(sweetFire({ type: "success", text: "Tierboards", title: "You made it!" }))
+        } else
+            yield Swal.fire(sweetFire({ type: "error", text: "Tierlist was not created !" }))
+
     } catch (err) {
-        yield Swal.fire(sweetFire({ type: "error", text: "Tierlist was not created !" }))
+        yield Swal.fire(sweetFire({ type: "error" }))
     }
 }
 

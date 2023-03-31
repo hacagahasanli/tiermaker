@@ -11,7 +11,6 @@ export const BoardProvider = ({ children }) => {
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
-    console.log(boards, "BOARDS");
     const resetBoards = () => setBoards(defaultBoards);
 
     const removeItemFromBoard = () => {

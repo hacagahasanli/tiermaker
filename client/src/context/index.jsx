@@ -11,6 +11,7 @@ export const BoardProvider = ({ children }) => {
     const [currentBoard, setCurrentBoard] = useState(null);
     const [currentItem, setCurrentItem] = useState(null);
 
+    console.log(boards, "BOARDS");
     const resetBoards = () => setBoards(defaultBoards);
 
     const removeItemFromBoard = () => {
@@ -34,6 +35,7 @@ export const BoardProvider = ({ children }) => {
         const urlChangeHandler = () => {
             localStorage.setItem('boards', JSON.stringify(boards))
         }
+        console.log("BURA DAXIL OLURAMA");
         window.addEventListener('popstate', urlChangeHandler);
         return () => {
             window.removeEventListener('popstate', urlChangeHandler);

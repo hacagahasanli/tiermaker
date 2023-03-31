@@ -1,6 +1,6 @@
 import { BoardsContext } from "context/index";
 import { useBoxShadow } from "hooks/index";
-import { memo, useContext } from "react";
+import { memo, useContext, useState } from "react";
 import styled from "styled-components";
 
 export const ColumnBoard = memo(({ diff, items, board }) => {
@@ -9,9 +9,15 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
 
     const dragLeaveHandler = (target) => target.style.boxShadow = "none"
 
-    const dragStartHandler = ({ board, item }) => {
-        setCurrentBoard(board);
-        setCurrentItem(item);
+    const dragStartHandler = ({ board, item, e }) => {
+        if (board !== undefined) {
+            setCurrentBoard(board);
+            setCurrentItem(item);
+        }
+
+        // const img = new Image();
+        // img.src = item.uri;
+        // e.dataTransfer.setDragImage(img, 0, 0);
     };
 
     const dragEndHandler = (e) => { };
@@ -19,9 +25,11 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
     const dropHandler = (e, board, item) => {
         e.preventDefault();
         removeItemFromBoard()
+
         const dropIndex = board.items.indexOf(item);
         board.items.splice(dropIndex, 0, currentItem);
         setBoardsHandler(board)
+
         e.target.style.boxShadow = "none"
     };
 
@@ -39,7 +47,7 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
                 draggable={true}
                 onDragOver={(e) => dragOverHandler(e)}
                 onDragLeave={(e) => dragLeaveHandler(e.target)}
-                onDragStart={() => dragStartHandler({ board, item })}
+                onDragStart={(e) => dragStartHandler({ e, board, item })}
                 onDragEnd={(e) => dragEndHandler(e)}
                 onDrop={(e) => dropHandler(e, board, item)}
             />
@@ -51,7 +59,6 @@ const ImageWrapper = styled.div`
     width: 100%;
     min-height: 80px;
     display: flex;
-    gap:0.1rem;
     flex-wrap: wrap;
     flex-shrink: 1;
     flex-grow: 1;
@@ -64,5 +71,9 @@ const StyledImage = styled.img`
     padding: 0;
     background: #eeeeee;
     background-image: url(${({ uri }) => uri});
-    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+    overflow: hidden;
+    cursor: pointer;
 `

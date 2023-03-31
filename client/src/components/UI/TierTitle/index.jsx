@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 export const TierTitle = memo(({ bgColor, value, defultImageBoard }) => {
     return <>
-        {defultImageBoard && <TitleWrapper bgColor={bgColor}>
+        {defultImageBoard && <TitleWrapper onDragOver={(e) => e.preventDefault()} bgColor={bgColor}>
             <Title contentEditable={true} suppressContentEditableWarning>
                 <span>{value}</span>
             </Title>

@@ -15,17 +15,18 @@ export const TierCard = () => {
 
     const tierBoardNavigator = (tierlistImages, id) => {
         const cachedId = localStorage.getItem("cachedId")
+        console.log(tierlistImages, "TIER LIST IMAGES");
 
         if (JSON.parse(cachedId) === id) {
             const boards = localStorage.getItem('boards')
             setBoards(JSON.parse(boards)?.map(item => item))
         } else {
-            dispatch(setCachedBoardId(id))
             setBoards(defaultBoards?.map((item) => {
                 if (item.id === 8) return { ...item, items: [...tierlistImages] }
                 return { ...item, items: [] }
             }))
         }
+        dispatch(setCachedBoardId(id))
         navigate('/tierboard')
     }
 
@@ -40,7 +41,7 @@ export const TierCard = () => {
         {tierLists?.map(({ _id, coverPhoto, templateName, tierlistImages }) =>
             <CardContainer key={`${_id}${v4()}`} onClick={() => tierBoardNavigator(tierlistImages, _id)} >
                 <Opacity />
-                <Image img={coverPhoto} />
+                <Image img={coverPhoto} lazy="loading" />
                 <CardText>
                     <span>{templateName}</span>
                 </CardText>
@@ -57,13 +58,13 @@ const CardWrapper = styled.article`
     gap:0.4rem;
     margin-bottom: 2rem;
 `
-const Image = styled.div`
+const Image = styled.img`
     background-image: url(${({ img }) => img});
     background-position: top;
     background-repeat: no-repeat;
     background-size:cover;
     overflow: hidden;
-    width: 100%;
+    width: 101%;
     min-height:100%;
     border-radius: .2rem;
 `
@@ -112,6 +113,8 @@ const CardText = styled.div`
     left: 0;
     color: white;
     background-color: #000000;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    padding:5px 0;
+    line-height:25px;
 `
 

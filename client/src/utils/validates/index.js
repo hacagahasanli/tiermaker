@@ -7,12 +7,13 @@ const errorMessage = {
     incorrect_short: 'Password must be at least 4 characters long !',
     iccorrect_long: 'Password must be less than 17 !',
     onlyCanBeUsed: 'Only letters and numbers are allowed',
-    noCoverPhoto: "",
+    noCoverPhoto: "Okay I will keep silence. SET COVER PHOTO..)",
     emptyTemplateName: "Are u okay? Set template name!",
     notSelectedCategory: "Select any category",
-    longDescription: "Long description (max desc length 100)",
+    longDescription: "Length of description : min 20 , max 100",
     tierListImagesLength: "You can select max 25 images",
-    longTemplateName: "Max length of template name is 50"
+    longTemplateName: "Max length of template name is 50",
+    tierListImageMin: "-_- set min 2 images!",
 }
 
 const helperAuth = (fieldValue) => {
@@ -71,17 +72,25 @@ export const tierListTemplateValidater = (values) => {
             : null
     }
 
+    if (!coverPhoto)
+        templateErrors.coverPhoto = errorMessage.noCoverPhoto
+
+
     if (templateName.length > 50)
         templateErrors.templateName = errorMessage.longTemplateName
 
     if (selectCategory === "Select a Category")
         templateErrors.selectCategory = errorMessage.notSelectedCategory
 
-    if (templateDescription.length > 100)
+    const tempDesc = templateDescription.split("")
+    if (tempDesc.length > 100 || tempDesc.length < 20)
         templateErrors.templateDescription = errorMessage.longDescription
 
     if (Object.entries(tierlistImages).length > 25)
         templateErrors.tierlistImages = errorMessage.tierListImagesLength
+
+    if (Object.entries(tierlistImages).length < 2)
+        templateErrors.tierlistImages = errorMessage.tierListImageMin
 
     return templateErrors
 }

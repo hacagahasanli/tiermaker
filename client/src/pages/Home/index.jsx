@@ -22,7 +22,7 @@ const Home = () => {
         ? <LoadingMessage port={"tierLists"} />
         : <>
             <TierCard />
-            <LoadMore />
+            {/* <LoadMore /> */}
         </>
 
     return (

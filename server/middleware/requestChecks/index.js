@@ -12,15 +12,15 @@ export const rateLimit = async (req, res, next) => {
             lastRequest: { $gt: twoMinuteAgo },
         });
 
-        // const user = await UserSchema.findOne({ ip: ip }, { blocked: 1 });
+        const user = await UserSchema.findOne({ ip: ip }, { blocked: 1 });
 
-        // if (user)
-        //     return response(res, 429, "serv", { message: "You have blocked temporarily to create new template" })
+        if (user)
+            return response(res, 429, "serv", { message: "You have blocked temporarily to create new template" })
 
-        // if (requests.length > 2 && now - user.lastRequest < 120000) {
-        //     await UserSchema.findOneAndUpdate({ ip }, { blocked: true });
-        //     return response(res, 429, "serv", { message: "You have blocked temporarily to create new template" })
-        // }
+        if (requests.length > 2 && now - user.lastRequest < 120000) {
+            await UserSchema.findOneAndUpdate({ ip }, { blocked: true });
+            return response(res, 429, "serv", { message: "You have blocked temporarily to create new template" })
+        }
 
         next();
     } catch (err) {

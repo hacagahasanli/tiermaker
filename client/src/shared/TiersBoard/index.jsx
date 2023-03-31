@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import React, { useCallback, useContext, useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { BoardsContext } from "context"
 import { TierTitle, ErrorBoundary, Settings, ColumnBoard } from "components/index"
 import { useBoxShadow } from "hooks/index"
 import { useSelector } from "react-redux"
+import { v4 } from "uuid"
 
 export const TiersBoard = () => {
     const { boards, currentItem, removeItemFromBoard, setBoardsHandler } = useContext(BoardsContext)
@@ -19,28 +20,35 @@ export const TiersBoard = () => {
         e.target.style.boxShadow = "none"
     };
 
-    const templateName = useMemo(() => {
-        const name = tierLists.find((item) => item._id === cachedBoardId).templateName
-        return name;
-    }, [cachedBoardId])
+    const templateNames = () => {
+        const name = tierLists.find((item) => item._id === cachedBoardId)?.templateName ?? "unknown"
+        return [name, name];
+    }
+
+    const preventDropZone = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
 
     return (
         <RowsContainer>
             <TempalateName>
-                <span>{templateName}</span>
-                <span>{templateName}</span>
+                {templateNames().map((tempName) => <span key={v4()}>{tempName}</span>)}
             </TempalateName>
             <ErrorBoundary>
                 {boards?.map((board) => {
                     const defultImageBoard = board.id !== 8;
                     const { diff, id, value, items, bgColor } = board;
+
                     return <ColumnContainer
                         diff={diff}
                         key={id}
                         onDragOver={e => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, board)}
                     >
-                        <TierTitle {...{ bgColor, value, defultImageBoard }} />
+                        <TitleWrapper onDragOver={preventDropZone} onDrop={preventDropZone}>
+                            <TierTitle  {...{ bgColor, value, defultImageBoard }} />
+                        </TitleWrapper>
                         <ColumnBoard {...{ diff, items, board }} />
                         {defultImageBoard && <Settings {...{ board }} />}
                     </ColumnContainer>
@@ -50,7 +58,9 @@ export const TiersBoard = () => {
     )
 }
 
+const TitleWrapper = styled.div`
 
+`
 const TempalateName = styled.div`
    width: 100%;
    text-align: left;
@@ -84,6 +94,7 @@ const RowsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
     margin-top: 2.5rem;
     gap: 0.12rem;
 `

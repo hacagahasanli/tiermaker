@@ -10,6 +10,11 @@ export const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
     position: relative;
  }
+
+ .swal2-modal{
+    position: absolute;
+    top: -8%;
+ }
 `
 
 export const Label = styled.label`

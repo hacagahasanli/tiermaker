@@ -2,8 +2,7 @@ import express from "express"
 import mongoose from "mongoose";
 import { config } from "dotenv";
 import cors from "cors"
-import credentials from "./config/credentials.js";
-import { authMiddleware, corsOptions, isValidPath } from "./middleware/index.js";
+import { authMiddleware, isValidPath } from "./middleware/index.js";
 import { fileRouter, authRouter, refreshRouter, logoutRouter } from "./routes/index.js";
 import cookieParser from "cookie-parser";
 config()
@@ -11,7 +10,6 @@ config()
 const DB_URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.u0jafxl.mongodb.net/?retryWrites=true&w=majority`
 const app = express();
 
-// app.use(credentials)
 const corsConfig = {
     origin: true,
     credentials: true,
@@ -21,7 +19,6 @@ app.use(express.static('uploads'))
 app.use(cors(corsConfig));
 app.options('*', cors(corsConfig))
 app.use(isValidPath)
-// app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cookieParser())
 app.use('/auth', authRouter)

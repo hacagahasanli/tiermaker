@@ -1,6 +1,6 @@
 import { BoardsContext } from "context/index";
 import { useBoxShadow } from "hooks/index";
-import { memo, useContext, useState } from "react";
+import { memo, useContext } from "react";
 import styled from "styled-components";
 
 export const ColumnBoard = memo(({ diff, items, board }) => {
@@ -9,15 +9,11 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
 
     const dragLeaveHandler = (target) => target.style.boxShadow = "none"
 
-    const dragStartHandler = ({ board, item, e }) => {
+    const dragStartHandler = ({ board, item }) => {
         if (board !== undefined) {
             setCurrentBoard(board);
             setCurrentItem(item);
         }
-
-        // const img = new Image();
-        // img.src = item.uri;
-        // e.dataTransfer.setDragImage(img, 0, 0);
     };
 
     const dragEndHandler = (e) => { };
@@ -38,7 +34,7 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
             const { id, uri } = item
             return <StyledImage
                 loading="lazy"
-                img={uri}
+                uri={uri}
                 id={id}
                 src={uri}
                 alt={id}
@@ -47,13 +43,14 @@ export const ColumnBoard = memo(({ diff, items, board }) => {
                 draggable={true}
                 onDragOver={(e) => dragOverHandler(e)}
                 onDragLeave={(e) => dragLeaveHandler(e.target)}
-                onDragStart={(e) => dragStartHandler({ e, board, item })}
+                onDragStart={(e) => dragStartHandler({ e, board, item, uri })}
                 onDragEnd={(e) => dragEndHandler(e)}
                 onDrop={(e) => dropHandler(e, board, item)}
             />
         })}
     </ImageWrapper>
 })
+
 
 const ImageWrapper = styled.div`
     width: 100%;
@@ -70,10 +67,10 @@ const StyledImage = styled.img`
     margin: 0;
     padding: 0;
     background: #eeeeee;
-    background-image: url(${({ uri }) => uri});
+    /* background-image: url(${({ uri }) => uri});
     background-position: center;
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size:cover; */
     overflow: hidden;
     cursor: pointer;
 `

@@ -3,8 +3,12 @@ import styled from "styled-components"
 
 
 export const TierTitle = memo(({ bgColor, value, defultImageBoard }) => {
+    const preventDropZone = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
     return <>
-        {defultImageBoard && <TitleWrapper onDragOver={(e) => e.preventDefault()} bgColor={bgColor}>
+        {defultImageBoard && <TitleWrapper onDragOver={preventDropZone} onDrop={preventDropZone} bgColor={bgColor}>
             <Title contentEditable={true} suppressContentEditableWarning>
                 <span>{value}</span>
             </Title>

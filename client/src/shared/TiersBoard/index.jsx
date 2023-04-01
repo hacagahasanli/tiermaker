@@ -26,11 +26,6 @@ export const TiersBoard = () => {
         return [templateName, templateDescription];
     }, [cachedBoardId])
 
-    const preventDropZone = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-    };
-
     return (
         <RowsContainer>
             <ErrorBoundary>
@@ -49,9 +44,7 @@ export const TiersBoard = () => {
                         onDragOver={e => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, board)}
                     >
-                        <TitleWrapper onDragOver={preventDropZone} onDrop={preventDropZone}>
-                            <TierTitle  {...{ bgColor, value, defultImageBoard }} />
-                        </TitleWrapper>
+                        <TierTitle  {...{ bgColor, value, defultImageBoard }} />
                         <ColumnBoard {...{ diff, items, board }} />
                         {defultImageBoard && <Settings {...{ board }} />}
                     </ColumnContainer>
@@ -61,9 +54,6 @@ export const TiersBoard = () => {
     )
 }
 
-const TitleWrapper = styled.div`
-
-`
 const TempalateName = styled.div`
    width: 100%;
    text-align: left;

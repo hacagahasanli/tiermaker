@@ -4,6 +4,7 @@ import { userValidation } from "./validation/index.js";
 import { isValidPath } from "./validPath/index.js";
 import { rateLimit } from "./requestChecks/index.js";
 import { checkPermission } from "./checkPermission/index.js";
+import { filePath } from "./filePath/index.js";
 
 
-export { corsOptions, userValidation, authMiddleware, isValidPath, rateLimit, checkPermission }
+export { corsOptions, userValidation, authMiddleware, isValidPath, rateLimit, checkPermission, filePath }

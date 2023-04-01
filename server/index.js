@@ -18,7 +18,7 @@ const corsConfig = {
 app.use(express.static('uploads'))
 app.use(cors(corsConfig));
 app.options('*', cors(corsConfig))
-app.use(filePath(path.resolve(__dirname, "uploads")))
+// app.use(filePath(path.resolve(__dirname, "uploads")))
 app.use(isValidPath)
 app.use(express.json())
 app.use(cookieParser())

@@ -6,13 +6,10 @@ client/yarn-error.log*
 client/pnpm-debug.log*
 client/lerna-debug.log*
 
-# Ignore .env file
-client/.env
-client/secrets.js
-server/.env
-client/node_modules
-server/node_modules
-server/uploads
+# Ignore file
+.env
+secrets.js
+node_modules
 
 dist
 dist-ssr

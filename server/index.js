@@ -30,7 +30,7 @@ app.use('/files', fileRouter)
 
 const start = async () => {
     try {
-        app.listen(process.env.PORT, () => console.log("everythin is okay"))
+        app.listen(process.env.PORT, () => console.log("everythin is okay " + process.env.PORT))
         await mongoose.connect(DB_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,

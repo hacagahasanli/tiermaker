@@ -36,7 +36,7 @@ class Auth {
                 return response(res, 400, { message: 'Username and password are required.' })
 
             const user = await UserSchema.findOne({ username }).maxTimeMS(10000).exec()
-
+            console.log("BURA")
             if (!user)
                 return response(res, 401)
 

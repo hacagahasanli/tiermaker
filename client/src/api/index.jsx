@@ -1,6 +1,7 @@
 import axios from "axios"
-import { baseURL } from "../../secrets"
+// import { baseURL } from "../../secrets"
 
+const baseURL = "http://localhost:5006"
 export const authAxios = axios.create({
     baseURL,
 })
